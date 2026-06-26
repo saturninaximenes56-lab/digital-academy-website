@@ -1,0 +1,54 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "category": "Design",
+      "title": "Company Branding Kit",
+      "description": "Kria identidade vizuál kompletu ba kompañia lokál",
+      "technologies": ["Adobe Illustrator", "Adobe Photoshop", "Figma"],
+      "image": "assets/images/projects/branding-kit.jpg",
+      "student": "Maria Fernandes",
+      "year": 2025
+    },
+    {
+      "id": 2,
+      "category": "Web Development",
+      "title": "E-Commerce Website",
+      "description": "Plataforma online ba negósiu ho sistema pagamentu",
+      "technologies": ["React", "Tailwind CSS", "Laravel", "MySQL"],
+      "image": "assets/images/projects/ecommerce.jpg",
+      "student": "Carlos Amaral",
+      "year": 2025
+    },
+    {
+      "id": 3,
+      "category": "Mobile",
+      "title": "Food Delivery App",
+      "description": "Aplikasaun mobile ba entrega ai-han ho tracking real-time",
+      "technologies": ["Flutter", "Firebase", "Google Maps API"],
+      "image": "assets/images/projects/delivery-app.jpg",
+      "student": "Ana Pereira",
+      "year": 2025
+    },
+    {
+      "id": 4,
+      "category": "UI/UX",
+      "title": "Banking App Design",
+      "description": "UI/UX design ba aplikasaun banking ho protótipu interativu",
+      "technologies": ["Figma", "Adobe XD"],
+      "image": "assets/images/projects/banking-app.jpg",
+      "student": "João da Silva",
+      "year": 2025
+    },
+    {
+      "id": 5,
+      "category": "Fullstack",
+      "title": "School Management System",
+      "description": "Sistema kompletu ba jere eskola (estudante, turma, notasaun)",
+      "technologies": ["Laravel", "MySQL", "Bootstrap", "JavaScript"],
+      "image": "assets/images/projects/school-system.jpg",
+      "student": "Pedro Gonçalves",
+      "year": 2025
+    }
+  ]
+}

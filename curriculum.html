@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="tet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurikulum - DTCI Academy</title>
+    <meta name="description" content="Kurikulum DTCI Academy - Digital Technology & Creative Industry Academy.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================================ */
+        /* ROOT VARIABLES */
+        /* ============================================================ */
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #5531b5;
+            --primary-light: #8b5cf6;
+            --secondary: #00D4AA;
+            --accent: #F97316;
+            --dark: #0A0A0F;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --gradient-main: linear-gradient(135deg, #6C3CE1 0%, #00D4AA 100%);
+            --shadow-card: 0 20px 60px rgba(108, 60, 225, 0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--light-gray);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ============================================================ */
+        /* NAVIGATION */
+        /* ============================================================ */
+        .navbar-glass {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 6px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-main);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .btn-primary-gradient {
+            background: var(--gradient-main);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 60, 225, 0.4);
+        }
+
+        /* ============================================================ */
+        /* PAGE HEADER */
+        /* ============================================================ */
+        .page-header {
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 60px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=1600&h=400&fit=crop') center/cover;
+            opacity: 0.06;
+        }
+
+        .page-header .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(108, 60, 225, 0.2) 0%, transparent 70%);
+        }
+
+        .page-header .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============================================================ */
+        /* CURRICULUM TIMELINE */
+        /* ============================================================ */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item .timeline-content {
+            width: 45%;
+            padding: 24px;
+            background: white;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .timeline-item .timeline-content:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .timeline-item .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(108, 60, 225, 0.3);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .timeline-item .timeline-dot .inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-main);
+        }
+
+        .timeline-item.left .timeline-content {
+            margin-right: auto;
+        }
+
+        .timeline-item.right .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-item .level-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item .duration-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 50px;
+            background: var(--light-gray);
+            color: var(--gray);
+        }
+
+        .timeline-item .module-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .timeline-item .module-tags span {
+            background: var(--light-gray);
+            color: var(--gray);
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        /* Color variants for timeline items */
+        .timeline-item.level-1 .level-badge { background: #3B82F6; color: white; }
+        .timeline-item.level-2 .level-badge { background: #8B5CF6; color: white; }
+        .timeline-item.level-3 .level-badge { background: #EC4899; color: white; }
+        .timeline-item.level-4 .level-badge { background: #818CF8; color: white; }
+        .timeline-item.level-5 .level-badge { background: #10B981; color: white; }
+        .timeline-item.level-6 .level-badge { background: #22D3EE; color: #0E7490; }
+        .timeline-item.level-7 .level-badge { background: #FB923C; color: #7C2D12; }
+        .timeline-item.level-8 .level-badge { background: #EF4444; color: white; }
+        .timeline-item.level-9 .level-badge { background: #2DD4BF; color: #064E3B; }
+        .timeline-item.level-10 .level-badge { background: #9CA3AF; color: #1F2937; }
+        .timeline-item.level-11 .level-badge { background: #818CF8; color: white; }
+        .timeline-item.level-12 .level-badge { background: #A855F7; color: white; }
+        .timeline-item.level-bonus .level-badge { background: #F59E0B; color: #78350F; }
+        .timeline-item.level-complete .level-badge { background: linear-gradient(135deg, #6C3CE1, #00D4AA); color: white; }
+
+        /* ============================================================ */
+        /* STATS CARDS */
+        /* ============================================================ */
+        .stat-card {
+            background: white;
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        /* ============================================================ */
+        /* WHATSAPP FLOAT */
+        /* ============================================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse-wa {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float {
+            animation: pulse-wa 2s infinite;
+        }
+
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 992px) {
+            .timeline::before {
+                left: 24px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                padding-left: 56px;
+            }
+
+            .timeline-item .timeline-content {
+                width: 100%;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            .timeline-item .timeline-dot {
+                left: 16px;
+                transform: translateX(0);
+                width: 20px;
+                height: 20px;
+                font-size: 9px;
+            }
+
+            .timeline-item .timeline-dot .inner {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 0 40px;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 16px;
+                right: 16px;
+            }
+            .stat-card .number {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-item {
+                padding-left: 44px;
+            }
+            .timeline-item .timeline-dot {
+                left: 12px;
+                width: 16px;
+                height: 16px;
+                font-size: 7px;
+            }
+            .timeline-item .timeline-content {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- NAVIGATION -->
+<!-- ============================================================ -->
+<nav class="navbar-glass fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+            
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg shadow-lg">
+                    D
+                </div>
+                <div>
+                    <span class="text-white font-bold text-lg tracking-tight">DTCI</span>
+                    <span class="text-gray-400 font-medium text-sm hidden md:inline">Academy</span>
+                </div>
+            </a>
+            
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="modules.html" class="nav-link">Módulu</a>
+                <a href="curriculum.html" class="nav-link active">Kurikulum</a>
+                <a href="projects.html" class="nav-link">Projetu</a>
+                <a href="about.html" class="nav-link">Kona-ba</a>
+                <a href="contact.html" class="nav-link">Kontaktu</a>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="register.html" class="btn-primary-gradient text-sm px-5 py-2">
+                    <i class="fas fa-user-plus mr-2"></i>Rejistu
+                </a>
+                <button id="menu-toggle" class="lg:hidden text-white text-2xl p-1 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#14141C] border-t border-white/5">
+        <div class="px-4 py-4 space-y-1">
+            <a href="index.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Início</a>
+            <a href="modules.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Módulu</a>
+            <a href="curriculum.html" class="block px-4 py-3 text-white bg-white/5 rounded-lg font-medium">Kurikulum</a>
+            <a href="projects.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Projetu</a>
+            <a href="about.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kona-ba</a>
+            <a href="contact.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kontaktu</a>
+            <a href="register.html" class="block px-4 py-3 mt-2 bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] text-white text-center font-bold rounded-xl">
+                <i class="fas fa-user-plus mr-2"></i>Rejistu Agora
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE HEADER -->
+<!-- ============================================================ -->
+<section class="page-header">
+    <div class="gradient-overlay"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content">
+        <div class="text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white">Kurikulum Detalladu</h1>
+            <p class="mt-3 text-gray-400 text-lg max-w-2xl mx-auto">
+                Estrutura kompletu husi programa aprendizajem DTCI Academy
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- STATS SECTION -->
+<!-- ============================================================ -->
+<section class="py-8 bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="stat-card">
+                <div class="number">12</div>
+                <div class="label">Módulu</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">5</div>
+                <div class="label">Level</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">12-18</div>
+                <div class="label">Fulan</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">70%</div>
+                <div class="label">Prátika</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CURRICULUM TIMELINE -->
+<!-- ============================================================ -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Timeline</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Jornada Aprendizajen</h2>
+            <p class="text-gray-500 mt-2">Husi zero to profissional iha 5 level</p>
+        </div>
+        
+        <!-- Timeline -->
+        <div class="timeline">
+            
+            <!-- ========================================================== -->
+            <!-- LEVEL 1 -->
+            <!-- ========================================================== -->
+            <div class="timeline-item level-1 left">
+                <div class="timeline-dot"><span class="inner">1</span></div>
+                <div class="timeline-content">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="level-badge">Level 1</span>
+                        <span class="duration-badge"><i class="far fa-clock mr-1"></i> 2-3 meses</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Web Basic</h3>
+                    <p class="text-gray-600 text-sm mt-1">Fundamentu web development no design</p>
+                    <div class="module-tags">
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>Bootstrap</span>
+                        <span>Tailwind CSS</span>
+                        <span>JavaScript Basic</span>
+                        <span>Git & GitHub</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <p class="text-sm text-gray-600">
+                            <i class="fas fa-project-diagram text-[#6C3CE1] mr-2"></i>
+                            <strong>Projetu:</strong> Portfolio Website, Company Profile, Landing Page
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <a href="register.html" class="text-[#6C3CE1] font-semibold text-sm hover:underline">
+                            Rejistu Agora <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- LEVEL 2 -->
+            <!-- ========================================================== -->
+            <div class="timeline-item level-2 right">
+                <div class="timeline-dot"><span class="inner">2</span></div>
+                <div class="timeline-content">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="level-badge">Level 2</span>
+                        <span class="duration-badge"><i class="far fa-clock mr-1"></i> 2 meses</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Frontend Developer</h3>
+                    <p class="text-gray-600 text-sm mt-1">Desenvolve UI modernu no dynamic</p>
+                    <div class="module-tags">
+                        <span>JavaScript Advanced</span>
+                        <span>jQuery</span>
+                        <span>AJAX</span>
+                        <span>JSON</span>
+                        <span>API Consumption</span>
+                        <span>ReactJS</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <p class="text-sm text-gray-600">
+                            <i class="fas fa-project-diagram text-[#6C3CE1] mr-2"></i>
+                            <strong>Projetu:</strong> Dashboard, Blog Platform, Product Catalog
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <a href="register.html" class="text-[#6C3CE1] font-semibold text-sm hover:underline">
+                            Rejistu Agora <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- LEVEL 3 -->
+            <!-- ========================================================== -->
+            <div class="timeline-item level-3 left">
+                <div class="timeline-dot"><span class="inner">3</span></div>
+                <div class="timeline-content">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="level-badge">Level 3</span>
+                        <span class="duration-badge"><i class="far fa-clock mr-1"></i> 3 meses</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">PHP Backend / Laravel</h3>
+                    <p class="text-gray-600 text-sm mt-1">Backend development ho PHP no Laravel</p>
+                    <div class="module-tags">
+                        <span>PHP Native</span>
+                        <span>CodeIgniter</span>
+                        <span>Laravel</span>
+                        <span>MySQL</span>
+                        <span>Authentication</span>
+                        <span>CRUD</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <p class="text-sm text-gray-600">
+                            <i class="fas fa-project-diagram text-[#6C3CE1] mr-2"></i>
+                            <strong>Projetu:</strong> Inventory System, Employee System, School System
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <a href="register.html" class="text-[#6C3CE1] font-semibold text-sm hover:underline">
+                            Rejistu Agora <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- LEVEL 4 -->
+            <!-- ========================================================== -->
+            <div class="timeline-item level-4 right">
+                <div class="timeline-dot"><span class="inner">4</span></div>
+                <div class="timeline-content">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="level-badge">Level 4</span>
+                        <span class="duration-badge"><i class="far fa-clock mr-1"></i> 2 meses</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Fullstack Project</h3>
+                    <p class="text-gray-600 text-sm mt-1">Integrasaun frontend no backend</p>
+                    <div class="module-tags">
+                        <span>REST API</span>
+                        <span>JWT Authentication</span>
+                        <span>React + Laravel</span>
+                        <span>Deployment</span>
+                        <span>API Testing</span>
+                        <span>Postman</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <p class="text-sm text-gray-600">
+                            <i class="fas fa-project-diagram text-[#6C3CE1] mr-2"></i>
+                            <strong>Projetu:</strong> E-Commerce Platform, Online Booking System
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <a href="register.html" class="text-[#6C3CE1] font-semibold text-sm hover:underline">
+                            Rejistu Agora <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- LEVEL 5 -->
+            <!-- ========================================================== -->
+            <div class="timeline-item level-5 left">
+                <div class="timeline-dot"><span class="inner">5</span></div>
+                <div class="timeline-content">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="level-badge">Level 5</span>
+                        <span class="duration-badge"><i class="far fa-clock mr-1"></i> 3-4 meses</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Mobile & Advanced</h3>
+                    <p class="text-gray-600 text-sm mt-1">Mobile development no backend modernu</p>
+                    <div class="module-tags">
+                        <span>Flutter</span>
+                        <span>Node.js</span>
+                        <span>Express.js</span>
+                        <span>Golang</span>
+                        <span>DevOps</span>
+                        <span>Docker</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <p class="text-sm text-gray-600">
+                            <i class="fas fa-project-diagram text-[#6C3CE1] mr-2"></i>
+                            <strong>Projetu:</strong> Mobile App, Microservice API, Real-Time Application
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <a href="register.html" class="text-[#6C3CE1] font-semibold text-sm hover:underline">
+                            Rejistu Agora <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- BONUS: Entrepreneurship -->
+            <!-- ========================================================== -->
+            <div class="timeline-item level-bonus right">
+                <div class="timeline-dot" style="background: #F59E0B; border-color: #F59E0B;">
+                    <span class="inner" style="background: #F59E0B; font-size: 10px;">🎯</span>
+                </div>
+                <div class="timeline-content" style="border-color: #F59E0B;">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="level-badge" style="background: #F59E0B; color: #78350F;">Bonus</span>
+                        <span class="duration-badge"><i class="far fa-clock mr-1"></i> 1-2 meses</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Entrepreneurship & Freelancing</h3>
+                    <p class="text-gray-600 text-sm mt-1">Preparasaun ba karreira no negósiu</p>
+                    <div class="module-tags">
+                        <span>Startup Fundamental</span>
+                        <span>Business Model Canvas</span>
+                        <span>Digital Marketing</span>
+                        <span>Client Management</span>
+                        <span>Upwork & Fiverr</span>
+                        <span>Personal Branding</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <p class="text-sm text-gray-600">
+                            <i class="fas fa-project-diagram text-[#6C3CE1] mr-2"></i>
+                            <strong>Projetu:</strong> Startup Pitch Deck, Business Plan
+                        </p>
+                    </div>
+                    <div class="mt-3">
+                        <a href="register.html" class="text-[#F59E0B] font-semibold text-sm hover:underline">
+                            Rejistu Agora <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- COMPLETE PROGRAM -->
+            <!-- ========================================================== -->
+            <div class="timeline-item level-complete" style="margin-top: 60px;">
+                <div class="timeline-dot" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA); border-color: #6C3CE1; width: 32px; height: 32px;">
+                    <span class="inner" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA); font-size: 12px;">🏆</span>
+                </div>
+                <div class="timeline-content" style="width: 80%; margin: 0 auto; border: 2px solid #6C3CE1; background: linear-gradient(135deg, #f5f0ff, #f0faf7);">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="level-badge" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA); color: white;">🏆 Mellor Opsaun</span>
+                        <span class="duration-badge" style="background: #6C3CE1; color: white;"><i class="far fa-clock mr-1"></i> 12-18 meses</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">Programa Kompletu</h3>
+                    <p class="text-gray-600 text-sm mt-1">Level 1 - 12 + Entrepreneurship & Freelancing</p>
+                    <div class="module-tags">
+                        <span style="background: #10B981; color: white;">✅ Level 1-12 Hotu</span>
+                        <span style="background: #10B981; color: white;">✅ Entrepreneurship</span>
+                        <span style="background: #10B981; color: white;">✅ Freelancing</span>
+                        <span style="background: #10B981; color: white;">✅ Sertifikadu Kompletu</span>
+                        <span style="background: #10B981; color: white;">✅ Portfolio Profisional</span>
+                        <span style="background: #10B981; color: white;">✅ Capstone Project</span>
+                    </div>
+                    <div class="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                        <p class="text-sm text-amber-800 font-bold">
+                            <i class="fas fa-gem mr-2"></i> Ekonómia! Selesa hotu-hotu ho preçu espesial
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <p class="text-sm text-gray-600">
+                            <i class="fas fa-project-diagram text-[#6C3CE1] mr-2"></i>
+                            <strong>Projetu Final:</strong> Capstone Project - Sistema Kompletu (E-Commerce, School System, POS, etc)
+                        </p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="register.html" class="inline-block bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] text-white px-8 py-3 rounded-xl font-bold hover:shadow-xl transition">
+                            <i class="fas fa-rocket mr-2"></i> Rejistu Agora
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div><!-- end timeline -->
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- METHODOLOGY -->
+<!-- ============================================================ -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Metodolojia</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Metodolojia Aprendizajen</h2>
+            <p class="text-gray-500 mt-2">Kombinasaun teoria no prátika ba rezultadu máximu</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="text-center p-8 bg-blue-50 rounded-xl hover:shadow-lg transition">
+                <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-chalkboard-teacher text-white text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">30% Teoria</h3>
+                <p class="text-gray-600 mt-2">Fundamentu sólidu ho konseitu klaru no estruturadu</p>
+            </div>
+            <div class="text-center p-8 bg-green-50 rounded-xl hover:shadow-lg transition">
+                <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-laptop-code text-white text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">70% Prátika</h3>
+                <p class="text-gray-600 mt-2">Hands-on experience ho projetu real no estudo kazu</p>
+            </div>
+            <div class="text-center p-8 bg-purple-50 rounded-xl hover:shadow-lg transition">
+                <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-project-diagram text-white text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Project Based</h3>
+                <p class="text-gray-600 mt-2">Aprende liuhusi projetu kompletu husi inicio to'o remata</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CTA SECTION -->
+<!-- ============================================================ -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] rounded-2xl p-8 md:p-12 text-white text-center">
+        <h2 class="text-2xl md:text-4xl font-bold">Prontu Atu Komesa Ita Nia Jornada?</h2>
+        <p class="mt-3 text-white/80 max-w-2xl mx-auto">
+            Rejista ona no sai profisionál iha teknolojia digital. Intake 2026 agora!
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="register.html" class="bg-white text-[#6C3CE1] px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl">
+                <i class="fas fa-rocket mr-2"></i> Rejistu Agora
+            </a>
+            <a href="contact.html" class="bg-white/20 backdrop-blur text-white px-10 py-4 rounded-xl font-semibold hover:bg-white/30 transition border border-white/20">
+                <i class="fas fa-phone mr-2"></i> Kontaktu
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-[#0A0A0F] text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg">D</div>
+                    <span class="text-white font-bold text-lg">DTCI Academy</span>
+                </div>
+                <p class="text-gray-500 text-sm">Digital Technology & Creative Industry Academy</p>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Ligaun</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="index.html" class="hover:text-white transition">Início</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">Kona-ba</a></li>
+                    <li><a href="modules.html" class="hover:text-white transition">Módulu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Suporte</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="contact.html" class="hover:text-white transition">Kontaktu</a></li>
+                    <li><a href="register.html" class="hover:text-white transition">Rejistu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Kontaktu</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><i class="fas fa-envelope w-5 text-[#6C3CE1]"></i> info@dtciacademy.com</li>
+                    <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 1234 5678</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-8 pt-6 text-center text-gray-600 text-sm">
+            &copy; 2026 DTCI Academy. Hotu-hotu direitu reservadu.
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- WHATSAPP FLOAT -->
+<!-- ============================================================ -->
+<a href="https://wa.me/67012345678" target="_blank" class="whatsapp-float" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    const toggleBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    toggleBtn?.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const icon = toggleBtn?.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // ============================================
+    // SMOOTH SCROLL
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // ============================================
+    // ANIMATE ON SCROLL - SIMPLE
+    // ============================================
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(item);
+    });
+
+    // Trigger animation for items already visible
+    setTimeout(() => {
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }
+        });
+    }, 100);
+
+    // ============================================
+    // STATS COUNTER ANIMATION
+    // ============================================
+    function animateStats() {
+        const stats = document.querySelectorAll('.stat-card .number');
+        stats.forEach(stat => {
+            const text = stat.textContent;
+            const isRange = text.includes('-');
+            const isPercent = text.includes('%');
+            const isNumber = !isRange && !isPercent && !isNaN(parseInt(text));
+            
+            if (isNumber) {
+                const target = parseInt(text);
+                let current = 0;
+                const increment = target / 40;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 30);
+            }
+        });
+    }
+
+    // Run stats animation when stats section is visible
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                statsObserver.disconnect();
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelector('.stat-card')?.parentElement?.parentElement && 
+        statsObserver.observe(document.querySelector('.stat-card').parentElement.parentElement);
+</script>
+</body>
+</html>

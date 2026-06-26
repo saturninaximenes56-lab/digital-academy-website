@@ -1,0 +1,333 @@
+{
+  "modules": [
+    {
+      "id": 1,
+      "level": "Level 1",
+      "title": "Computer & Digital Fundamental",
+      "duration": "1-2 months",
+      "icon": "fa-laptop",
+      "color": "blue",
+      "description": "Fundamentu komputador no alfabetizasaun digital",
+      "topics": [
+        "Computer Basic",
+        "Operating System",
+        "Internet & Email",
+        "Microsoft Office",
+        "Google Workspace",
+        "Cyber Security Basic"
+      ],
+      "projects": [
+        "CV Professional",
+        "Presentation Design",
+        "Digital Documentation"
+      ],
+      "learning_outcomes": [
+        "Komprende operasaun komputador básiku",
+        "Uza Microsoft Office ho efetivu",
+        "Aplica prátika seguransa digital"
+      ]
+    },
+    {
+      "id": 2,
+      "level": "Level 1",
+      "title": "Graphic Design Fundamental",
+      "duration": "2-3 months",
+      "icon": "fa-paint-brush",
+      "color": "purple",
+      "description": "Prinsipiu básiku design gráfiku no komunikasaun visual",
+      "topics": [
+        "Design Principle",
+        "Color Theory",
+        "Typography",
+        "Social Media Design",
+        "Flyer, Poster, Brochure",
+        "Presentation Design",
+        "Brand Identity"
+      ],
+      "projects": [
+        "Company Profile",
+        "Marketing Kit",
+        "Social Campaign Design"
+      ],
+      "learning_outcomes": [
+        "Aplica prinsipiu design iha projetu real",
+        "Kria materiál marketing profesional",
+        "Komprende identidade vizuál ba negósiu"
+      ]
+    },
+    {
+      "id": 3,
+      "level": "Level 1",
+      "title": "Advanced Graphic Design",
+      "duration": "2-3 months",
+      "icon": "fa-edit",
+      "color": "pink",
+      "description": "Téknika avansadu design ho ferramenta profisionál",
+      "topics": [
+        "Adobe Photoshop",
+        "Adobe Illustrator",
+        "Banner & Poster",
+        "Logo & Branding",
+        "Video Editing (CapCut)",
+        "Motion Graphic Basic"
+      ],
+      "projects": [
+        "Logo Brand",
+        "Branding Guideline",
+        "Promotional Video"
+      ],
+      "learning_outcomes": [
+        "Dominia Adobe Creative Suite",
+        "Kria branding kompletu ba negósiu",
+        "Prodús vídeo promosionál"
+      ]
+    },
+    {
+      "id": 4,
+      "level": "Level 1-2",
+      "title": "UI/UX Design",
+      "duration": "1-2 months",
+      "icon": "fa-pencil-ruler",
+      "color": "indigo",
+      "description": "Design esperiénsia no interfase uzuáriu",
+      "topics": [
+        "UI Design",
+        "Design System",
+        "Responsive Design",
+        "UX Research",
+        "Wireframe",
+        "Prototype",
+        "Usability Testing"
+      ],
+      "projects": [
+        "E-Commerce UI",
+        "Mobile App UI",
+        "Dashboard Design"
+      ],
+      "learning_outcomes": [
+        "Realiza pesquisa UX",
+        "Kria protótipu interativu",
+        "Aplica design system iha projetu"
+      ]
+    },
+    {
+      "id": 5,
+      "level": "Level 2",
+      "title": "Web Fundamental",
+      "duration": "2-3 months",
+      "icon": "fa-code",
+      "color": "green",
+      "description": "Fundamentu web development ho HTML, CSS, no JavaScript",
+      "topics": [
+        "HTML5",
+        "CSS3",
+        "Bootstrap",
+        "Tailwind CSS",
+        "JavaScript Basic",
+        "Git & GitHub (version control)"
+      ],
+      "projects": [
+        "Portfolio Website",
+        "Company Profile",
+        "Landing Page"
+      ],
+      "learning_outcomes": [
+        "Kria website responsivu",
+        "Uza framework CSS modernu",
+        "Jere kódigu ho Git"
+      ]
+    },
+    {
+      "id": 6,
+      "level": "Level 2",
+      "title": "Frontend Development",
+      "duration": "2-3 months",
+      "icon": "fa-react",
+      "color": "cyan",
+      "description": "Frontend modernu ho ReactJS no Next.js",
+      "topics": [
+        "JavaScript Advanced",
+        "ES6+ (DOM, Async)",
+        "Fetch API & JSON",
+        "ReactJS",
+        "Next.js",
+        "State Management"
+      ],
+      "projects": [
+        "Dashboard App",
+        "Blog Platform",
+        "Product Catalog"
+      ],
+      "learning_outcomes": [
+        "Desenvolve aplikasaun ho React",
+        "Jere state iha aplikasaun kompleksu",
+        "Integra ho API"
+      ]
+    },
+    {
+      "id": 7,
+      "level": "Level 3",
+      "title": "Database & Backend Development",
+      "duration": "2-3 months",
+      "icon": "fa-database",
+      "color": "orange",
+      "description": "Backend development ho PHP, Laravel, no banco dadus",
+      "topics": [
+        "ERP & Database Design",
+        "MySQL",
+        "PostgreSQL",
+        "PHP Fundamental",
+        "OOP PHP",
+        "Laravel Framework"
+      ],
+      "projects": [
+        "Inventory System",
+        "Employee System",
+        "School System"
+      ],
+      "learning_outcomes": [
+        "Desenha banco dadus relasional",
+        "Kria backend ho Laravel",
+        "Implementa autentikasaun"
+      ]
+    },
+    {
+      "id": 8,
+      "level": "Level 4",
+      "title": "API & Fullstack Development",
+      "duration": "1-2 months",
+      "icon": "fa-plug",
+      "color": "red",
+      "description": "Integrasaun frontend-backend ho REST API",
+      "topics": [
+        "REST API",
+        "JSON Handling",
+        "JWT Authentication",
+        "Laravel Sanctum",
+        "React + Laravel",
+        "Next.js + Laravel"
+      ],
+      "projects": [
+        "E-Commerce Platform",
+        "Online Booking System"
+      ],
+      "learning_outcomes": [
+        "Kria REST API seguru",
+        "Integra frontend ho backend",
+        "Implementa autentikasaun JWT"
+      ]
+    },
+    {
+      "id": 9,
+      "level": "Level 5",
+      "title": "Mobile Development",
+      "duration": "2-3 months",
+      "icon": "fa-mobile-alt",
+      "color": "teal",
+      "description": "Aplikasaun mobile ho Flutter ba Android no iOS",
+      "topics": [
+        "Dart Programming",
+        "Widget System",
+        "State Management",
+        "API Integration",
+        "Local Storage",
+        "Push Notification"
+      ],
+      "projects": [
+        "E-Commerce App",
+        "Delivery App",
+        "Attendance App"
+      ],
+      "learning_outcomes": [
+        "Desenvolve aplikasaun mobile cross-platform",
+        "Integra ho API backend",
+        "Implementa notifikasaun push"
+      ]
+    },
+    {
+      "id": 10,
+      "level": "Level 5",
+      "title": "Modern Backend Development",
+      "duration": "2-3 months",
+      "icon": "fa-server",
+      "color": "gray",
+      "description": "Backend modernu ho Node.js, TypeScript, no Golang",
+      "topics": [
+        "Node.js",
+        "Express.js",
+        "TypeScript",
+        "Golang Basic",
+        "API Development",
+        "Real-Time System"
+      ],
+      "projects": [
+        "Microservice API",
+        "Real-Time Application"
+      ],
+      "learning_outcomes": [
+        "Kria API ho Node.js no Express",
+        "Uza TypeScript ba tipagem seguru",
+        "Komprende konseitu microservice"
+      ]
+    },
+    {
+      "id": 11,
+      "level": "Level 5",
+      "title": "DevOps & Cloud Deployment",
+      "duration": "1-2 months",
+      "icon": "fa-cloud-upload-alt",
+      "color": "indigo",
+      "description": "Deployment no manutensaun aplikasaun iha nuvem",
+      "topics": [
+        "Linux Basic",
+        "VPS Management",
+        "Nginx",
+        "Docker Basic",
+        "CI/CD Basic",
+        "Domain & SSL"
+      ],
+      "projects": [
+        "Deploy Fullstack App",
+        "Production Server Setup"
+      ],
+      "learning_outcomes": [
+        "Jere servidor VPS",
+        "Konfigura Nginx no SSL",
+        "Implementa Docker ba containerization"
+      ]
+    },
+    {
+      "id": 12,
+      "level": "Level 5",
+      "title": "AI & Emerging Technology",
+      "duration": "1 month",
+      "icon": "fa-robot",
+      "color": "purple",
+      "description": "Inteligência artificial no teknolojia emergente",
+      "topics": [
+        "ChatGPT & Copilot",
+        "Canva AI, Firefly",
+        "Midjourney",
+        "AI Video (Runway)",
+        "Prompt Engineering",
+        "AI Automation"
+      ],
+      "projects": [
+        "AI Powered App",
+        "AI Marketing Campaign"
+      ],
+      "learning_outcomes": [
+        "Uza AI tools ba produtividade",
+        "Aplica prompt engineering",
+        "Integra AI iha projetu"
+      ]
+    }
+  ],
+  "total_modules": 12,
+  "total_duration": "12-18 months",
+  "methodology": {
+    "theory": "30%",
+    "practice": "70%",
+    "approach": "Project Based Learning"
+  }
+}

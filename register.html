@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="tet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejistu - DTCI Academy</title>
+    <meta name="description" content="Rejistu ba programa Digital Technology & Creative Industry Academy.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================================ */
+        /* ROOT VARIABLES - DESIGN SYSTEM */
+        /* ============================================================ */
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #5531b5;
+            --primary-light: #8b5cf6;
+            --secondary: #00D4AA;
+            --accent: #F97316;
+            --dark: #0A0A0F;
+            --dark-card: #14141C;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --gradient-main: linear-gradient(135deg, #6C3CE1 0%, #00D4AA 100%);
+            --shadow-card: 0 20px 60px rgba(108, 60, 225, 0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--light-gray);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ============================================================ */
+        /* NAVIGATION - GLASSMORPHISM */
+        /* ============================================================ */
+        .navbar-glass {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 6px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-main);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .btn-primary-gradient {
+            background: var(--gradient-main);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 60, 225, 0.4);
+        }
+
+        /* ============================================================ */
+        /* PAGE HEADER */
+        /* ============================================================ */
+        .page-header {
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 60px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=400&fit=crop') center/cover;
+            opacity: 0.06;
+        }
+
+        .page-header .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(108, 60, 225, 0.2) 0%, transparent 70%);
+        }
+
+        .page-header .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============================================================ */
+        /* FORM STYLES */
+        /* ============================================================ */
+        .form-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
+
+        .form-section {
+            background: var(--light-gray);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .form-section .section-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E5E7EB;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            background: white;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 60, 225, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9CA3AF;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .form-checkbox {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            border: 2px solid #D1D5DB;
+            transition: var(--transition);
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .form-checkbox:checked {
+            border-color: var(--primary);
+        }
+
+        .price-tag {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #78350F;
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .btn-submit {
+            background: var(--gradient-main);
+            color: white;
+            padding: 16px 32px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 18px;
+            transition: var(--transition);
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 60, 225, 0.4);
+        }
+
+        /* ============================================================ */
+        /* PRICE SUMMARY TABLE */
+        /* ============================================================ */
+        .price-summary {
+            background: var(--light-gray);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+        }
+
+        .price-summary .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .price-summary .row:last-child {
+            border-bottom: none;
+        }
+
+        .price-summary .total {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--dark);
+        }
+
+        /* ============================================================ */
+        /* COURSE CARD (small) */
+        /* ============================================================ */
+        .course-select-card {
+            border: 1px solid #E5E7EB;
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .course-select-card:hover {
+            border-color: var(--primary);
+            background: rgba(108, 60, 225, 0.02);
+        }
+
+        .course-select-card.has-checked {
+            border-color: var(--primary);
+            background: rgba(108, 60, 225, 0.04);
+        }
+
+        /* ============================================================ */
+        /* WHATSAPP FLOAT */
+        /* ============================================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse-wa {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float {
+            animation: pulse-wa 2s infinite;
+        }
+
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 0 40px;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 16px;
+                right: 16px;
+            }
+            .form-container {
+                border-radius: var(--radius-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- NAVIGATION -->
+<!-- ============================================================ -->
+<nav class="navbar-glass fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+            
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg shadow-lg">
+                    D
+                </div>
+                <div>
+                    <span class="text-white font-bold text-lg tracking-tight">DTCI</span>
+                    <span class="text-gray-400 font-medium text-sm hidden md:inline">Academy</span>
+                </div>
+            </a>
+            
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="modules.html" class="nav-link">Módulu</a>
+                <a href="curriculum.html" class="nav-link">Kurikulum</a>
+                <a href="projects.html" class="nav-link">Projetu</a>
+                <a href="about.html" class="nav-link">Kona-ba</a>
+                <a href="contact.html" class="nav-link">Kontaktu</a>
+                <a href="register.html" class="nav-link active">Rejistu</a>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="register.html" class="btn-primary-gradient text-sm px-5 py-2">
+                    <i class="fas fa-user-plus mr-2"></i>Rejistu
+                </a>
+                <button id="menu-toggle" class="lg:hidden text-white text-2xl p-1 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#14141C] border-t border-white/5">
+        <div class="px-4 py-4 space-y-1">
+            <a href="index.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Início</a>
+            <a href="modules.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Módulu</a>
+            <a href="curriculum.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kurikulum</a>
+            <a href="projects.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Projetu</a>
+            <a href="about.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kona-ba</a>
+            <a href="contact.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kontaktu</a>
+            <a href="register.html" class="block px-4 py-3 text-white bg-white/5 rounded-lg font-medium">Rejistu</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE HEADER -->
+<!-- ============================================================ -->
+<section class="page-header">
+    <div class="gradient-overlay"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content">
+        <div class="text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white">Rejistu Estudante</h1>
+            <p class="mt-3 text-gray-400 text-lg max-w-2xl mx-auto">
+                Preenche formuláriu atu rejista ba programa ne'ebé ita hakarak
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- REGISTRATION FORM -->
+<!-- ============================================================ -->
+<section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Price Summary -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h3 class="text-lg font-bold text-gray-900 mb-4 text-center">
+                <i class="fas fa-tag text-[#6C3CE1] mr-2"></i> PREÇU KURSU
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                <div class="bg-blue-50 p-3 rounded-lg text-center border border-blue-200">
+                    <p class="font-bold text-blue-600 text-xs">Level 1</p>
+                    <p class="font-bold">$5/fulan</p>
+                    <p class="text-xs text-gray-500">+ $2 rejistu</p>
+                </div>
+                <div class="bg-purple-50 p-3 rounded-lg text-center border border-purple-200">
+                    <p class="font-bold text-purple-600 text-xs">Level 2-3</p>
+                    <p class="font-bold">$6/fulan</p>
+                    <p class="text-xs text-gray-500">+ $2 rejistu</p>
+                </div>
+                <div class="bg-indigo-50 p-3 rounded-lg text-center border border-indigo-200">
+                    <p class="font-bold text-indigo-600 text-xs">Level 4</p>
+                    <p class="font-bold">$5/fulan</p>
+                    <p class="text-xs text-gray-500">+ $2 rejistu</p>
+                </div>
+                <div class="bg-green-50 p-3 rounded-lg text-center border border-green-200">
+                    <p class="font-bold text-green-600 text-xs">Level 5</p>
+                    <p class="font-bold">$5/fulan</p>
+                    <p class="text-xs text-gray-500">+ $3 rejistu</p>
+                </div>
+                <div class="bg-cyan-50 p-3 rounded-lg text-center border border-cyan-200">
+                    <p class="font-bold text-cyan-600 text-xs">Level 6</p>
+                    <p class="font-bold">$6/fulan</p>
+                    <p class="text-xs text-gray-500">+ $3 rejistu</p>
+                </div>
+                <div class="bg-orange-50 p-3 rounded-lg text-center border border-orange-200">
+                    <p class="font-bold text-orange-600 text-xs">Level 7</p>
+                    <p class="font-bold">$7/fulan</p>
+                    <p class="text-xs text-gray-500">+ $3 rejistu</p>
+                </div>
+                <div class="bg-red-50 p-3 rounded-lg text-center border border-red-200">
+                    <p class="font-bold text-red-600 text-xs">Level 8</p>
+                    <p class="font-bold">$10/fulan</p>
+                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
+                </div>
+                <div class="bg-teal-50 p-3 rounded-lg text-center border border-teal-200">
+                    <p class="font-bold text-teal-600 text-xs">Level 9</p>
+                    <p class="font-bold">$10/fulan</p>
+                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
+                </div>
+                <div class="bg-gray-50 p-3 rounded-lg text-center border border-gray-200">
+                    <p class="font-bold text-gray-600 text-xs">Level 10</p>
+                    <p class="font-bold">$8/fulan</p>
+                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
+                </div>
+                <div class="bg-indigo-50 p-3 rounded-lg text-center border border-indigo-200">
+                    <p class="font-bold text-indigo-600 text-xs">Level 11</p>
+                    <p class="font-bold">$10/fulan</p>
+                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
+                </div>
+                <div class="bg-pink-50 p-3 rounded-lg text-center border border-pink-200">
+                    <p class="font-bold text-pink-600 text-xs">Level 12</p>
+                    <p class="font-bold">$10/fulan</p>
+                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-lg text-center border border-amber-200 col-span-2 md:col-span-1">
+                    <p class="font-bold text-amber-600 text-xs">🎯 Kompletu</p>
+                    <p class="font-bold text-sm">Pakote</p>
+                    <p class="text-xs text-gray-500">Espesial</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Form -->
+        <div class="form-container p-6 md:p-10">
+            <h2 class="text-2xl font-bold text-gray-900 text-center mb-1">FORMULÁRIU REJISTU ESTUDANTE</h2>
+            <p class="text-center text-gray-500 text-sm mb-8">DIGITAL TECHNOLOGY & CREATIVE INDUSTRY ACADEMY</p>
+            
+            <form id="registrationForm" onsubmit="handleRegistration(event)">
+                
+                <!-- ======================================== -->
+                <!-- INFORMASAUN PESSOAL -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3">
+                    <div class="section-icon" style="background: var(--gradient-main);">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">INFORMASAUN PESSOAL</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="form-label">Naran Kompletu <span class="text-red-500">*</span></label>
+                        <input type="text" id="fullName" required placeholder="Ex: João da Silva" class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label">Data Moris <span class="text-red-500">*</span></label>
+                        <input type="date" id="birthDate" required class="form-input">
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="form-label">Sexo <span class="text-red-500">*</span></label>
+                        <div class="flex gap-6 pt-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="gender" value="Mane" required class="w-4 h-4 accent-[#6C3CE1]">
+                                <span>Mane</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="gender" value="Feto" required class="w-4 h-4 accent-[#6C3CE1]">
+                                <span>Feto</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label">Munisípiu <span class="text-red-500">*</span></label>
+                        <input type="text" id="municipality" required placeholder="Ex: Dili" class="form-input">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label">Endereçu Atual <span class="text-red-500">*</span></label>
+                    <textarea id="address" required rows="2" placeholder="Endereçu kompletu..." class="form-input"></textarea>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="form-label">Telemóvel / WhatsApp <span class="text-red-500">*</span></label>
+                        <input type="tel" id="phone" required placeholder="670 1234 5678" class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label">Email <span class="text-red-500">*</span></label>
+                        <input type="email" id="email" required placeholder="exemplo@email.com" class="form-input">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label">Númeru BI / Cartão Eleitoral / Passaporte <span class="text-red-500">*</span></label>
+                    <input type="text" id="idNumber" required placeholder="Númeru dokumentu..." class="form-input">
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- INFORMASAUN EDUKASAUN -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #00D4AA;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #00D4AA, #059669);">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">INFORMASAUN EDUKASAUN</h3>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label">Nível Edukasaun Ikus <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                        <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="educationLevel" value="Ensino Básico" required class="w-4 h-4 accent-[#6C3CE1]">
+                            <span class="text-sm">Ensino Básico</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="educationLevel" value="Ensino Secundário" required class="w-4 h-4 accent-[#6C3CE1]">
+                            <span class="text-sm">Ensino Secundário</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="educationLevel" value="Diploma" required class="w-4 h-4 accent-[#6C3CE1]">
+                            <span class="text-sm">Diploma</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="educationLevel" value="Licenciatura" required class="w-4 h-4 accent-[#6C3CE1]">
+                            <span class="text-sm">Licenciatura</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="educationLevel" value="Pós-Graduação" required class="w-4 h-4 accent-[#6C3CE1]">
+                            <span class="text-sm">Pós-Graduação</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="educationLevel" value="Seluk" required class="w-4 h-4 accent-[#6C3CE1]">
+                            <span class="text-sm">Seluk</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="form-label">Naran Eskola / Universidade</label>
+                        <input type="text" id="schoolName" placeholder="Naran eskola..." class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label">Tinan Remata Estudu</label>
+                        <input type="number" id="graduationYear" placeholder="Ex: 2020" class="form-input">
+                    </div>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- KURSU NE'EBE HAKARAK TUIR -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #8B5CF6;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #8B5CF6, #6C3CE1);">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">KURSU NE'EBÉ HAKARAK TUIR</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-3 mb-4" id="courseSelection">
+                    <!-- Level 1 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 1 – Computer & Digital Fundamental" class="form-checkbox mt-1 course-checkbox" data-price="5" data-regfee="2">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 1 – Computer & Digital Fundamental</p>
+                            <p class="text-xs text-blue-600 font-semibold">$5/fulan + $2 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 2 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 2 – Graphic Design Fundamental (Canva Professional)" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="2">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 2 – Graphic Design Fundamental</p>
+                            <p class="text-xs text-purple-600 font-semibold">$6/fulan + $2 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 3 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 3 – Advanced Graphic Design (Adobe Photoshop, Illustrator & Video Editing)" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="2">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 3 – Advanced Graphic Design</p>
+                            <p class="text-xs text-pink-600 font-semibold">$6/fulan + $2 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 4 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 4 – UI/UX Design (Figma, Wireframe & Prototype)" class="form-checkbox mt-1 course-checkbox" data-price="5" data-regfee="2">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 4 – UI/UX Design</p>
+                            <p class="text-xs text-indigo-600 font-semibold">$5/fulan + $2 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 5 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 5 – Web Fundamental (HTML5, CSS3, Tailwind CSS & JavaScript)" class="form-checkbox mt-1 course-checkbox" data-price="5" data-regfee="3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 5 – Web Fundamental</p>
+                            <p class="text-xs text-green-600 font-semibold">$5/fulan + $3 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 6 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 6 – Frontend Development (ReactJS & Next.js)" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 6 – Frontend Development</p>
+                            <p class="text-xs text-cyan-600 font-semibold">$6/fulan + $3 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 7 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 7 – Database & Backend Development (MySQL, PostgreSQL, PHP & Laravel)" class="form-checkbox mt-1 course-checkbox" data-price="7" data-regfee="3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 7 – Database & Backend</p>
+                            <p class="text-xs text-orange-600 font-semibold">$7/fulan + $3 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 8 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 8 – API & Fullstack Development" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 8 – API & Fullstack</p>
+                            <p class="text-xs text-red-600 font-semibold">$10/fulan + $5 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 9 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 9 – Mobile Development (Flutter)" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 9 – Mobile Development</p>
+                            <p class="text-xs text-teal-600 font-semibold">$10/fulan + $5 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 10 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 10 – Modern Backend Development (Node.js, Express.js, TypeScript & Golang)" class="form-checkbox mt-1 course-checkbox" data-price="8" data-regfee="5">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 10 – Modern Backend</p>
+                            <p class="text-xs text-gray-600 font-semibold">$8/fulan + $5 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 11 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 11 – DevOps & Cloud Deployment (Linux, Docker, VPS & CI/CD)" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 11 – DevOps & Cloud</p>
+                            <p class="text-xs text-indigo-600 font-semibold">$10/fulan + $5 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Level 12 -->
+                    <label class="course-select-card">
+                        <input type="checkbox" name="courses" value="Level 12 – AI & Emerging Technology" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Level 12 – AI & Emerging Tech</p>
+                            <p class="text-xs text-pink-600 font-semibold">$10/fulan + $5 rejistu</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Entrepreneurship -->
+                    <label class="course-select-card border-amber-300 bg-amber-50">
+                        <input type="checkbox" name="courses" value="Entrepreneurship & Freelancing" class="form-checkbox mt-1 course-checkbox" data-price="0" data-regfee="0">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">🎯 Entrepreneurship & Freelancing</p>
+                            <p class="text-xs text-amber-600 font-semibold">Inklui iha pakote</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Programa Kompletu -->
+                    <label class="course-select-card border-2 border-[#6C3CE1] bg-purple-50 col-span-2">
+                        <input type="checkbox" name="courses" value="Programa Kompletu – Digital Technology & Creative Industry Academy" class="form-checkbox mt-1 course-checkbox" data-price="0" data-regfee="0">
+                        <div>
+                            <p class="text-sm font-bold text-gray-800">🏆 Programa Kompletu – Digital Technology & Creative Industry Academy</p>
+                            <p class="text-xs text-[#6C3CE1] font-bold">Pakote Espesial (Ekonómia)</p>
+                        </div>
+                    </label>
+                </div>
+                
+                <!-- Total Price Display -->
+                <div id="priceDisplay" class="hidden bg-amber-50 border-2 border-amber-400 rounded-xl p-4 mb-6 text-center">
+                    <p class="text-lg font-bold text-amber-800">
+                        TOTAL: <span id="totalPrice" class="text-2xl">$0</span>
+                    </p>
+                    <p class="text-sm text-gray-600">
+                        <span id="totalMonthly">$0</span>/fulan + <span id="totalRegFee">$0</span> rejistu
+                    </p>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- MODALIDADE APRENDIZAJEN -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #F59E0B;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">MODALIDADE APRENDIZAJEN</h3>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="mode" value="Presential Class" required class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">Presential Class</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="mode" value="Online Class" required class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">Online Class</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="mode" value="Hybrid Class" required class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">Hybrid Class</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="mode" value="Weekend Class" required class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">Weekend Class</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="mode" value="Evening Class" required class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">Evening Class</span>
+                    </label>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- ESPERIÉNSIA ANTES -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #6B7280;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #6B7280, #4B5563);">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">ESPERIÉNSIA ANTES</h3>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="experience" value="La Iha" class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">La Iha</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="experience" value="Básiku" class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">Básiku</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="experience" value="Intermediáriu" class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">Intermediáriu</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="experience" value="Avansadu" class="w-4 h-4 accent-[#6C3CE1]">
+                        <span class="text-sm">Avansadu</span>
+                    </label>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label">Se iha, favor hakerek badak:</label>
+                    <textarea id="experienceDetail" rows="2" placeholder="Escreve ita nia esperiénsia..." class="form-input"></textarea>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- OBJETIVU APRENDIZAJEN -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #3B82F6;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #3B82F6, #2563EB);">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">OBJETIVU APRENDIZAJEN</h3>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label">Tansá mak ita hakarak tuir programa ida ne'e? <span class="text-red-500">*</span></label>
+                    <textarea id="objective" required rows="3" placeholder="Escreve ita nia objetivu..." class="form-input"></textarea>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- KONTAKTU EMERJÉNSIA -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #EF4444;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #EF4444, #DC2626);">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">KONTAKTU EMERJÉNSIA</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="form-label">Naran <span class="text-red-500">*</span></label>
+                        <input type="text" id="emergencyName" required placeholder="Naran..." class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label">Relação <span class="text-red-500">*</span></label>
+                        <input type="text" id="emergencyRelation" required placeholder="Inan, Aman, etc" class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label">Telemóvel <span class="text-red-500">*</span></label>
+                        <input type="tel" id="emergencyPhone" required placeholder="670 1234 5678" class="form-input">
+                    </div>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- DOKUMENTU ANEXU -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #6B7280;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #6B7280, #4B5563);">
+                        <i class="fas fa-file"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">DOKUMENTU ANEXU</h3>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
+                    <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="documents" value="Kópia Bilhete Identidade / Cartão Eleitoral / Passaporte" class="form-checkbox">
+                        <span class="text-sm">BI / Cartão Eleitoral</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="documents" value="Kópia Sertifikadu Eskolaridade" class="form-checkbox">
+                        <span class="text-sm">Sertifikadu Eskolaridade</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="documents" value="Curriculum Vitae (CV)" class="form-checkbox">
+                        <span class="text-sm">Curriculum Vitae (CV)</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="documents" value="Pasfoto 3x4" class="form-checkbox">
+                        <span class="text-sm">Pasfoto 3x4</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="documents" value="Komprovativu Pagamentu (se aplika)" class="form-checkbox">
+                        <span class="text-sm">Komprovativu Pagamentu</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="documents" value="Seluk" class="form-checkbox">
+                        <span class="text-sm">Seluk</span>
+                    </label>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- DEKLARAÇÃO -->
+                <!-- ======================================== -->
+                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #10B981;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">DEKLARAÇÃO</h3>
+                </div>
+                
+                <div class="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" id="declaration" required class="form-checkbox mt-1">
+                        <span class="text-sm text-gray-700">
+                            Ha'u declara katak informasaun hotu ne'ebé ha'u fornese iha formuláriu ida ne'e loos no loloos. 
+                            Ha'u konkorda atu tuir regra no regulamentu ne'ebé estabelese husi Digital Technology & Creative Industry Academy.
+                        </span>
+                    </label>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label class="form-label">Fatin</label>
+                        <input type="text" id="place" value="Dili" class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label">Data</label>
+                        <input type="date" id="declarationDate" class="form-input">
+                    </div>
+                    <div>
+                        <label class="form-label">Asinatura Kandidatu</label>
+                        <input type="text" id="signature" placeholder="Naran kompletu" class="form-input">
+                    </div>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- ADMIN SECTION -->
+                <!-- ======================================== -->
+                <div class="bg-gray-100 rounded-xl p-4 mb-6 border-2 border-dashed border-gray-400">
+                    <h4 class="font-bold text-gray-600 text-sm flex items-center gap-2">
+                        <i class="fas fa-user-cog"></i> USU ADMINISTRAÇÃO
+                    </h4>
+                    <p class="text-xs text-gray-400 mt-1">(Preenche husi administrasaun)</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                        <div>
+                            <label class="block text-gray-600 text-xs font-medium mb-1">Númeru Rejistu</label>
+                            <input type="text" id="regNumber" placeholder="Auto-generated" class="form-input bg-gray-200 text-sm" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 text-xs font-medium mb-1">Data Rejistu</label>
+                            <input type="text" id="regDate" class="form-input bg-gray-200 text-sm" readonly>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="block text-gray-600 text-xs font-medium mb-1">Kursu Selecionadu</label>
+                        <input type="text" id="selectedCourses" class="form-input bg-gray-200 text-sm" readonly>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                        <div>
+                            <label class="block text-gray-600 text-xs font-medium mb-1">Status</label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center gap-1 cursor-pointer">
+                                    <input type="radio" name="adminStatus" value="Sim" class="w-4 h-4 accent-green-600">
+                                    <span class="text-sm">Sim</span>
+                                </label>
+                                <label class="flex items-center gap-1 cursor-pointer">
+                                    <input type="radio" name="adminStatus" value="Pendente" class="w-4 h-4 accent-yellow-600" checked>
+                                    <span class="text-sm">Pendente</span>
+                                </label>
+                                <label class="flex items-center gap-1 cursor-pointer">
+                                    <input type="radio" name="adminStatus" value="Rejeitado" class="w-4 h-4 accent-red-600">
+                                    <span class="text-sm">Rejeitado</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 text-xs font-medium mb-1">Observasaun</label>
+                            <input type="text" id="adminObservations" placeholder="Observasaun..." class="form-input bg-gray-200 text-sm">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ======================================== -->
+                <!-- SUBMIT BUTTON -->
+                <!-- ======================================== -->
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane mr-2"></i> SUBMETE REJISTU
+                </button>
+                
+                <div class="text-center mt-4 space-y-1">
+                    <p class="text-sm text-gray-500">
+                        <i class="fas fa-lock mr-1 text-green-500"></i> Ita nia dadus seguru no konfidensial
+                    </p>
+                    <p class="text-sm text-green-600 font-medium">
+                        <i class="fab fa-whatsapp mr-1"></i> Após submite, ita sei redireksiona ba WhatsApp atu konfirma rejistu
+                    </p>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-[#0A0A0F] text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg">D</div>
+                    <span class="text-white font-bold text-lg">DTCI Academy</span>
+                </div>
+                <p class="text-gray-500 text-sm">Digital Technology & Creative Industry Academy</p>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Ligaun</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="index.html" class="hover:text-white transition">Início</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">Kona-ba</a></li>
+                    <li><a href="curriculum.html" class="hover:text-white transition">Kurikulum</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Suporte</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="contact.html" class="hover:text-white transition">Kontaktu</a></li>
+                    <li><a href="register.html" class="hover:text-white transition">Rejistu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Kontaktu</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><i class="fas fa-envelope w-5 text-[#6C3CE1]"></i> info@dtciacademy.com</li>
+                    <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 1234 5678</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-8 pt-6 text-center text-gray-600 text-sm">
+            &copy; 2026 DTCI Academy. Hotu-hotu direitu reservadu.
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- WHATSAPP FLOAT -->
+<!-- ============================================================ -->
+<a href="https://wa.me/+670 7449 2303" target="_blank" class="whatsapp-float" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    const toggleBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    toggleBtn?.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const icon = toggleBtn?.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // ============================================
+    // SET DEFAULT DATES
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const dateStr = today.toISOString().split('T')[0];
+        
+        const declarationDate = document.getElementById('declarationDate');
+        if (declarationDate) declarationDate.value = dateStr;
+        
+        const regDate = document.getElementById('regDate');
+        if (regDate) regDate.value = dateStr;
+        
+        // Generate registration number
+        const regNumber = document.getElementById('regNumber');
+        if (regNumber) {
+            const prefix = 'DTCI';
+            const year = today.getFullYear();
+            const random = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+            regNumber.value = `${prefix}-${year}-${random}`;
+        }
+    });
+
+    // ============================================
+    // PRICE CALCULATOR
+    // ============================================
+    document.querySelectorAll('.course-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', calculateTotal);
+    });
+
+    function calculateTotal() {
+        const checked = document.querySelectorAll('.course-checkbox:checked');
+        const display = document.getElementById('priceDisplay');
+        const totalPrice = document.getElementById('totalPrice');
+        const totalMonthly = document.getElementById('totalMonthly');
+        const totalRegFee = document.getElementById('totalRegFee');
+        
+        if (checked.length === 0) {
+            display.classList.add('hidden');
+            return;
+        }
+        
+        display.classList.remove('hidden');
+        
+        let monthly = 0;
+        let regFee = 0;
+        
+        checked.forEach(cb => {
+            monthly += parseFloat(cb.dataset.price) || 0;
+            regFee += parseFloat(cb.dataset.regfee) || 0;
+        });
+        
+        const isComplete = Array.from(checked).some(cb => cb.value.includes('Programa Kompletu'));
+        
+        if (isComplete) {
+            totalPrice.textContent = '$0 (Pakote Espesial)';
+            totalMonthly.textContent = '$0';
+            totalRegFee.textContent = '$0';
+        } else {
+            totalPrice.textContent = `$${monthly + regFee}`;
+            totalMonthly.textContent = `$${monthly}`;
+            totalRegFee.textContent = `$${regFee}`;
+        }
+    }
+
+    // ============================================
+    // UPDATE SELECTED COURSES (admin section)
+    // ============================================
+    document.querySelectorAll('.course-checkbox').forEach(cb => {
+        cb.addEventListener('change', function() {
+            const checked = document.querySelectorAll('.course-checkbox:checked');
+            const names = Array.from(checked).map(c => c.value);
+            const selectedCourses = document.getElementById('selectedCourses');
+            if (selectedCourses) {
+                selectedCourses.value = names.length > 0 ? names.join('; ') : 'N/A';
+            }
+        });
+    });
+
+    // ============================================
+    // HANDLE REGISTRATION - WHATSAPP INTEGRATION
+    // ============================================
+    function handleRegistration(event) {
+        event.preventDefault();
+        
+        // ========================================
+        // 1. COLLECT FORM DATA
+        // ========================================
+        
+        const genderEl = document.querySelector('input[name="gender"]:checked');
+        const gender = genderEl ? genderEl.value : '';
+        
+        const eduEl = document.querySelector('input[name="educationLevel"]:checked');
+        const educationLevel = eduEl ? eduEl.value : '';
+        
+        const modeEl = document.querySelector('input[name="mode"]:checked');
+        const mode = modeEl ? modeEl.value : '';
+        
+        const expEl = document.querySelector('input[name="experience"]:checked');
+        const experience = expEl ? expEl.value : '';
+        
+        const statusEl = document.querySelector('input[name="adminStatus"]:checked');
+        const adminStatus = statusEl ? statusEl.value : 'Pendente';
+        
+        const courses = Array.from(document.querySelectorAll('input[name="courses"]:checked')).map(cb => cb.value);
+        const documents = Array.from(document.querySelectorAll('input[name="documents"]:checked')).map(cb => cb.value);
+        
+        const formData = {
+            fullName: document.getElementById('fullName')?.value || '',
+            birthDate: document.getElementById('birthDate')?.value || '',
+            gender: gender,
+            municipality: document.getElementById('municipality')?.value || '',
+            address: document.getElementById('address')?.value || '',
+            phone: document.getElementById('phone')?.value || '',
+            email: document.getElementById('email')?.value || '',
+            idNumber: document.getElementById('idNumber')?.value || '',
+            educationLevel: educationLevel,
+            schoolName: document.getElementById('schoolName')?.value || '',
+            graduationYear: document.getElementById('graduationYear')?.value || '',
+            courses: courses,
+            mode: mode,
+            experience: experience,
+            experienceDetail: document.getElementById('experienceDetail')?.value || '',
+            objective: document.getElementById('objective')?.value || '',
+            emergencyName: document.getElementById('emergencyName')?.value || '',
+            emergencyRelation: document.getElementById('emergencyRelation')?.value || '',
+            emergencyPhone: document.getElementById('emergencyPhone')?.value || '',
+            documents: documents,
+            declaration: document.getElementById('declaration')?.checked || false,
+            place: document.getElementById('place')?.value || 'Dili',
+            declarationDate: document.getElementById('declarationDate')?.value || '',
+            signature: document.getElementById('signature')?.value || '',
+            regNumber: document.getElementById('regNumber')?.value || '',
+            regDate: document.getElementById('regDate')?.value || '',
+            selectedCourses: document.getElementById('selectedCourses')?.value || '',
+            adminStatus: adminStatus,
+            adminObservations: document.getElementById('adminObservations')?.value || ''
+        };
+        
+        // ========================================
+        // 2. VALIDATE REQUIRED FIELDS
+        // ========================================
+        if (!formData.fullName) {
+            alert('⚠️ Favor preenche Naran Kompletu!');
+            document.getElementById('fullName').focus();
+            return;
+        }
+        if (!formData.phone) {
+            alert('⚠️ Favor preenche Númeru Telemóvel!');
+            document.getElementById('phone').focus();
+            return;
+        }
+        if (!formData.email) {
+            alert('⚠️ Favor preenche Email!');
+            document.getElementById('email').focus();
+            return;
+        }
+        if (!formData.idNumber) {
+            alert('⚠️ Favor preenche Númeru BI / Cartão Eleitoral!');
+            document.getElementById('idNumber').focus();
+            return;
+        }
+        if (formData.courses.length === 0) {
+            alert('⚠️ Favor hili kursu ne\'ebé ita hakarak tuir!');
+            return;
+        }
+        if (!formData.mode) {
+            alert('⚠️ Favor hili modalidade aprendizajen!');
+            return;
+        }
+        if (!formData.objective) {
+            alert('⚠️ Favor preenche objetivu aprendizajen!');
+            document.getElementById('objective').focus();
+            return;
+        }
+        if (!formData.emergencyName) {
+            alert('⚠️ Favor preenche kontaktu emerjénsia naran!');
+            document.getElementById('emergencyName').focus();
+            return;
+        }
+        if (!formData.declaration) {
+            alert('⚠️ Favor asina deklarasaun!');
+            document.getElementById('declaration').focus();
+            return;
+        }
+        
+        // ========================================
+        // 3. BUILD WHATSAPP MESSAGE
+        // ========================================
+        const message = buildWhatsAppMessage(formData);
+        
+        // ========================================
+        // 4. SEND TO WHATSAPP
+        // ========================================
+        // MUDA BA NUMERU REAL HUSI DTCI ACADEMY
+        const phoneNumber = '+67074492303';
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        
+        window.open(whatsappUrl, '_blank');
+        
+        // ========================================
+        // 5. SHOW SUCCESS MESSAGE
+        // ========================================
+        alert('✅ REJISTU SUSEZU!\n\n' +
+              'Ita nia rejistu hetan ona.\n' +
+              'Favor verifika WhatsApp atu konfirma.\n\n' +
+              'Obrigadu!');
+    }
+
+    // ============================================
+    // BUILD WHATSAPP MESSAGE - FORMATED
+    // ============================================
+    function buildWhatsAppMessage(data) {
+        const courseList = data.courses.map((c, i) => `${i+1}. ${c}`).join('\n');
+        const docList = data.documents.length > 0 ? data.documents.map(d => `✓ ${d}`).join('\n') : 'N/A';
+        
+        let monthly = 0;
+        let regFee = 0;
+        document.querySelectorAll('.course-checkbox:checked').forEach(cb => {
+            monthly += parseFloat(cb.dataset.price) || 0;
+            regFee += parseFloat(cb.dataset.regfee) || 0;
+        });
+        
+        const isComplete = data.courses.some(c => c.includes('Programa Kompletu'));
+        const totalPrice = isComplete ? '$0 (Pakote Espesial)' : `$${monthly + regFee}`;
+        const monthlyTotal = isComplete ? '$0' : `$${monthly}`;
+        const regTotal = isComplete ? '$0' : `$${regFee}`;
+        
+        return `
+*📋 FORMULÁRIU REJISTU ESTUDANTE*
+*DIGITAL TECHNOLOGY & CREATIVE INDUSTRY ACADEMY*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*👤 INFORMASAUN PESSOAL*
+Naran Kompletu: ${data.fullName}
+Data Moris: ${data.birthDate}
+Sexo: ${data.gender}
+Munisípiu: ${data.municipality}
+Endereçu: ${data.address}
+Telemóvel: ${data.phone}
+Email: ${data.email}
+BI / Cartão: ${data.idNumber}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*🎓 INFORMASAUN EDUKASAUN*
+Nível: ${data.educationLevel}
+Eskola: ${data.schoolName || 'N/A'}
+Tinan Remata: ${data.graduationYear || 'N/A'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*📚 KURSU NE'EBÉ HAKARAK TUIR*
+${courseList}
+
+*💰 TOTAL PREÇU*
+Fulan: ${monthlyTotal}
+Rejistu: ${regTotal}
+Total: ${totalPrice}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*⏰ MODALIDADE*
+${data.mode}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*⭐ ESPERIÉNSIA*
+Nível: ${data.experience || 'N/A'}
+Detalhe: ${data.experienceDetail || 'N/A'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*🎯 OBJETIVU*
+${data.objective}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*🚨 KONTAKTU EMERJÉNSIA*
+Naran: ${data.emergencyName}
+Relação: ${data.emergencyRelation}
+Telemóvel: ${data.emergencyPhone}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*📄 DOKUMENTU*
+${docList}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*📝 DEKLARAÇÃO*
+Fatin: ${data.place}
+Data: ${data.declarationDate}
+Asinatura: ${data.signature || 'N/A'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+*✅ REJISTU KOMPLETU*
+Númeru Rejistu: ${data.regNumber}
+Data Rejistu: ${data.regDate}
+Status: ${data.adminStatus}
+`.trim();
+    }
+</script>
+</body>
+</html>

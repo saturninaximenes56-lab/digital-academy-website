@@ -1,0 +1,44 @@
+{
+  "faq": [
+    {
+      "id": 1,
+      "question": "Presiza esperiénsia antes atu tama iha DTCI Academy?",
+      "answer": "Lae! Kursu ida ne'e desenha ba estudante ho nível zero. Ita sei aprende husi fundamentu to'o profisional. Estudante sira ho esperiénsia mós di'ak."
+    },
+    {
+      "id": 2,
+      "question": "Sertifikadu ne'ebé fo?",
+      "answer": "DTCI Academy fo sertifikadu internasional ne'ebé rekonese husi indústria. Sertifikadu ida ne'e bele uza ba karreira iha Timor-Leste no internasional."
+    },
+    {
+      "id": 3,
+      "question": "Presiza komputador rasik?",
+      "answer": "Sim, estudante presiza komputador pessoal (laptop) ho spec mínimu: RAM 8GB, Storage 256GB SSD. DTCI Academy fornese software no ferramenta ne'ebé presiza."
+    },
+    {
+      "id": 4,
+      "question": "Oinsá ho estudante ne'ebé servisu?",
+      "answer": "Kursu ida ne'e fleksível. Klase sira iha semana no sábadu. Estudante sira bele ajusta ho horáriu servisu. Materia mós disponivel online."
+    },
+    {
+      "id": 5,
+      "question": "Tempo total ba kursu?",
+      "answer": "12-18 fulan, depende ba intensidade estudante nia aprendizajem. Estudante sira bele halo lalais ka tuir ritmu rasik."
+    },
+    {
+      "id": 6,
+      "question": "Projetu final ne'ebé?",
+      "answer": "Estudante tenke kompleta projetu real (Capstone Project) hanesan: E-Commerce System, School Management System, POS System, Hospital System, ka Mobile Application. Projetu ida ne'e bele sai portfolio ba karreira."
+    },
+    {
+      "id": 7,
+      "question": "Ajuda ba emprego depois kursu?",
+      "answer": "Sim! DTCI Academy iha network ho kompañia sira iha Timor-Leste no internasional. Estudante sira hetan suporte atu buka emprego, estájiu, no oportunidade freelancing."
+    },
+    {
+      "id": 8,
+      "question": "Kursu iha online ka presensial?",
+      "answer": "DTCI Academy oferese klase presensial no online (hibridu). Estudante sira bele hili modalidade ne'ebé konfortável. Prátika no workshop presensial ba interasaun direta."
+    }
+  ]
+}

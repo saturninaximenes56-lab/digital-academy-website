@@ -1,0 +1,70 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "João da Silva",
+      "role": "Frontend Developer",
+      "company": "Tech Solutions TL",
+      "image": "assets/images/team/joao.jpg",
+      "testimonial": "DTCI Academy transforma hau husi zero to professional. Iha 18 fulan hau aprende web development no agora servisu nu'udar Frontend Developer iha empresa lokál. Metodu prátika mak di'ak liu!",
+      "rating": 5,
+      "date": "2025-12-15"
+    },
+    {
+      "id": 2,
+      "name": "Maria Fernandes",
+      "role": "UI/UX Designer",
+      "company": "Creative Studio Dili",
+      "image": "assets/images/team/maria.jpg",
+      "testimonial": "Parte UI/UX Design mak faboritu hau. Instrutor sira profisionál no suporte individual mak ajuda hau komprende konseitu komplexu. Agora hau servisu ho kliente internasional.",
+      "rating": 5,
+      "date": "2025-11-20"
+    },
+    {
+      "id": 3,
+      "name": "Carlos Amaral",
+      "role": "Fullstack Developer",
+      "company": "Freelancer",
+      "image": "assets/images/team/carlos.jpg",
+      "testimonial": "Kursu kompletu tebes! Hau aprende husi design to'o backend. Projetu real hanesan E-Commerce no School System prepara hau ba merkadu servisu. Rekomenda ba ema hotu!",
+      "rating": 5,
+      "date": "2025-10-10"
+    },
+    {
+      "id": 4,
+      "name": "Ana Pereira",
+      "role": "Mobile Developer",
+      "company": "AppDev Timor",
+      "image": "assets/images/team/ana.jpg",
+      "testimonial": "Flutter mobile development mak espesializasaun hau. DTCI Academy fo base sólidu no ajuda hau kria aplikasaun mobile ba negósiu lokál. Obrigada!",
+      "rating": 5,
+      "date": "2025-09-05"
+    },
+    {
+      "id": 5,
+      "name": "Pedro Gonçalves",
+      "role": "Digital Marketing Specialist",
+      "company": "Marketing Pro TL",
+      "image": "assets/images/team/pedro.jpg",
+      "testimonial": "Ha'u la'ós programador, maibé DTCI Academy ajuda hau komprende teknolojia no design. Agora hau bele komunik ho ekipa tekniku no lidera projetu digital.",
+      "rating": 4,
+      "date": "2025-08-12"
+    },
+    {
+      "id": 6,
+      "name": "Isabel Costa",
+      "role": "Graphic Designer",
+      "company": "Design Studio Timor",
+      "image": "assets/images/team/isabel.jpg",
+      "testimonial": "Adobe Creative Suite no branding mak área ne'ebé hau gosta. Instrutor sira ho esperiénsia indústria fo insight valiozu. Hau agora iha portfolio forte!",
+      "rating": 5,
+      "date": "2025-07-18"
+    }
+  ],
+  "statistics": {
+    "total_students": 156,
+    "graduation_rate": "92%",
+    "employment_rate": "85%",
+    "average_rating": 4.8
+  }
+}

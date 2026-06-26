@@ -1,0 +1,68 @@
+{
+  "team": [
+    {
+      "id": 1,
+      "name": "Dr. António Belo",
+      "role": "Director & Lead Instructor",
+      "specialty": "Fullstack Development, AI",
+      "experience": "10+ years",
+      "bio": "Esperiénsia iha web development no AI. Lead developer ba projetu governu no privadu.",
+      "image": "assets/images/team/antonio.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/antonio-belo",
+        "github": "https://github.com/antonio-belo"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Dra. Beatriz Soares",
+      "role": "Design Lead",
+      "specialty": "UI/UX Design, Graphic Design",
+      "experience": "8+ years",
+      "bio": "Especialista iha design thinking no brand identity. Sira nia clientes inklui organizasaun internasional.",
+      "image": "assets/images/team/beatriz.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/beatriz-soares",
+        "portfolio": "https://beatrizdesign.com"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Eng. Carlos Mendonça",
+      "role": "Backend & DevOps Instructor",
+      "specialty": "Laravel, Node.js, DevOps",
+      "experience": "7+ years",
+      "bio": "Expert iha backend development no cloud deployment. Jere infraestrutura ba startup sira.",
+      "image": "assets/images/team/carlos-m.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/carlos-mendonca",
+        "github": "https://github.com/carlos-mendonca"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Dra. Dulce Ramos",
+      "role": "Mobile Development Instructor",
+      "specialty": "Flutter, Dart, Firebase",
+      "experience": "6+ years",
+      "bio": "Especialista iha mobile development cross-platform. Sira nia aplikasaun iha 10,000+ uzuáriu.",
+      "image": "assets/images/team/dulce.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/dulce-ramos",
+        "github": "https://github.com/dulce-ramos"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Sr. Francisco Ximenes",
+      "role": "Entrepreneurship & Career Mentor",
+      "specialty": "Business Development, Freelancing",
+      "experience": "12+ years",
+      "bio": "Fundador startup lokál, mentor ba 50+ empreendedor. Especialista iha digital marketing no client management.",
+      "image": "assets/images/team/francisco.jpg",
+      "social": {
+        "linkedin": "https://linkedin.com/in/francisco-ximenes"
+      }
+    }
+  ]
+}

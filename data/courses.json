@@ -1,0 +1,49 @@
+{
+  "courses": [
+    {
+      "id": "web-dev",
+      "title": "Web Development",
+      "icon": "fa-code",
+      "description": "Kria website modernu no aplikasaun web",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "React", "Laravel", "Node.js"],
+      "duration": "6 months",
+      "level": "Intermediate"
+    },
+    {
+      "id": "ui-ux",
+      "title": "UI/UX Design",
+      "icon": "fa-pencil-ruler",
+      "description": "Desenha interfase no esperiénsia uzuáriu",
+      "technologies": ["Figma", "Adobe XD", "UX Research", "Prototyping"],
+      "duration": "3 months",
+      "level": "Beginner"
+    },
+    {
+      "id": "graphic-design",
+      "title": "Graphic Design",
+      "icon": "fa-paint-brush",
+      "description": "Komunikasaun vizuál no branding",
+      "technologies": ["Adobe Photoshop", "Illustrator", "Branding", "Typography"],
+      "duration": "4 months",
+      "level": "Beginner"
+    },
+    {
+      "id": "mobile-dev",
+      "title": "Mobile Development",
+      "icon": "fa-mobile-alt",
+      "description": "Aplikasaun Android no iOS ho Flutter",
+      "technologies": ["Dart", "Flutter", "Firebase", "API Integration"],
+      "duration": "4 months",
+      "level": "Intermediate"
+    },
+    {
+      "id": "data-science",
+      "title": "Data Science & AI",
+      "icon": "fa-robot",
+      "description": "Analiza dadus no AI aplikasaun",
+      "technologies": ["Python", "Pandas", "Machine Learning", "AI Tools"],
+      "duration": "3 months",
+      "level": "Advanced"
+    }
+  ]
+}

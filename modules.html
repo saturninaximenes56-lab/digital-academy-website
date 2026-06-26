@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="tet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulu - DTCI Academy</title>
+    <meta name="description" content="Módulu kursu DTCI Academy - Digital Technology & Creative Industry Academy.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================================ */
+        /* ROOT VARIABLES - DESIGN SYSTEM */
+        /* ============================================================ */
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #5531b5;
+            --primary-light: #8b5cf6;
+            --secondary: #00D4AA;
+            --accent: #F97316;
+            --dark: #0A0A0F;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --gradient-main: linear-gradient(135deg, #6C3CE1 0%, #00D4AA 100%);
+            --shadow-card: 0 20px 60px rgba(108, 60, 225, 0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--light-gray);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ============================================================ */
+        /* NAVIGATION */
+        /* ============================================================ */
+        .navbar-glass {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 6px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-main);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .btn-primary-gradient {
+            background: var(--gradient-main);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 60, 225, 0.4);
+        }
+
+        /* ============================================================ */
+        /* PAGE HEADER */
+        /* ============================================================ */
+        .page-header {
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 60px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&h=400&fit=crop') center/cover;
+            opacity: 0.06;
+        }
+
+        .page-header .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(108, 60, 225, 0.2) 0%, transparent 70%);
+        }
+
+        .page-header .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============================================================ */
+        /* MODULE CARDS */
+        /* ============================================================ */
+        .module-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-card);
+            border-color: rgba(108, 60, 225, 0.1);
+        }
+
+        .module-card .card-header {
+            padding: 20px 24px 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card .card-header .level-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .module-card .card-header .price-tag {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #78350F;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .module-card .card-body {
+            padding: 0 24px 20px;
+            flex: 1;
+        }
+
+        .module-card .card-body .module-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        .module-card .card-body .module-desc {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        .module-card .card-body .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .module-card .card-body .topics span {
+            background: var(--light-gray);
+            color: var(--gray);
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .module-card .card-footer {
+            padding: 16px 24px 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .module-card .card-footer .projects {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .module-card .card-footer .projects strong {
+            color: var(--dark);
+        }
+
+        .btn-register-sm {
+            background: var(--gradient-main);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-register-sm:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(108, 60, 225, 0.3);
+        }
+
+        /* Color variants for module cards */
+        .module-card.level-1 .card-header { background: linear-gradient(135deg, #1E3A8A, #3B82F6); }
+        .module-card.level-2 .card-header { background: linear-gradient(135deg, #6D28D9, #A855F7); }
+        .module-card.level-3 .card-header { background: linear-gradient(135deg, #BE185D, #EC4899); }
+        .module-card.level-4 .card-header { background: linear-gradient(135deg, #4338CA, #818CF8); }
+        .module-card.level-5 .card-header { background: linear-gradient(135deg, #065F46, #10B981); }
+        .module-card.level-6 .card-header { background: linear-gradient(135deg, #0E7490, #22D3EE); }
+        .module-card.level-7 .card-header { background: linear-gradient(135deg, #C2410C, #FB923C); }
+        .module-card.level-8 .card-header { background: linear-gradient(135deg, #B91C1C, #EF4444); }
+        .module-card.level-9 .card-header { background: linear-gradient(135deg, #0D9488, #2DD4BF); }
+        .module-card.level-10 .card-header { background: linear-gradient(135deg, #4B5563, #9CA3AF); }
+        .module-card.level-11 .card-header { background: linear-gradient(135deg, #4F46E5, #818CF8); }
+        .module-card.level-12 .card-header { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+        .module-card.level-bonus .card-header { background: linear-gradient(135deg, #D97706, #F59E0B); }
+        .module-card.level-complete .card-header { background: linear-gradient(135deg, #6C3CE1, #00D4AA); }
+
+        .module-card .card-header .level-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .module-card .card-header .module-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .module-card .card-header .module-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 48px;
+            color: rgba(255,255,255,0.1);
+        }
+
+        /* ============================================================ */
+        /* FILTER BUTTONS */
+        /* ============================================================ */
+        .filter-btn-module {
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .filter-btn-module:hover {
+            border-color: var(--primary);
+            color: var(--dark);
+        }
+
+        .filter-btn-module.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* ============================================================ */
+        /* SEARCH BAR */
+        /* ============================================================ */
+        .search-bar-module {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px 12px 48px;
+            border: 1px solid #E5E7EB;
+            border-radius: 50px;
+            font-size: 14px;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .search-bar-module:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 60, 225, 0.1);
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-wrapper .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        /* ============================================================ */
+        /* WHATSAPP FLOAT */
+        /* ============================================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse-wa {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float {
+            animation: pulse-wa 2s infinite;
+        }
+
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 0 40px;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 16px;
+                right: 16px;
+            }
+            .module-card .card-header .module-icon {
+                font-size: 32px;
+            }
+            .search-bar-module {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- NAVIGATION -->
+<!-- ============================================================ -->
+<nav class="navbar-glass fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+            
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg shadow-lg">
+                    D
+                </div>
+                <div>
+                    <span class="text-white font-bold text-lg tracking-tight">DTCI</span>
+                    <span class="text-gray-400 font-medium text-sm hidden md:inline">Academy</span>
+                </div>
+            </a>
+            
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="modules.html" class="nav-link active">Módulu</a>
+                <a href="curriculum.html" class="nav-link">Kurikulum</a>
+                <a href="projects.html" class="nav-link">Projetu</a>
+                <a href="about.html" class="nav-link">Kona-ba</a>
+                <a href="contact.html" class="nav-link">Kontaktu</a>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="register.html" class="btn-primary-gradient text-sm px-5 py-2">
+                    <i class="fas fa-user-plus mr-2"></i>Rejistu
+                </a>
+                <button id="menu-toggle" class="lg:hidden text-white text-2xl p-1 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#14141C] border-t border-white/5">
+        <div class="px-4 py-4 space-y-1">
+            <a href="index.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Início</a>
+            <a href="modules.html" class="block px-4 py-3 text-white bg-white/5 rounded-lg font-medium">Módulu</a>
+            <a href="curriculum.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kurikulum</a>
+            <a href="projects.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Projetu</a>
+            <a href="about.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kona-ba</a>
+            <a href="contact.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kontaktu</a>
+            <a href="register.html" class="block px-4 py-3 mt-2 bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] text-white text-center font-bold rounded-xl">
+                <i class="fas fa-user-plus mr-2"></i>Rejistu Agora
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE HEADER -->
+<!-- ============================================================ -->
+<section class="page-header">
+    <div class="gradient-overlay"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content">
+        <div class="text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white">Módulu Kursu</h1>
+            <p class="mt-3 text-gray-400 text-lg max-w-2xl mx-auto">
+                12 módulu ne'ebé kobre hotu-hotu teknolojia digital modernu
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FILTER & SEARCH -->
+<!-- ============================================================ -->
+<section class="py-8 bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-2">
+                <button class="filter-btn-module active" data-filter="all" onclick="filterModules('all')">
+                    <i class="fas fa-th-list mr-1"></i> Hotu
+                </button>
+                <button class="filter-btn-module" data-filter="level1" onclick="filterModules('level1')">
+                    Level 1
+                </button>
+                <button class="filter-btn-module" data-filter="level2" onclick="filterModules('level2')">
+                    Level 2-4
+                </button>
+                <button class="filter-btn-module" data-filter="level3" onclick="filterModules('level3')">
+                    Level 5-8
+                </button>
+                <button class="filter-btn-module" data-filter="level4" onclick="filterModules('level4')">
+                    Level 9-12
+                </button>
+                <button class="filter-btn-module" data-filter="bonus" onclick="filterModules('bonus')">
+                    <i class="fas fa-star text-amber-500 mr-1"></i> Bonus
+                </button>
+            </div>
+            
+            <!-- Search -->
+            <div class="search-wrapper w-full md:w-auto">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="moduleSearch" placeholder="Buka módulu..." class="search-bar-module" onkeyup="searchModules(this.value)">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULES GRID -->
+<!-- ============================================================ -->
+<section class="py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Count -->
+        <div class="text-center mb-8">
+            <p class="text-gray-500 text-sm" id="module-count">12 módulu disponível</p>
+        </div>
+        
+        <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 1: Level 1 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-1" data-level="level1" data-title="Computer & Digital Fundamental">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 1</span>
+                        <span class="price-tag">$5/fulan</span>
+                    </div>
+                    <h3 class="module-title">Computer & Digital Fundamental</h3>
+                    <div class="module-icon"><i class="fas fa-laptop"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Fundamentu komputador no alfabetizasaun digital ba ema hotu</p>
+                    <div class="topics">
+                        <span>Computer Basic</span>
+                        <span>OS</span>
+                        <span>Internet & Email</span>
+                        <span>Microsoft Office</span>
+                        <span>Google Workspace</span>
+                        <span>Cyber Security</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> CV, Presentation, Digital Documentation
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 2: Level 2 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-2" data-level="level2" data-title="Graphic Design Fundamental">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 2</span>
+                        <span class="price-tag">$6/fulan</span>
+                    </div>
+                    <h3 class="module-title">Graphic Design Fundamental</h3>
+                    <div class="module-icon"><i class="fas fa-paint-brush"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Prinsipiu básiku design gráfiku ho Canva Professional</p>
+                    <div class="topics">
+                        <span>Design Principle</span>
+                        <span>Color Theory</span>
+                        <span>Typography</span>
+                        <span>Social Media Design</span>
+                        <span>Flyer & Poster</span>
+                        <span>Brand Identity</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> Company Profile, Marketing Kit, Social Campaign
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 3: Level 3 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-3" data-level="level2" data-title="Advanced Graphic Design">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 3</span>
+                        <span class="price-tag">$6/fulan</span>
+                    </div>
+                    <h3 class="module-title">Advanced Graphic Design</h3>
+                    <div class="module-icon"><i class="fas fa-edit"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Adobe Photoshop, Illustrator & Video Editing</p>
+                    <div class="topics">
+                        <span>Adobe Photoshop</span>
+                        <span>Adobe Illustrator</span>
+                        <span>Banner & Poster</span>
+                        <span>Logo & Branding</span>
+                        <span>Video Editing</span>
+                        <span>Motion Graphic</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> Logo Brand, Branding Guideline, Promotional Video
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 4: Level 4 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-4" data-level="level2" data-title="UI/UX Design">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 4</span>
+                        <span class="price-tag">$5/fulan</span>
+                    </div>
+                    <h3 class="module-title">UI/UX Design</h3>
+                    <div class="module-icon"><i class="fas fa-pencil-ruler"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Figma, Wireframe & Prototype ba aplikasaun</p>
+                    <div class="topics">
+                        <span>UI Design</span>
+                        <span>Design System</span>
+                        <span>UX Research</span>
+                        <span>Wireframe</span>
+                        <span>Prototype</span>
+                        <span>Usability Testing</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> E-Commerce UI, Mobile App UI, Dashboard Design
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 5: Level 5 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-5" data-level="level3" data-title="Web Fundamental">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 5</span>
+                        <span class="price-tag">$5/fulan</span>
+                    </div>
+                    <h3 class="module-title">Web Fundamental</h3>
+                    <div class="module-icon"><i class="fas fa-code"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">HTML5, CSS3, Tailwind CSS & JavaScript</p>
+                    <div class="topics">
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>Bootstrap</span>
+                        <span>Tailwind CSS</span>
+                        <span>JavaScript Basic</span>
+                        <span>Git & GitHub</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> Portfolio Website, Company Profile, Landing Page
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 6: Level 6 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-6" data-level="level3" data-title="Frontend Development">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 6</span>
+                        <span class="price-tag">$6/fulan</span>
+                    </div>
+                    <h3 class="module-title">Frontend Development</h3>
+                    <div class="module-icon"><i class="fab fa-react"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">ReactJS & Next.js ho state management</p>
+                    <div class="topics">
+                        <span>JavaScript Advanced</span>
+                        <span>ES6+</span>
+                        <span>ReactJS</span>
+                        <span>Next.js</span>
+                        <span>State Management</span>
+                        <span>Fetch API & JSON</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> Dashboard, Blog Platform, Product Catalog
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 7: Level 7 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-7" data-level="level3" data-title="Database & Backend">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 7</span>
+                        <span class="price-tag">$7/fulan</span>
+                    </div>
+                    <h3 class="module-title">Database & Backend</h3>
+                    <div class="module-icon"><i class="fas fa-database"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">MySQL, PostgreSQL, PHP & Laravel</p>
+                    <div class="topics">
+                        <span>Database Design</span>
+                        <span>MySQL</span>
+                        <span>PostgreSQL</span>
+                        <span>PHP Fundamental</span>
+                        <span>OOP PHP</span>
+                        <span>Laravel</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> Inventory System, Employee System, School System
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 8: Level 8 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-8" data-level="level3" data-title="API & Fullstack">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 8</span>
+                        <span class="price-tag">$10/fulan</span>
+                    </div>
+                    <h3 class="module-title">API & Fullstack</h3>
+                    <div class="module-icon"><i class="fas fa-plug"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">REST API, JWT Authentication, React + Laravel</p>
+                    <div class="topics">
+                        <span>REST API</span>
+                        <span>JSON Handling</span>
+                        <span>JWT Authentication</span>
+                        <span>Laravel Sanctum</span>
+                        <span>React + Laravel</span>
+                        <span>Next.js + Laravel</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> E-Commerce Platform, Online Booking System
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 9: Level 9 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-9" data-level="level4" data-title="Mobile Development">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 9</span>
+                        <span class="price-tag">$10/fulan</span>
+                    </div>
+                    <h3 class="module-title">Mobile Development</h3>
+                    <div class="module-icon"><i class="fas fa-mobile-alt"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Flutter - Android & iOS ho ida código de'it</p>
+                    <div class="topics">
+                        <span>Dart Programming</span>
+                        <span>Widget System</span>
+                        <span>State Management</span>
+                        <span>API Integration</span>
+                        <span>Local Storage</span>
+                        <span>Push Notification</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> E-Commerce App, Delivery App, Attendance App
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 10: Level 10 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-10" data-level="level4" data-title="Modern Backend">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 10</span>
+                        <span class="price-tag">$8/fulan</span>
+                    </div>
+                    <h3 class="module-title">Modern Backend</h3>
+                    <div class="module-icon"><i class="fab fa-node"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Node.js, Express, TypeScript & Golang</p>
+                    <div class="topics">
+                        <span>Node.js</span>
+                        <span>Express.js</span>
+                        <span>TypeScript</span>
+                        <span>Golang Basic</span>
+                        <span>API Development</span>
+                        <span>Real-Time System</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> Microservice API, Real-Time Application
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 11: Level 11 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-11" data-level="level4" data-title="DevOps & Cloud">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 11</span>
+                        <span class="price-tag">$10/fulan</span>
+                    </div>
+                    <h3 class="module-title">DevOps & Cloud</h3>
+                    <div class="module-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Linux, Docker, VPS & CI/CD</p>
+                    <div class="topics">
+                        <span>Linux Basic</span>
+                        <span>VPS Management</span>
+                        <span>Nginx</span>
+                        <span>Docker Basic</span>
+                        <span>CI/CD Basic</span>
+                        <span>Domain & SSL</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> Deploy Fullstack App, Production Server Setup
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- MODULE 12: Level 12 -->
+            <!-- ========================================================== -->
+            <div class="module-card level-12" data-level="level4" data-title="AI & Emerging Technology">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge">Level 12</span>
+                        <span class="price-tag">$10/fulan</span>
+                    </div>
+                    <h3 class="module-title">AI & Emerging Technology</h3>
+                    <div class="module-icon"><i class="fas fa-robot"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">ChatGPT, Midjourney, Prompt Engineering & Automation</p>
+                    <div class="topics">
+                        <span>ChatGPT & Copilot</span>
+                        <span>Canva AI</span>
+                        <span>Midjourney</span>
+                        <span>AI Video</span>
+                        <span>Prompt Engineering</span>
+                        <span>AI Automation</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> AI Powered App, AI Marketing Campaign
+                    </div>
+                    <a href="register.html" class="btn-register-sm">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- BONUS: Entrepreneurship -->
+            <!-- ========================================================== -->
+            <div class="module-card level-bonus" data-level="bonus" data-title="Entrepreneurship & Freelancing">
+                <div class="card-header">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge" style="background: #FBBF24; color: #78350F;">🎯 Bonus</span>
+                        <span class="price-tag" style="background: #10B981; color: white;">FREE</span>
+                    </div>
+                    <h3 class="module-title">Entrepreneurship & Freelancing</h3>
+                    <div class="module-icon"><i class="fas fa-briefcase"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Startup, Digital Marketing, Freelancing no Client Management</p>
+                    <div class="topics">
+                        <span>Startup Fundamental</span>
+                        <span>Business Model Canvas</span>
+                        <span>Digital Marketing</span>
+                        <span>Client Management</span>
+                        <span>Upwork & Fiverr</span>
+                        <span>Personal Branding</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="projects">
+                        <strong>Projetu:</strong> Startup Pitch Deck, Business Plan
+                    </div>
+                    <a href="register.html" class="btn-register-sm" style="background: #F59E0B;">
+                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ========================================================== -->
+            <!-- COMPLETE PROGRAM - HIGHLIGHTED -->
+            <!-- ========================================================== -->
+            <div class="module-card level-complete col-span-1 md:col-span-2 lg:col-span-3" data-level="bonus" data-title="Programa Kompletu">
+                <div class="card-header" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA);">
+                    <div class="flex items-center justify-between">
+                        <span class="level-badge" style="background: #FBBF24; color: #78350F;">🏆 Mellor Opsaun</span>
+                        <span class="price-tag" style="background: white; color: #6C3CE1;">Pakote Espesial</span>
+                    </div>
+                    <h3 class="module-title" style="font-size: 24px;">Programa Kompletu</h3>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Level 1 - 12 + Entrepreneurship & Freelancing</p>
+                    <div class="module-icon" style="font-size: 64px; color: rgba(255,255,255,0.1);"><i class="fas fa-crown"></i></div>
+                </div>
+                <div class="card-body">
+                    <p class="module-desc">Pakote espesial ne'ebé inklui módulu hotu-hotu ho preçu ekonómiku</p>
+                    <div class="topics">
+                        <span style="background: #10B981; color: white;">✅ Level 1-12 Hotu</span>
+                        <span style="background: #10B981; color: white;">✅ Entrepreneurship</span>
+                        <span style="background: #10B981; color: white;">✅ Freelancing</span>
+                        <span style="background: #10B981; color: white;">✅ Sertifikadu Kompletu</span>
+                        <span style="background: #10B981; color: white;">✅ Portfolio Profisional</span>
+                    </div>
+                    <div class="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                        <p class="text-sm text-amber-800 font-bold">
+                            <i class="fas fa-gem mr-2"></i> Ekonómia! Selesa hotu-hotu ho preçu espesial
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer" style="border-top: 2px solid #6C3CE1;">
+                    <div class="projects">
+                        <strong>Projetu Final:</strong> Capstone Project - Sistema Kompletu
+                    </div>
+                    <a href="register.html" class="btn-register-sm" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA); padding: 10px 28px;">
+                        Rejistu Agora <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+        </div><!-- end grid -->
+        
+        <!-- No Results -->
+        <div id="no-results" class="hidden text-center py-16">
+            <i class="fas fa-search text-5xl text-gray-300 mb-4"></i>
+            <p class="text-gray-500 text-lg">Laiha módulu ne'ebé koko.</p>
+            <button onclick="resetFilters()" class="mt-4 text-[#6C3CE1] font-semibold hover:underline">
+                Reset filter
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CTA SECTION -->
+<!-- ============================================================ -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] rounded-2xl p-8 md:p-12 text-white text-center">
+        <h2 class="text-2xl md:text-4xl font-bold">Prontu Atu Komesa Ita Nia Karreira?</h2>
+        <p class="mt-3 text-white/80 max-w-2xl mx-auto">
+            Rejista ona no sai profisionál iha teknolojia digital. Intake 2026 agora!
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="register.html" class="bg-white text-[#6C3CE1] px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl">
+                <i class="fas fa-rocket mr-2"></i> Rejistu Agora
+            </a>
+            <a href="contact.html" class="bg-white/20 backdrop-blur text-white px-10 py-4 rounded-xl font-semibold hover:bg-white/30 transition border border-white/20">
+                <i class="fas fa-phone mr-2"></i> Kontaktu
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-[#0A0A0F] text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg">D</div>
+                    <span class="text-white font-bold text-lg">DTCI Academy</span>
+                </div>
+                <p class="text-gray-500 text-sm">Digital Technology & Creative Industry Academy</p>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Ligaun</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="index.html" class="hover:text-white transition">Início</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">Kona-ba</a></li>
+                    <li><a href="curriculum.html" class="hover:text-white transition">Kurikulum</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Suporte</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="contact.html" class="hover:text-white transition">Kontaktu</a></li>
+                    <li><a href="register.html" class="hover:text-white transition">Rejistu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Kontaktu</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><i class="fas fa-envelope w-5 text-[#6C3CE1]"></i> info@dtciacademy.com</li>
+                    <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 1234 5678</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-8 pt-6 text-center text-gray-600 text-sm">
+            &copy; 2026 DTCI Academy. Hotu-hotu direitu reservadu.
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- WHATSAPP FLOAT -->
+<!-- ============================================================ -->
+<a href="https://wa.me/67012345678" target="_blank" class="whatsapp-float" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    const toggleBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    toggleBtn?.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const icon = toggleBtn?.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // ============================================
+    // FILTER MODULES
+    // ============================================
+    function filterModules(level) {
+        const cards = document.querySelectorAll('.module-card');
+        const btns = document.querySelectorAll('.filter-btn-module');
+        const noResults = document.getElementById('no-results');
+        let visibleCount = 0;
+        
+        // Update active button
+        btns.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.filter === level) {
+                btn.classList.add('active');
+            }
+        });
+        
+        // Filter cards
+        cards.forEach(card => {
+            const cardLevel = card.dataset.level || '';
+            if (level === 'all' || cardLevel === level) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        // Show/hide no results
+        if (visibleCount === 0) {
+            noResults.classList.remove('hidden');
+        } else {
+            noResults.classList.add('hidden');
+        }
+        
+        // Update count
+        document.getElementById('module-count').textContent = `${visibleCount} módulu disponível`;
+    }
+
+    // ============================================
+    // SEARCH MODULES
+    // ============================================
+    function searchModules(query) {
+        const cards = document.querySelectorAll('.module-card');
+        const searchTerm = query.toLowerCase().trim();
+        const noResults = document.getElementById('no-results');
+        let visibleCount = 0;
+        
+        // Reset filter buttons
+        document.querySelectorAll('.filter-btn-module').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector('.filter-btn-module[data-filter="all"]')?.classList.add('active');
+        
+        cards.forEach(card => {
+            const title = card.dataset.title?.toLowerCase() || '';
+            const text = card.textContent?.toLowerCase() || '';
+            
+            if (title.includes(searchTerm) || text.includes(searchTerm) || searchTerm === '') {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        if (visibleCount === 0 && searchTerm.length > 0) {
+            noResults.classList.remove('hidden');
+        } else {
+            noResults.classList.add('hidden');
+        }
+        
+        document.getElementById('module-count').textContent = `${visibleCount} módulu disponível`;
+    }
+
+    // ============================================
+    // RESET FILTERS
+    // ============================================
+    function resetFilters() {
+        document.getElementById('moduleSearch').value = '';
+        filterModules('all');
+    }
+</script>
+</body>
+</html>

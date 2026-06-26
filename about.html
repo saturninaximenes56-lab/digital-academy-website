@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="tet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kona-ba - DTCI Academy</title>
+    <meta name="description" content="Kona-ba DTCI Academy - Digital Technology & Creative Industry Academy.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================================ */
+        /* ROOT VARIABLES */
+        /* ============================================================ */
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #5531b5;
+            --primary-light: #8b5cf6;
+            --secondary: #00D4AA;
+            --accent: #F97316;
+            --dark: #0A0A0F;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --gradient-main: linear-gradient(135deg, #6C3CE1 0%, #00D4AA 100%);
+            --shadow-card: 0 20px 60px rgba(108, 60, 225, 0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--light-gray);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ============================================================ */
+        /* NAVIGATION */
+        /* ============================================================ */
+        .navbar-glass {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 6px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-main);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .btn-primary-gradient {
+            background: var(--gradient-main);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 60, 225, 0.4);
+        }
+
+        /* ============================================================ */
+        /* PAGE HEADER */
+        /* ============================================================ */
+        .page-header {
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 60px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=400&fit=crop') center/cover;
+            opacity: 0.06;
+        }
+
+        .page-header .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(108, 60, 225, 0.2) 0%, transparent 70%);
+        }
+
+        .page-header .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============================================================ */
+        /* ABOUT SECTIONS */
+        /* ============================================================ */
+        .about-card {
+            background: white;
+            border-radius: var(--radius-sm);
+            padding: 32px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+        }
+
+        .about-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .about-card .icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .mission-card {
+            background: linear-gradient(135deg, #f5f0ff, #f0faf7);
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid rgba(108, 60, 225, 0.1);
+        }
+
+        .mission-card .quote-mark {
+            font-size: 48px;
+            color: var(--primary);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        /* ============================================================ */
+        /* TEAM CARDS */
+        /* ============================================================ */
+        .team-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .team-card .team-avatar {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            color: rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .team-card .team-avatar .avatar-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .team-card .team-info {
+            padding: 20px 24px 24px;
+        }
+
+        .team-card .team-info h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .team-card .team-info .role {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .team-card .team-info .specialty {
+            font-size: 13px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        .team-card .team-info .bio {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+
+        .team-card .team-info .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .team-card .team-info .social-links a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .team-card .team-info .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ============================================================ */
+        /* STATS CARDS */
+        /* ============================================================ */
+        .stat-card-about {
+            background: white;
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: var(--transition);
+        }
+
+        .stat-card-about:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .stat-card-about .number {
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card-about .label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        /* ============================================================ */
+        /* VALUE CARDS */
+        /* ============================================================ */
+        .value-card {
+            background: white;
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--primary);
+        }
+
+        .value-card .value-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 20px;
+        }
+
+        /* ============================================================ */
+        /* WHATSAPP FLOAT */
+        /* ============================================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse-wa {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float {
+            animation: pulse-wa 2s infinite;
+        }
+
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 0 40px;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 16px;
+                right: 16px;
+            }
+            .mission-card {
+                padding: 24px;
+            }
+            .stat-card-about .number {
+                font-size: 24px;
+            }
+            .team-card .team-avatar {
+                height: 160px;
+            }
+            .team-card .team-avatar .avatar-img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-card {
+                padding: 20px;
+            }
+            .mission-card .quote-mark {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- NAVIGATION -->
+<!-- ============================================================ -->
+<nav class="navbar-glass fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+            
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg shadow-lg">
+                    D
+                </div>
+                <div>
+                    <span class="text-white font-bold text-lg tracking-tight">DTCI</span>
+                    <span class="text-gray-400 font-medium text-sm hidden md:inline">Academy</span>
+                </div>
+            </a>
+            
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="modules.html" class="nav-link">Módulu</a>
+                <a href="curriculum.html" class="nav-link">Kurikulum</a>
+                <a href="projects.html" class="nav-link">Projetu</a>
+                <a href="about.html" class="nav-link active">Kona-ba</a>
+                <a href="contact.html" class="nav-link">Kontaktu</a>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="register.html" class="btn-primary-gradient text-sm px-5 py-2">
+                    <i class="fas fa-user-plus mr-2"></i>Rejistu
+                </a>
+                <button id="menu-toggle" class="lg:hidden text-white text-2xl p-1 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#14141C] border-t border-white/5">
+        <div class="px-4 py-4 space-y-1">
+            <a href="index.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Início</a>
+            <a href="modules.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Módulu</a>
+            <a href="curriculum.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kurikulum</a>
+            <a href="projects.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Projetu</a>
+            <a href="about.html" class="block px-4 py-3 text-white bg-white/5 rounded-lg font-medium">Kona-ba</a>
+            <a href="contact.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kontaktu</a>
+            <a href="register.html" class="block px-4 py-3 mt-2 bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] text-white text-center font-bold rounded-xl">
+                <i class="fas fa-user-plus mr-2"></i>Rejistu Agora
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE HEADER -->
+<!-- ============================================================ -->
+<section class="page-header">
+    <div class="gradient-overlay"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content">
+        <div class="text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white">Kona-ba DTCI Academy</h1>
+            <p class="mt-3 text-gray-400 text-lg max-w-2xl mx-auto">
+                Komprometidu atu forma profisionál teknolojia digital ba futuru
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ABOUT CONTENT -->
+<!-- ============================================================ -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left - Text -->
+            <div>
+                <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Misaun</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-3">Forma Profisionál Digital</h2>
+                <p class="mt-4 text-gray-600 leading-relaxed">
+                    DTCI Academy ne'ebé hamriik ho objetivu atu forma profisionál sira ne'ebé kompetente iha área 
+                    teknolojia digital no indústria kreativa. Ho metodu project-based learning, ita foka ba 
+                    habilidade prá tiku ne'ebé pronto atu uza iha merkadu servisu.
+                </p>
+                <p class="mt-4 text-gray-600 leading-relaxed">
+                    Ita kona-ba ho kurikulum ne'ebé atualizadu ho teknolojia foun, instrutor sira ho esperiénsia 
+                    indústria, no suporte kompletu ba estudante atu atinje sira nia objetivu karreira.
+                </p>
+                
+                <div class="mt-8 grid grid-cols-2 gap-4">
+                    <div class="bg-blue-50 rounded-xl p-4 text-center">
+                        <p class="text-3xl font-bold text-blue-600">12</p>
+                        <p class="text-sm text-gray-600">Módulu</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-xl p-4 text-center">
+                        <p class="text-3xl font-bold text-purple-600">18</p>
+                        <p class="text-sm text-gray-600">Fulan</p>
+                    </div>
+                    <div class="bg-green-50 rounded-xl p-4 text-center">
+                        <p class="text-3xl font-bold text-green-600">156+</p>
+                        <p class="text-sm text-gray-600">Graduadu</p>
+                    </div>
+                    <div class="bg-amber-50 rounded-xl p-4 text-center">
+                        <p class="text-3xl font-bold text-amber-600">85%</p>
+                        <p class="text-sm text-gray-600">Employment</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right - Image -->
+            <div>
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=500&fit=crop" 
+                     alt="About DTCI Academy" 
+                     class="rounded-2xl shadow-2xl w-full object-cover"
+                     style="height: 400px;">
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MISSION & VISION -->
+<!-- ============================================================ -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <!-- Mission -->
+            <div class="mission-card">
+                <div class="quote-mark">"</div>
+                <h3 class="text-2xl font-bold text-gray-900 mt-2">
+                    <i class="fas fa-bullseye text-[#6C3CE1] mr-2"></i> Vizaun
+                </h3>
+                <p class="text-gray-700 text-lg leading-relaxed mt-3 italic">
+                    "Atu sai sentru formasaun teknolojia digital ne'ebé lider iha Timor-Leste no rejional, 
+                    prodús profisionál sira ne'ebé kompetitivu iha merkadu global."
+                </p>
+            </div>
+            
+            <!-- Vision -->
+            <div class="mission-card" style="background: linear-gradient(135deg, #f0faf7, #f5f0ff);">
+                <div class="quote-mark" style="color: #00D4AA;">"</div>
+                <h3 class="text-2xl font-bold text-gray-900 mt-2">
+                    <i class="fas fa-heart text-[#00D4AA] mr-2"></i> Valor
+                </h3>
+                <ul class="space-y-3 mt-3">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                        <div>
+                            <span class="font-bold text-gray-900">Inovasaun no Kreatividade</span>
+                            <p class="text-gray-600 text-sm">Enkoraja pensamentu kriativu no solusaun inovativu</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                        <div>
+                            <span class="font-bold text-gray-900">Kualidade no Excelénsia</span>
+                            <p class="text-gray-600 text-sm">Kompromisu ba standard kualidade aas</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                        <div>
+                            <span class="font-bold text-gray-900">Kolaborasaun no Komunidade</span>
+                            <p class="text-gray-600 text-sm">Aprende no kresce hamutuk</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                        <div>
+                            <span class="font-bold text-gray-900">Aprendizajem Kontinua</span>
+                            <p class="text-gray-600 text-sm">Nunka para atu aprende no dezenvolve</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- KEY FEATURES -->
+<!-- ============================================================ -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Vantajen</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Tau Saida Ita Hetan?</h2>
+            <p class="text-gray-500 mt-2">Benefisiu aprende iha DTCI Academy</p>
+        </div>
+        
+        <div class="grid md:grid-cols-4 gap-6">
+            <div class="about-card text-center">
+                <div class="icon-wrapper" style="background: rgba(108, 60, 225, 0.1); color: #6C3CE1; margin: 0 auto 16px;">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-900">70% Prátika</h4>
+                <p class="text-gray-600 text-sm mt-2">Aprende liuhusi projetu real no estudo kazu</p>
+            </div>
+            
+            <div class="about-card text-center">
+                <div class="icon-wrapper" style="background: rgba(0, 212, 170, 0.1); color: #00D4AA; margin: 0 auto 16px;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-900">Mentoria Profisional</h4>
+                <p class="text-gray-600 text-sm mt-2">Instrutor sira ho esperiénsia indústria</p>
+            </div>
+            
+            <div class="about-card text-center">
+                <div class="icon-wrapper" style="background: rgba(249, 115, 22, 0.1); color: #F97316; margin: 0 auto 16px;">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-900">Sertifikadu Internasional</h4>
+                <p class="text-gray-600 text-sm mt-2">Rekonese iha Timor-Leste no internacional</p>
+            </div>
+            
+            <div class="about-card text-center">
+                <div class="icon-wrapper" style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6; margin: 0 auto 16px;">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-900">Preparasaun Karreira</h4>
+                <p class="text-gray-600 text-sm mt-2">Pronto atu servisu iha empresa lokal no global</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TEAM SECTION -->
+<!-- ============================================================ -->
+<section class="py-16 bg-gray-50" id="team-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Ekipa</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Instrutor & Mentor</h2>
+            <p class="text-gray-500 mt-2">Profisionál sira ho esperiénsia indústria no kompromisu ba aprendizajem</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Team Member 1 -->
+            <div class="team-card">
+                <div class="team-avatar" style="background: linear-gradient(135deg, #6C3CE1, #8B5CF6);">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" 
+                         alt="Dr. António Belo" 
+                         class="avatar-img">
+                </div>
+                <div class="team-info">
+                    <h4>Dr. António Belo</h4>
+                    <p class="role">Director & Lead Instructor</p>
+                    <p class="specialty">Fullstack Development, AI</p>
+                    <p class="bio">Esperiénsia 10+ anos iha web development no AI. Lead developer ba projetu governu no privadu.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Member 2 -->
+            <div class="team-card">
+                <div class="team-avatar" style="background: linear-gradient(135deg, #00D4AA, #059669);">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face" 
+                         alt="Dra. Beatriz Soares" 
+                         class="avatar-img">
+                </div>
+                <div class="team-info">
+                    <h4>Dra. Beatriz Soares</h4>
+                    <p class="role">Design Lead</p>
+                    <p class="specialty">UI/UX Design, Graphic Design</p>
+                    <p class="bio">Esperiénsia 8+ anos iha design thinking no brand identity. Kliente sira inklui organizasaun internasional.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fas fa-briefcase"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Member 3 -->
+            <div class="team-card">
+                <div class="team-avatar" style="background: linear-gradient(135deg, #F97316, #D97706);">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face" 
+                         alt="Eng. Carlos Mendonça" 
+                         class="avatar-img">
+                </div>
+                <div class="team-info">
+                    <h4>Eng. Carlos Mendonça</h4>
+                    <p class="role">Backend & DevOps Instructor</p>
+                    <p class="specialty">Laravel, Node.js, DevOps</p>
+                    <p class="bio">Esperiénsia 7+ anos iha backend development no cloud deployment. Jere infraestrutura ba startup sira.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Member 4 -->
+            <div class="team-card">
+                <div class="team-avatar" style="background: linear-gradient(135deg, #8B5CF6, #6C3CE1);">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face" 
+                         alt="Dra. Dulce Ramos" 
+                         class="avatar-img">
+                </div>
+                <div class="team-info">
+                    <h4>Dra. Dulce Ramos</h4>
+                    <p class="role">Mobile Development Instructor</p>
+                    <p class="specialty">Flutter, Dart, Firebase</p>
+                    <p class="bio">Esperiénsia 6+ anos iha mobile development cross-platform. Aplikasaun sira iha 10,000+ uzuáriu.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- WHY CHOOSE US -->
+<!-- ============================================================ -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Tau Saida?</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Tau Saida DTCI Academy Diferente?</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="value-card">
+                <div class="value-icon" style="background: rgba(108, 60, 225, 0.1); color: #6C3CE1;">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h4 class="font-bold text-gray-900">Kurikulum Atualizadu</h4>
+                <p class="text-gray-600 text-sm mt-2">Materia sempre atualiza ho teknolojia foun no trend indústria</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon" style="background: rgba(0, 212, 170, 0.1); color: #00D4AA;">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h4 class="font-bold text-gray-900">Project Based Learning</h4>
+                <p class="text-gray-600 text-sm mt-2">Aprende liuhusi projetu real ne'ebé bele uza ba portfolio</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon" style="background: rgba(249, 115, 22, 0.1); color: #F97316;">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h4 class="font-bold text-gray-900">Network & Comunidade</h4>
+                <p class="text-gray-600 text-sm mt-2">Koneksaun ho profisionál, alumni, no empresa sira</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CTA SECTION -->
+<!-- ============================================================ -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] rounded-2xl p-8 md:p-12 text-white text-center">
+        <h2 class="text-2xl md:text-4xl font-bold">Prontu Atu Juntar ba DTCI Academy?</h2>
+        <p class="mt-3 text-white/80 max-w-2xl mx-auto">
+            Rejista ona no sai parte husi komunidade teknolojia digital.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="register.html" class="bg-white text-[#6C3CE1] px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl">
+                <i class="fas fa-rocket mr-2"></i> Rejistu Agora
+            </a>
+            <a href="contact.html" class="bg-white/20 backdrop-blur text-white px-10 py-4 rounded-xl font-semibold hover:bg-white/30 transition border border-white/20">
+                <i class="fas fa-phone mr-2"></i> Kontaktu
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-[#0A0A0F] text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg">D</div>
+                    <span class="text-white font-bold text-lg">DTCI Academy</span>
+                </div>
+                <p class="text-gray-500 text-sm">Digital Technology & Creative Industry Academy</p>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Ligaun</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="index.html" class="hover:text-white transition">Início</a></li>
+                    <li><a href="modules.html" class="hover:text-white transition">Módulu</a></li>
+                    <li><a href="curriculum.html" class="hover:text-white transition">Kurikulum</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Suporte</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="contact.html" class="hover:text-white transition">Kontaktu</a></li>
+                    <li><a href="register.html" class="hover:text-white transition">Rejistu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Kontaktu</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><i class="fas fa-envelope w-5 text-[#6C3CE1]"></i> info@dtciacademy.com</li>
+                    <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 1234 5678</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-8 pt-6 text-center text-gray-600 text-sm">
+            &copy; 2026 DTCI Academy. Hotu-hotu direitu reservadu.
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- WHATSAPP FLOAT -->
+<!-- ============================================================ -->
+<a href="https://wa.me/67012345678" target="_blank" class="whatsapp-float" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    const toggleBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    toggleBtn?.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const icon = toggleBtn?.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // ============================================
+    // SMOOTH SCROLL
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // ============================================
+    // STATS COUNTER ANIMATION
+    // ============================================
+    function animateStats() {
+        const stats = document.querySelectorAll('.stat-card-about .number, .stat-container .number');
+        stats.forEach(stat => {
+            const text = stat.textContent;
+            const isRange = text.includes('-');
+            const isPercent = text.includes('%');
+            const isNumber = !isRange && !isPercent && !isNaN(parseInt(text));
+            
+            if (isNumber) {
+                const target = parseInt(text);
+                let current = 0;
+                const increment = target / 40;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 30);
+            }
+        });
+    }
+
+    // Run stats animation when stats section is visible
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                statsObserver.disconnect();
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelector('.stat-card-about')?.parentElement?.parentElement && 
+        statsObserver.observe(document.querySelector('.stat-card-about').parentElement.parentElement);
+
+    // ============================================
+    // ANIMATE ON SCROLL
+    // ============================================
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.about-card, .team-card, .value-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+
+    // Trigger for visible items
+    setTimeout(() => {
+        document.querySelectorAll('.about-card, .team-card, .value-card').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+    }, 100);
+</script>
+</body>
+</html>

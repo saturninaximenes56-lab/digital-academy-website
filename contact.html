@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontaktu - DTCI Academy</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- HEADER (same as index) -->
+    <!-- ... copy header from index.html ... -->
+
+    <!-- ============================================ -->
+    <!-- PAGE HEADER -->
+    <!-- ============================================ -->
+    <section class="pt-32 pb-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold">Kontaktu</h1>
+            <p class="mt-4 text-lg text-blue-100 max-w-2xl mx-auto">
+                Kontaktu ami ba informasaun tan ka rejistu
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTACT FORM & INFO -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- Contact Form -->
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Haruka Mensajem</h2>
+                    
+                    <form data-validate>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-medium mb-2">Naran Kompletu *</label>
+                            <input type="text" 
+                                   name="name" 
+                                   required 
+                                   placeholder="Ex: João da Silva"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-medium mb-2">Email *</label>
+                            <input type="email" 
+                                   name="email" 
+                                   required 
+                                   placeholder="exemplo@email.com"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-medium mb-2">Telefone</label>
+                            <input type="tel" 
+                                   name="phone" 
+                                   placeholder="+670 1234 5678"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-medium mb-2">Asuntu *</label>
+                            <select name="subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Hili asuntu...</option>
+                                <option value="inscricao">Inskrisaun</option>
+                                <option value="informacao">Informasaun Kursu</option>
+                                <option value="duvida">Dúvida</option>
+                                <option value="parceria">Parceria</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Mensajem *</label>
+                            <textarea name="message" 
+                                      required 
+                                      rows="5" 
+                                      placeholder="Escreve ita nia mensajem..."
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i> Haruka Mensajem
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Informasaun Kontaktu</h2>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-blue-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-900">Endereçu</h4>
+                                    <p class="text-gray-600">Dili, Timor-Leste</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-phone text-green-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-900">Telefone</h4>
+                                    <p class="text-gray-600">+670 1234 5678</p>
+                                    <p class="text-gray-600">+670 8765 4321</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-envelope text-purple-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-900">Email</h4>
+                                    <p class="text-gray-600">info@dtciacademy.com</p>
+                                    <p class="text-gray-600">support@dtciacademy.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-clock text-orange-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-900">Horáriu</h4>
+                                    <p class="text-gray-600">Segunda - Sexta: 09:00 - 17:00</p>
+                                    <p class="text-gray-600">Sábadu: 09:00 - 12:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Sosial Media</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center hover:bg-pink-700 transition">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ PREVIEW -->
+    <!-- ============================================ -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">FAQ</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-2">Pergunta Frequente</h2>
+            </div>
+            
+            <div id="faq-container">
+                <!-- Rendered by JavaScript -->
+                <div class="text-center py-12">
+                    <div class="loading-spinner mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Karregando FAQ...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MAP / LOCATION -->
+    <!-- ============================================ -->
+    <section class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gray-300 h-80 rounded-2xl flex items-center justify-center text-gray-500">
+                <div class="text-center">
+                    <i class="fas fa-map-marked-alt text-6xl mb-4 opacity-50"></i>
+                    <p>Mapa Lokalizasaun</p>
+                    <p class="text-sm">(Google Maps Integration)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (same as index) -->
+    <!-- ... copy footer from index.html ... -->
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-700 transition opacity-0 invisible z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/load-data.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof loadFAQ === 'function') {
+                loadFAQ('faq-container');
+            }
+        });
+    </script>
+</body>
+</html>

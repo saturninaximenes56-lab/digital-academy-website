@@ -1,0 +1,17 @@
+{
+  "name": "dtci-academy-website",
+  "version": "1.0.0",
+  "description": "Digital Technology & Creative Industry Academy Website",
+  "main": "index.html",
+  "scripts": {
+    "build:css": "tailwindcss build css/style.css -o css/output.css",
+    "watch:css": "tailwindcss build css/style.css -o css/output.css --watch",
+    "start": "live-server"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "live-server": "^1.2.2"
+  }
+}

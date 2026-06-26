@@ -1,0 +1,36 @@
+{
+  "site": {
+    "name": "DTCI Academy",
+    "full_name": "Digital Technology & Creative Industry Academy",
+    "tagline": "Formasaun Kompletu husi Zero to Profisional",
+    "description": "Programa formasaun iha área teknolojia digital no indústria kreativa",
+    "logo": "assets/images/logo.png",
+    "favicon": "assets/images/favicon.ico"
+  },
+  "contact": {
+    "email": "info@dtciacademy.com",
+    "phone": "+670 1234 5678",
+    "address": "Dili, Timor-Leste",
+    "social": {
+      "facebook": "https://facebook.com/dtciacademy",
+      "instagram": "https://instagram.com/dtciacademy",
+      "youtube": "https://youtube.com/dtciacademy",
+      "linkedin": "https://linkedin.com/company/dtciacademy"
+    }
+  },
+  "features": {
+    "theme": {
+      "primary_color": "#3b82f6",
+      "secondary_color": "#8b5cf6",
+      "dark_mode": false
+    },
+    "language": {
+      "default": "tet",
+      "available": ["tet", "en", "pt"]
+    },
+    "analytics": {
+      "enabled": false,
+      "google_analytics_id": ""
+    }
+  }
+}
