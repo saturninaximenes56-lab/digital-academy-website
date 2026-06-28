@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="tet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maneira Pagamentu - DTCI Academy</title>
+    <meta name="description" content="Informasaun kompletu kona-ba maneira pagamentu DTCI Academy.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6C3CE1;
+            --primary-dark: #5531b5;
+            --primary-light: #8b5cf6;
+            --secondary: #00D4AA;
+            --accent: #F97316;
+            --dark: #0A0A0F;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --gradient-main: linear-gradient(135deg, #6C3CE1 0%, #00D4AA 100%);
+            --shadow-card: 0 20px 60px rgba(108, 60, 225, 0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--light-gray); color: var(--dark); overflow-x: hidden; }
+
+        /* ===== NAVIGATION ===== */
+        .navbar-glass {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 6px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-main);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover { color: white; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: white; }
+        .nav-link.active::after { width: 100%; }
+
+        .btn-primary-gradient {
+            background: var(--gradient-main);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 60, 225, 0.4);
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 60px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&h=400&fit=crop') center/cover;
+            opacity: 0.06;
+        }
+
+        .page-header .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(108, 60, 225, 0.2) 0%, transparent 70%);
+        }
+
+        .page-header .content { position: relative; z-index: 2; }
+
+        /* ===== PAYMENT CARDS ===== */
+        .payment-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 32px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .payment-card .icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .payment-card .step-number {
+            display: inline-block;
+            background: var(--gradient-main);
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 4px 14px;
+            border-radius: 50px;
+            margin-bottom: 12px;
+        }
+
+        .payment-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .payment-card p {
+            color: var(--gray);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .payment-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 12px;
+        }
+
+        .payment-card ul li {
+            padding: 6px 0;
+            color: var(--gray);
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .payment-card ul li i {
+            color: var(--primary);
+            margin-top: 4px;
+        }
+
+        /* ===== PROCESS STEPS ===== */
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .process-step:last-child { border-bottom: none; }
+
+        .process-step .step-number-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .process-step .step-content h4 {
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .process-step .step-content p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ===== PRICE TABLE ===== */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .price-table thead {
+            background: var(--gradient-main);
+            color: white;
+        }
+
+        .price-table thead th {
+            padding: 14px 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .price-table tbody td {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .price-table tbody tr:hover {
+            background: rgba(108, 60, 225, 0.02);
+        }
+
+        .price-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-table .highlight-row {
+            background: rgba(108, 60, 225, 0.05);
+            font-weight: 700;
+        }
+
+        .price-table .highlight-row td {
+            border-top: 2px solid var(--primary);
+        }
+
+        /* ===== WHATSAPP FLOAT ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse-wa {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float { animation: pulse-wa 2s infinite; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .page-header { padding: 100px 0 40px; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 16px; right: 16px; }
+            .payment-card { padding: 24px; }
+            .process-step { flex-direction: column; gap: 12px; }
+            .price-table { font-size: 12px; }
+            .price-table thead th, .price-table tbody td { padding: 8px 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .payment-card .icon-wrapper { width: 48px; height: 48px; font-size: 20px; }
+            .price-table { font-size: 11px; display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- NAVIGATION -->
+<!-- ============================================================ -->
+<nav class="navbar-glass fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg shadow-lg">D</div>
+                <div><span class="text-white font-bold text-lg tracking-tight">DTCI</span><span class="text-gray-400 font-medium text-sm hidden md:inline">Academy</span></div>
+            </a>
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="modules.html" class="nav-link">Módulu</a>
+                <a href="curriculum.html" class="nav-link">Kurikulum</a>
+                <a href="projects.html" class="nav-link">Projetu</a>
+                <a href="about.html" class="nav-link">Kona-ba</a>
+                <a href="contact.html" class="nav-link">Kontaktu</a>
+                <a href="payment.html" class="nav-link active">Pagamentu</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="register.html" class="btn-primary-gradient text-sm px-5 py-2 hidden sm:inline-block">
+                    <i class="fas fa-user-plus mr-2"></i>Rejistu
+                </a>
+                <button id="menu-toggle" class="lg:hidden text-white text-2xl p-1 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#14141C] border-t border-white/5">
+        <div class="px-4 py-4 space-y-1">
+            <a href="index.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Início</a>
+            <a href="modules.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Módulu</a>
+            <a href="curriculum.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kurikulum</a>
+            <a href="projects.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Projetu</a>
+            <a href="about.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kona-ba</a>
+            <a href="contact.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kontaktu</a>
+            <a href="payment.html" class="block px-4 py-3 text-white bg-white/5 rounded-lg font-medium">Pagamentu</a>
+            <a href="register.html" class="block px-4 py-3 mt-2 bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] text-white text-center font-bold rounded-xl">
+                <i class="fas fa-user-plus mr-2"></i>Rejistu Agora
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE HEADER -->
+<!-- ============================================================ -->
+<section class="page-header">
+    <div class="gradient-overlay"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content">
+        <div class="text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white">Maneira Pagamentu</h1>
+            <p class="mt-3 text-gray-400 text-lg max-w-2xl mx-auto">
+                Informasaun kompletu kona-ba prosesu pagamentu no opsaun ne'ebé disponível
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAYMENT OPTIONS -->
+<!-- ============================================================ -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Opsaun Pagamentu</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Hili Maneira Pagamentu ne'ebé Konfortável</h2>
+            <p class="text-gray-500 mt-2">Ami simu pagamentu iha fatin (cash) no sei iha opsaun seluk iha futuru</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            
+            <!-- Cash Payment -->
+            <div class="payment-card text-center">
+                <div class="icon-wrapper" style="background: rgba(16, 185, 129, 0.1); color: #10B981; margin: 0 auto;">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <span class="step-number" style="background: #10B981;">Disponível</span>
+                <h3>Pagamentu Cash</h3>
+                <p>Ita bele selu diretamente iha fatin DTCI Academy ho osan foin (cash).</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Pagamentu iha fatin</li>
+                    <li><i class="fas fa-check-circle"></i> Resibu pagamentu</li>
+                    <li><i class="fas fa-check-circle"></i> Suporta husi administrasaun</li>
+                </ul>
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                        <i class="fas fa-map-marker-alt text-[#6C3CE1] mr-2"></i>
+                        <strong>Fatin:</strong> Dili, Timor-Leste
+                    </p>
+                    <p class="text-sm text-gray-600 mt-2">
+                        <i class="fas fa-clock text-[#6C3CE1] mr-2"></i>
+                        <strong>Horáriu:</strong> Segunda - Sexta, 09:00 - 17:00
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Bank Transfer (Coming Soon) -->
+            <div class="payment-card text-center opacity-60">
+                <div class="icon-wrapper" style="background: rgba(249, 115, 22, 0.1); color: #F97316; margin: 0 auto;">
+                    <i class="fas fa-university"></i>
+                </div>
+                <span class="step-number" style="background: #F97316;">Em Breve</span>
+                <h3>Transferénsia Banku</h3>
+                <p>Transferénsia liuhusi banku lokal. Sei disponível iha futuru.</p>
+                <ul>
+                    <li><i class="fas fa-clock text-gray-400"></i> Sei iha futuru</li>
+                    <li><i class="fas fa-clock text-gray-400"></i> Konfirmasaun pagamentu</li>
+                </ul>
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-sm text-gray-400">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Opsaun ida ne'e sei ativu iha futuru
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Digital Wallet (Coming Soon) -->
+            <div class="payment-card text-center opacity-60">
+                <div class="icon-wrapper" style="background: rgba(108, 60, 225, 0.1); color: #6C3CE1; margin: 0 auto;">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <span class="step-number" style="background: #6C3CE1;">Em Breve</span>
+                <h3>Digital Wallet</h3>
+                <p>Pagamentu liuhusi aplikasaun digital wallet. Sei disponível iha futuru.</p>
+                <ul>
+                    <li><i class="fas fa-clock text-gray-400"></i> Sei iha futuru</li>
+                    <li><i class="fas fa-clock text-gray-400"></i> Prosesu lalais</li>
+                </ul>
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-sm text-gray-400">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Opsaun ida ne'e sei ativu iha futuru
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAYMENT PROCESS -->
+<!-- ============================================================ -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Prosesu</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Prosesu Pagamentu</h2>
+            <p class="text-gray-500 mt-2">Tuir pasu-pasu atu kompleta pagamentu ho susesu</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
+            
+            <!-- Step 1 -->
+            <div class="process-step">
+                <div class="step-number-circle">1</div>
+                <div class="step-content">
+                    <h4>Rejistu Programa</h4>
+                    <p>
+                        <strong>Antes de pagamentu, ita tenke rejistu ba programa ne'ebé ita hakarak.</strong><br>
+                        Rejistu bele halo liuhusi <a href="register.html" class="text-[#6C3CE1] font-semibold hover:underline">Formuláriu Rejistu</a> iha website.
+                        Bainhira ita submite formuláriu rejistu, ita nia dadus sei hetan ona husi DTCI Academy.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="process-step">
+                <div class="step-number-circle">2</div>
+                <div class="step-content">
+                    <h4>Informasaun Pagamentu</h4>
+                    <p>
+                        <strong>Bazeia ba programa ne'ebé ita rejistu, preçu sei tuir tuir mai:</strong><br>
+                        • Preçu Rejistu: Tuir programa (hetan iha tabela iha kraik)<br>
+                        • Preçu Fulan: Tuir programa (hetan iha tabela iha kraik)<br>
+                        • Programa Kompletu: Pakote espesial (Ekonómia)
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="process-step">
+                <div class="step-number-circle">3</div>
+                <div class="step-content">
+                    <h4>Selu Iha Fatin</h4>
+                    <p>
+                        <strong>Ita bele selu diretamente iha fatin DTCI Academy:</strong><br>
+                        • <strong>Fatin:</strong> Dili, Timor-Leste<br>
+                        • <strong>Horáriu:</strong> Segunda - Sexta, 09:00 - 17:00<br>
+                        • <strong>Métodu:</strong> Cash (osan foin)
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="process-step">
+                <div class="step-number-circle">4</div>
+                <div class="step-content">
+                    <h4>Konfirmasaun & Inísiu Kursu</h4>
+                    <p>
+                        <strong>Após pagamentu, ita sei hetan:</strong><br>
+                        • Resibu pagamentu<br>
+                        • Informasaun kona-ba data hahu kursu<br>
+                        • Materia no guia estudante<br>
+                        • Acessu ba komunidade estudante
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PRICE TABLE REFERENCE -->
+<!-- ============================================================ -->
+<section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">Preçu</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Referénsia Preçu Programa</h2>
+            <p class="text-gray-500 mt-2">Preçu tuir programa ne'ebé ita rejistu</p>
+        </div>
+        
+        <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg">
+            <div class="overflow-x-auto">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Programa</th>
+                            <th>Preçu Fulan</th>
+                            <th>Rejistu</th>
+                            <th>Total Inisiál</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="font-semibold">Level 1</span></td>
+                            <td>Computer & Digital Fundamental</td>
+                            <td>$5</td>
+                            <td>$2</td>
+                            <td>$7</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 2</span></td>
+                            <td>Graphic Design Fundamental</td>
+                            <td>$6</td>
+                            <td>$2</td>
+                            <td>$8</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 3</span></td>
+                            <td>Advanced Graphic Design</td>
+                            <td>$6</td>
+                            <td>$2</td>
+                            <td>$8</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 4</span></td>
+                            <td>UI/UX Design</td>
+                            <td>$5</td>
+                            <td>$2</td>
+                            <td>$7</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 5</span></td>
+                            <td>Web Fundamental</td>
+                            <td>$5</td>
+                            <td>$3</td>
+                            <td>$8</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 6</span></td>
+                            <td>Frontend Development</td>
+                            <td>$6</td>
+                            <td>$3</td>
+                            <td>$9</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 7</span></td>
+                            <td>Database & Backend</td>
+                            <td>$7</td>
+                            <td>$3</td>
+                            <td>$10</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 8</span></td>
+                            <td>API & Fullstack</td>
+                            <td>$10</td>
+                            <td>$5</td>
+                            <td>$15</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 9</span></td>
+                            <td>Mobile Development</td>
+                            <td>$10</td>
+                            <td>$5</td>
+                            <td>$15</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 10</span></td>
+                            <td>Modern Backend</td>
+                            <td>$8</td>
+                            <td>$5</td>
+                            <td>$13</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 11</span></td>
+                            <td>DevOps & Cloud</td>
+                            <td>$10</td>
+                            <td>$5</td>
+                            <td>$15</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">Level 12</span></td>
+                            <td>AI & Emerging Tech</td>
+                            <td>$10</td>
+                            <td>$5</td>
+                            <td>$15</td>
+                        </tr>
+                        <tr>
+                            <td><span class="font-semibold">🎯 Bonus</span></td>
+                            <td>Entrepreneurship & Freelancing</td>
+                            <td>FREE</td>
+                            <td>FREE</td>
+                            <td>FREE</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><span class="font-bold">🏆</span></td>
+                            <td><span class="font-bold">Programa Kompletu</span></td>
+                            <td><span class="font-bold text-[#6C3CE1]">Pakote</span></td>
+                            <td><span class="font-bold text-[#6C3CE1]">Espesial</span></td>
+                            <td><span class="font-bold text-[#10B981]">Ekonómia</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200 text-center">
+            <p class="text-sm text-amber-800">
+                <i class="fas fa-info-circle mr-2"></i>
+                <strong>Nota:</strong> Preçu rejistu selu dala ida de'it. Preçu fulan selu kada fulan durante durasaun kursu.
+                Programa Kompletu oferese pakote espesial ho ekonómia.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FAQ PAYMENT -->
+<!-- ============================================================ -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-[#6C3CE1]/10 text-[#6C3CE1] font-semibold text-sm px-4 py-1.5 rounded-full">FAQ</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mt-2">Pergunta Frequente kona-ba Pagamentu</h2>
+        </div>
+        
+        <div class="space-y-4">
+            <!-- FAQ 1 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h4 class="font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fas fa-question-circle text-[#6C3CE1]"></i>
+                    Precisu selu rejistu antes ka depois?
+                </h4>
+                <p class="text-gray-600 mt-2">Rejistu selu antes atu komesa kursu. Preçu rejistu selu dala ida de'it no inklui iha total inisiál.</p>
+            </div>
+            
+            <!-- FAQ 2 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h4 class="font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fas fa-question-circle text-[#6C3CE1]"></i>
+                    Oinsá selu preçu fulan?
+                </h4>
+                <p class="text-gray-600 mt-2">Preçu fulan selu kada fulan durante durasaun kursu. Pagamentu bele halo iha fatin DTCI Academy.</p>
+            </div>
+            
+            <!-- FAQ 3 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h4 class="font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fas fa-question-circle text-[#6C3CE1]"></i>
+                    Programa Kompletu nia preçu oinsá?
+                </h4>
+                <p class="text-gray-600 mt-2">Programa Kompletu oferese pakote espesial ho ekonómia. Ita bele hetan informasaun kompletu liuhusu kontaktu ho administrasaun.</p>
+            </div>
+            
+            <!-- FAQ 4 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h4 class="font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fas fa-question-circle text-[#6C3CE1]"></i>
+                    Se la selu, bele tuir kursu?
+                </h4>
+                <p class="text-gray-600 mt-2">Lae. Pagamentu presiza atu kompleta antes kursu hahu. Ne'e atu garante kompromisu no kualidade servisu.</p>
+            </div>
+            
+            <!-- FAQ 5 -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h4 class="font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fas fa-question-circle text-[#6C3CE1]"></i>
+                    Iha suporte ba pagamentu?
+                </h4>
+                <p class="text-gray-600 mt-2">Sim! DTCI Academy fornese suporte kompletu ba prosesu pagamentu. Ita bele kontaktu administrasaun ba ajuda.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CTA SECTION -->
+<!-- ============================================================ -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] rounded-2xl p-8 md:p-12 text-white text-center">
+        <h2 class="text-2xl md:text-4xl font-bold">Prontu Atu Rejistu no Selu?</h2>
+        <p class="mt-3 text-white/80 max-w-2xl mx-auto">
+            Rejista agora no kompleta pagamentu atu komesa ita nia karreira.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="register.html" class="bg-white text-[#6C3CE1] px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl">
+                <i class="fas fa-rocket mr-2"></i> Rejistu Agora
+            </a>
+            <a href="contact.html" class="bg-white/20 backdrop-blur text-white px-10 py-4 rounded-xl font-semibold hover:bg-white/30 transition border border-white/20">
+                <i class="fas fa-phone mr-2"></i> Kontaktu
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-[#0A0A0F] text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg">D</div>
+                    <span class="text-white font-bold text-lg">DTCI Academy</span>
+                </div>
+                <p class="text-gray-500 text-sm">Digital Technology & Creative Industry Academy</p>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Ligaun</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="index.html" class="hover:text-white transition">Início</a></li>
+                    <li><a href="modules.html" class="hover:text-white transition">Módulu</a></li>
+                    <li><a href="curriculum.html" class="hover:text-white transition">Kurikulum</a></li>
+                    <li><a href="payment.html" class="hover:text-white transition">Pagamentu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Suporte</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="contact.html" class="hover:text-white transition">Kontaktu</a></li>
+                    <li><a href="register.html" class="hover:text-white transition">Rejistu</a></li>
+                    <li><a href="payment.html" class="hover:text-white transition">Maneira Pagamentu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Kontaktu</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><i class="fas fa-envelope w-5 text-[#6C3CE1]"></i> info@dtciacademy.com</li>
+                    <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 1234 5678</li>
+                    <li><i class="fas fa-map-marker-alt w-5 text-[#6C3CE1]"></i> Dili, Timor-Leste</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-8 pt-6 text-center text-gray-600 text-sm">
+            &copy; 2026 DTCI Academy. Hotu-hotu direitu reservadu.
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- WHATSAPP FLOAT -->
+<!-- ============================================================ -->
+<a href="https://wa.me/67012345678" target="_blank" class="whatsapp-float" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    const toggleBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    toggleBtn?.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const icon = toggleBtn?.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // ============================================
+    // SMOOTH SCROLL
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
