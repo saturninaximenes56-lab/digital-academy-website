@@ -708,7 +708,7 @@
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="form-label">Telemóvel / WhatsApp <span class="required">*</span></label>
-                        <input type="tel" id="phone" required placeholder="670 1234 5678" class="form-input">
+                        <input type="tel" id="phone" required placeholder="+670 7588 9890" class="form-input">
                         <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche telemóvel válidu</p>
                     </div>
                     <div>
@@ -1045,7 +1045,7 @@
                     </div>
                     <div>
                         <label class="form-label">Telemóvel <span class="required">*</span></label>
-                        <input type="tel" id="emergencyPhone" required placeholder="670 1234 5678" class="form-input">
+                        <input type="tel" id="emergencyPhone" required placeholder="+670 7588 9890" class="form-input">
                         <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche telemóvel</p>
                     </div>
                 </div>
@@ -1246,7 +1246,7 @@
                 <h5 class="font-semibold mb-3">Kontaktu</h5>
                 <ul class="space-y-2 text-sm text-gray-500">
                     <li><i class="fas fa-envelope w-5 text-[#6C3CE1]"></i> info@dtciacademy.com</li>
-                    <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 1234 5678</li>
+                    <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 7588 9890</li>
                     <li><i class="fas fa-map-marker-alt w-5 text-[#6C3CE1]"></i> Dili, Timor-Leste</li>
                 </ul>
             </div>
@@ -1260,7 +1260,7 @@
 <!-- ============================================================ -->
 <!-- WHATSAPP FLOAT -->
 <!-- ============================================================ -->
-<a href="https://wa.me/67012345678" target="_blank" class="whatsapp-float" title="WhatsApp">
+<a href="https://wa.me/+670 7588 9890" target="_blank" class="whatsapp-float" title="WhatsApp">
     <i class="fab fa-whatsapp"></i>
 </a>
 
@@ -1690,7 +1690,7 @@ $(document).ready(function() {
         const message = buildWhatsAppMessage(formData);
         
         // WhatsApp number - MUDA BA NUMERU REAL
-        const phoneNumber = '67012345678';
+        const phoneNumber = '+670 7588 9890';
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         
