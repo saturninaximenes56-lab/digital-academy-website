@@ -1,17 +1,21 @@
+
 {
   "name": "dtci-academy-website",
   "version": "1.0.0",
-  "description": "Digital Technology & Creative Industry Academy Website",
+  "description": "DTCI Academy - Digital Technology & Creative Industry Academy",
   "main": "index.html",
   "scripts": {
+    "start": "live-server",
     "build:css": "tailwindcss build css/style.css -o css/output.css",
-    "watch:css": "tailwindcss build css/style.css -o css/output.css --watch",
-    "start": "live-server"
+    "watch:css": "tailwindcss build css/style.css -o css/output.css --watch"
   },
+  "keywords": ["academy", "technology", "education", "timor-leste"],
+  "author": "DTCI Academy",
+  "license": "MIT",
   "devDependencies": {
-    "tailwindcss": "^3.4.0",
     "autoprefixer": "^10.4.16",
+    "live-server": "^1.2.2",
     "postcss": "^8.4.32",
-    "live-server": "^1.2.2"
+    "tailwindcss": "^3.4.0"
   }
 }

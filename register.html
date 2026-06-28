@@ -9,6 +9,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
@@ -17,7 +20,7 @@
     
     <style>
         /* ============================================================ */
-        /* ROOT VARIABLES - DESIGN SYSTEM */
+        /* ROOT VARIABLES */
         /* ============================================================ */
         :root {
             --primary: #6C3CE1;
@@ -26,7 +29,6 @@
             --secondary: #00D4AA;
             --accent: #F97316;
             --dark: #0A0A0F;
-            --dark-card: #14141C;
             --gray: #6B7280;
             --light-gray: #F3F4F6;
             --white: #FFFFFF;
@@ -37,19 +39,11 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--light-gray);
-            color: var(--dark);
-            overflow-x: hidden;
-        }
+        * { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--light-gray); color: var(--dark); overflow-x: hidden; }
 
         /* ============================================================ */
-        /* NAVIGATION - GLASSMORPHISM */
+        /* NAVIGATION */
         /* ============================================================ */
         .navbar-glass {
             background: rgba(10, 10, 15, 0.85);
@@ -77,21 +71,10 @@
             transition: var(--transition);
         }
 
-        .nav-link:hover {
-            color: white;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link.active {
-            color: white;
-        }
-
-        .nav-link.active::after {
-            width: 100%;
-        }
+        .nav-link:hover { color: white; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: white; }
+        .nav-link.active::after { width: 100%; }
 
         .btn-primary-gradient {
             background: var(--gradient-main);
@@ -101,6 +84,9 @@
             font-weight: 600;
             transition: var(--transition);
             border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary-gradient:hover {
@@ -132,10 +118,7 @@
             background: radial-gradient(ellipse at 70% 50%, rgba(108, 60, 225, 0.2) 0%, transparent 70%);
         }
 
-        .page-header .content {
-            position: relative;
-            z-index: 2;
-        }
+        .page-header .content { position: relative; z-index: 2; }
 
         /* ============================================================ */
         /* FORM STYLES */
@@ -153,16 +136,19 @@
             padding: 16px 20px;
             margin-bottom: 24px;
             border-left: 4px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .form-section .section-icon {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 16px;
             color: white;
             flex-shrink: 0;
         }
@@ -183,9 +169,9 @@
             box-shadow: 0 0 0 3px rgba(108, 60, 225, 0.1);
         }
 
-        .form-input::placeholder {
-            color: #9CA3AF;
-        }
+        .form-input::placeholder { color: #9CA3AF; }
+        .form-input.error { border-color: #EF4444; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1); }
+        .form-input.success { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
 
         .form-label {
             display: block;
@@ -194,6 +180,8 @@
             margin-bottom: 6px;
             font-size: 14px;
         }
+
+        .form-label .required { color: #EF4444; }
 
         .form-checkbox {
             width: 18px;
@@ -206,20 +194,278 @@
             flex-shrink: 0;
         }
 
-        .form-checkbox:checked {
-            border-color: var(--primary);
+        .form-checkbox:checked { border-color: var(--primary); }
+
+        /* ============================================================ */
+        /* COURSE SELECT CARDS */
+        /* ============================================================ */
+        .course-select-card {
+            border: 1px solid #E5E7EB;
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: white;
         }
 
-        .price-tag {
-            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+        .course-select-card:hover {
+            border-color: var(--primary);
+            background: rgba(108, 60, 225, 0.02);
+        }
+
+        .course-select-card.checked {
+            border-color: var(--primary);
+            background: rgba(108, 60, 225, 0.05);
+        }
+
+        .course-select-card .course-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .course-select-card .course-price {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ============================================================ */
+        /* PRICE DISPLAY */
+        /* ============================================================ */
+        .price-display {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border: 2px solid #F59E0B;
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .price-display.show { display: block; }
+
+        .price-display .total {
+            font-size: 24px;
+            font-weight: 800;
             color: #78350F;
-            padding: 2px 10px;
-            border-radius: 50px;
+        }
+
+        .price-display .detail {
+            font-size: 14px;
+            color: #92400E;
+        }
+
+        /* ============================================================ */
+        /* PRICE GRID */
+        /* ============================================================ */
+        .price-grid-item {
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            border: 1px solid #E5E7EB;
+            background: white;
+            transition: var(--transition);
+        }
+
+        .price-grid-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .price-grid-item .level {
             font-size: 11px;
             font-weight: 700;
-            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
+        .price-grid-item .price {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .price-grid-item .reg {
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+        /* ============================================================ */
+        /* NOTIFICATION / TOAST */
+        /* ============================================================ */
+        .toast-container {
+            position: fixed;
+            top: 90px;
+            right: 24px;
+            z-index: 9999;
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .toast {
+            background: white;
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .toast.show { transform: translateX(0); }
+
+        .toast .toast-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+
+        .toast .toast-content { flex: 1; }
+        .toast .toast-content .toast-title { font-weight: 700; font-size: 14px; }
+        .toast .toast-content .toast-message { font-size: 13px; color: var(--gray); margin-top: 2px; }
+
+        .toast .toast-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+            transition: var(--transition);
+        }
+
+        .toast .toast-close:hover { color: var(--dark); }
+
+        .toast-success { border-left-color: #10B981; }
+        .toast-success .toast-icon { background: #10B981; color: white; }
+
+        .toast-error { border-left-color: #EF4444; }
+        .toast-error .toast-icon { background: #EF4444; color: white; }
+
+        .toast-warning { border-left-color: #F59E0B; }
+        .toast-warning .toast-icon { background: #F59E0B; color: white; }
+
+        .toast-info { border-left-color: #3B82F6; }
+        .toast-info .toast-icon { background: #3B82F6; color: white; }
+
+        /* ============================================================ */
+        /* CONFIRMATION DIALOG */
+        /* ============================================================ */
+        .dialog-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .dialog-overlay.active { display: flex; }
+
+        .dialog-box {
+            background: white;
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+            animation: dialogIn 0.3s ease;
+        }
+
+        @keyframes dialogIn {
+            from { transform: scale(0.9) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .dialog-box .dialog-icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .dialog-box h3 {
+            font-size: 20px;
+            font-weight: 800;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .dialog-box p {
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .dialog-box .dialog-body {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: var(--radius-sm);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .dialog-box .dialog-body .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .dialog-box .dialog-body .item i { color: #10B981; width: 20px; }
+
+        .dialog-box .dialog-footer {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .dialog-box .dialog-footer button {
+            flex: 1;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dialog-box .dialog-footer .btn-cancel {
+            background: var(--light-gray);
+            color: var(--gray);
+        }
+
+        .dialog-box .dialog-footer .btn-cancel:hover { background: #e5e7eb; }
+
+        .dialog-box .dialog-footer .btn-confirm {
+            background: var(--gradient-main);
+            color: white;
+        }
+
+        .dialog-box .dialog-footer .btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(108, 60, 225, 0.3);
+        }
+
+        /* ============================================================ */
+        /* SUBMIT BUTTON */
+        /* ============================================================ */
         .btn-submit {
             background: var(--gradient-main);
             color: white;
@@ -238,54 +484,26 @@
             box-shadow: 0 10px 30px rgba(108, 60, 225, 0.4);
         }
 
-        /* ============================================================ */
-        /* PRICE SUMMARY TABLE */
-        /* ============================================================ */
-        .price-summary {
-            background: var(--light-gray);
-            border-radius: var(--radius-sm);
-            padding: 16px;
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        .price-summary .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #E5E7EB;
+        .spinner-small {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
         }
 
-        .price-summary .row:last-child {
-            border-bottom: none;
-        }
-
-        .price-summary .total {
-            font-weight: 800;
-            font-size: 18px;
-            color: var(--dark);
-        }
-
-        /* ============================================================ */
-        /* COURSE CARD (small) */
-        /* ============================================================ */
-        .course-select-card {
-            border: 1px solid #E5E7EB;
-            border-radius: var(--radius-sm);
-            padding: 12px 16px;
-            transition: var(--transition);
-            cursor: pointer;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .course-select-card:hover {
-            border-color: var(--primary);
-            background: rgba(108, 60, 225, 0.02);
-        }
-
-        .course-select-card.has-checked {
-            border-color: var(--primary);
-            background: rgba(108, 60, 225, 0.04);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* ============================================================ */
@@ -320,27 +538,38 @@
             50% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
         }
 
-        .whatsapp-float {
-            animation: pulse-wa 2s infinite;
+        .whatsapp-float { animation: pulse-wa 2s infinite; }
+
+        /* ============================================================ */
+        /* LOADING SPINNER */
+        /* ============================================================ */
+        .loading-spinner {
+            border: 3px solid var(--light-gray);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
         }
 
         /* ============================================================ */
         /* RESPONSIVE */
         /* ============================================================ */
         @media (max-width: 768px) {
-            .page-header {
-                padding: 100px 0 40px;
-            }
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-                bottom: 16px;
-                right: 16px;
-            }
-            .form-container {
-                border-radius: var(--radius-sm);
-            }
+            .page-header { padding: 100px 0 40px; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 16px; right: 16px; }
+            .form-container { border-radius: var(--radius-sm); padding: 16px; }
+            .toast-container { right: 12px; left: 12px; max-width: 100%; }
+            .dialog-box { margin: 0 12px; padding: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 { font-size: 24px; }
+            .form-container { padding: 12px; }
+            .price-display .total { font-size: 20px; }
+            .btn-submit { font-size: 16px; padding: 14px; }
+            .dialog-box .dialog-footer { flex-direction: column; }
         }
     </style>
 </head>
@@ -352,17 +581,10 @@
 <nav class="navbar-glass fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 md:h-20">
-            
             <a href="index.html" class="flex items-center gap-2.5">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg shadow-lg">
-                    D
-                </div>
-                <div>
-                    <span class="text-white font-bold text-lg tracking-tight">DTCI</span>
-                    <span class="text-gray-400 font-medium text-sm hidden md:inline">Academy</span>
-                </div>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg shadow-lg">D</div>
+                <div><span class="text-white font-bold text-lg tracking-tight">DTCI</span><span class="text-gray-400 font-medium text-sm hidden md:inline">Academy</span></div>
             </a>
-            
             <div class="hidden lg:flex items-center gap-8">
                 <a href="index.html" class="nav-link">Início</a>
                 <a href="modules.html" class="nav-link">Módulu</a>
@@ -370,11 +592,11 @@
                 <a href="projects.html" class="nav-link">Projetu</a>
                 <a href="about.html" class="nav-link">Kona-ba</a>
                 <a href="contact.html" class="nav-link">Kontaktu</a>
+                <a href="payment.html" class="nav-link">Pagamentu</a>
                 <a href="register.html" class="nav-link active">Rejistu</a>
             </div>
-            
             <div class="flex items-center gap-3">
-                <a href="register.html" class="btn-primary-gradient text-sm px-5 py-2">
+                <a href="register.html" class="btn-primary-gradient text-sm px-5 py-2 hidden sm:inline-block">
                     <i class="fas fa-user-plus mr-2"></i>Rejistu
                 </a>
                 <button id="menu-toggle" class="lg:hidden text-white text-2xl p-1 hover:bg-white/10 rounded-lg transition">
@@ -383,7 +605,6 @@
             </div>
         </div>
     </div>
-    
     <div id="mobile-menu" class="hidden lg:hidden bg-[#14141C] border-t border-white/5">
         <div class="px-4 py-4 space-y-1">
             <a href="index.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Início</a>
@@ -392,6 +613,7 @@
             <a href="projects.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Projetu</a>
             <a href="about.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kona-ba</a>
             <a href="contact.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kontaktu</a>
+            <a href="payment.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Pagamentu</a>
             <a href="register.html" class="block px-4 py-3 text-white bg-white/5 rounded-lg font-medium">Rejistu</a>
         </div>
     </div>
@@ -418,86 +640,24 @@
 <section class="py-12 md:py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Price Summary -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h3 class="text-lg font-bold text-gray-900 mb-4 text-center">
-                <i class="fas fa-tag text-[#6C3CE1] mr-2"></i> PREÇU KURSU
-            </h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                <div class="bg-blue-50 p-3 rounded-lg text-center border border-blue-200">
-                    <p class="font-bold text-blue-600 text-xs">Level 1</p>
-                    <p class="font-bold">$5/fulan</p>
-                    <p class="text-xs text-gray-500">+ $2 rejistu</p>
-                </div>
-                <div class="bg-purple-50 p-3 rounded-lg text-center border border-purple-200">
-                    <p class="font-bold text-purple-600 text-xs">Level 2-3</p>
-                    <p class="font-bold">$6/fulan</p>
-                    <p class="text-xs text-gray-500">+ $2 rejistu</p>
-                </div>
-                <div class="bg-indigo-50 p-3 rounded-lg text-center border border-indigo-200">
-                    <p class="font-bold text-indigo-600 text-xs">Level 4</p>
-                    <p class="font-bold">$5/fulan</p>
-                    <p class="text-xs text-gray-500">+ $2 rejistu</p>
-                </div>
-                <div class="bg-green-50 p-3 rounded-lg text-center border border-green-200">
-                    <p class="font-bold text-green-600 text-xs">Level 5</p>
-                    <p class="font-bold">$5/fulan</p>
-                    <p class="text-xs text-gray-500">+ $3 rejistu</p>
-                </div>
-                <div class="bg-cyan-50 p-3 rounded-lg text-center border border-cyan-200">
-                    <p class="font-bold text-cyan-600 text-xs">Level 6</p>
-                    <p class="font-bold">$6/fulan</p>
-                    <p class="text-xs text-gray-500">+ $3 rejistu</p>
-                </div>
-                <div class="bg-orange-50 p-3 rounded-lg text-center border border-orange-200">
-                    <p class="font-bold text-orange-600 text-xs">Level 7</p>
-                    <p class="font-bold">$7/fulan</p>
-                    <p class="text-xs text-gray-500">+ $3 rejistu</p>
-                </div>
-                <div class="bg-red-50 p-3 rounded-lg text-center border border-red-200">
-                    <p class="font-bold text-red-600 text-xs">Level 8</p>
-                    <p class="font-bold">$10/fulan</p>
-                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
-                </div>
-                <div class="bg-teal-50 p-3 rounded-lg text-center border border-teal-200">
-                    <p class="font-bold text-teal-600 text-xs">Level 9</p>
-                    <p class="font-bold">$10/fulan</p>
-                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
-                </div>
-                <div class="bg-gray-50 p-3 rounded-lg text-center border border-gray-200">
-                    <p class="font-bold text-gray-600 text-xs">Level 10</p>
-                    <p class="font-bold">$8/fulan</p>
-                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
-                </div>
-                <div class="bg-indigo-50 p-3 rounded-lg text-center border border-indigo-200">
-                    <p class="font-bold text-indigo-600 text-xs">Level 11</p>
-                    <p class="font-bold">$10/fulan</p>
-                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
-                </div>
-                <div class="bg-pink-50 p-3 rounded-lg text-center border border-pink-200">
-                    <p class="font-bold text-pink-600 text-xs">Level 12</p>
-                    <p class="font-bold">$10/fulan</p>
-                    <p class="text-xs text-gray-500">+ $5 rejistu</p>
-                </div>
-                <div class="bg-amber-50 p-3 rounded-lg text-center border border-amber-200 col-span-2 md:col-span-1">
-                    <p class="font-bold text-amber-600 text-xs">🎯 Kompletu</p>
-                    <p class="font-bold text-sm">Pakote</p>
-                    <p class="text-xs text-gray-500">Espesial</p>
-                </div>
-            </div>
-        </div>
+        <!-- ========================================================== -->
+        <!-- PRICE SUMMARY - STATIC (NO AJAX) -->
+        <!-- ========================================================== -->
+    
         
-        <!-- Form -->
+        <!-- ========================================================== -->
+        <!-- FORM -->
+        <!-- ========================================================== -->
         <div class="form-container p-6 md:p-10">
             <h2 class="text-2xl font-bold text-gray-900 text-center mb-1">FORMULÁRIU REJISTU ESTUDANTE</h2>
             <p class="text-center text-gray-500 text-sm mb-8">DIGITAL TECHNOLOGY & CREATIVE INDUSTRY ACADEMY</p>
             
-            <form id="registrationForm" onsubmit="handleRegistration(event)">
+            <form id="registrationForm" novalidate>
                 
                 <!-- ======================================== -->
                 <!-- INFORMASAUN PESSOAL -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3">
+                <div class="form-section">
                     <div class="section-icon" style="background: var(--gradient-main);">
                         <i class="fas fa-user"></i>
                     </div>
@@ -506,18 +666,20 @@
                 
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
                     <div>
-                        <label class="form-label">Naran Kompletu <span class="text-red-500">*</span></label>
-                        <input type="text" id="fullName" required placeholder="Ex: João da Silva" class="form-input">
+                        <label class="form-label">Naran Kompletu <span class="required">*</span></label>
+                        <input type="text" id="fullName" required placeholder="Ex: João da Silva" class="form-input" autocomplete="name">
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche naran kompletu</p>
                     </div>
                     <div>
-                        <label class="form-label">Data Moris <span class="text-red-500">*</span></label>
+                        <label class="form-label">Data Moris <span class="required">*</span></label>
                         <input type="date" id="birthDate" required class="form-input">
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor hili data moris</p>
                     </div>
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
                     <div>
-                        <label class="form-label">Sexo <span class="text-red-500">*</span></label>
+                        <label class="form-label">Sexo <span class="required">*</span></label>
                         <div class="flex gap-6 pt-2">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="radio" name="gender" value="Mane" required class="w-4 h-4 accent-[#6C3CE1]">
@@ -528,38 +690,44 @@
                                 <span>Feto</span>
                             </label>
                         </div>
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor hili sexo</p>
                     </div>
                     <div>
-                        <label class="form-label">Munisípiu <span class="text-red-500">*</span></label>
+                        <label class="form-label">Munisípiu <span class="required">*</span></label>
                         <input type="text" id="municipality" required placeholder="Ex: Dili" class="form-input">
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche munisípiu</p>
                     </div>
                 </div>
                 
                 <div class="mb-4">
-                    <label class="form-label">Endereçu Atual <span class="text-red-500">*</span></label>
+                    <label class="form-label">Endereçu Atual <span class="required">*</span></label>
                     <textarea id="address" required rows="2" placeholder="Endereçu kompletu..." class="form-input"></textarea>
+                    <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche endereçu</p>
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
                     <div>
-                        <label class="form-label">Telemóvel / WhatsApp <span class="text-red-500">*</span></label>
+                        <label class="form-label">Telemóvel / WhatsApp <span class="required">*</span></label>
                         <input type="tel" id="phone" required placeholder="670 1234 5678" class="form-input">
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche telemóvel válidu</p>
                     </div>
                     <div>
-                        <label class="form-label">Email <span class="text-red-500">*</span></label>
+                        <label class="form-label">Email <span class="required">*</span></label>
                         <input type="email" id="email" required placeholder="exemplo@email.com" class="form-input">
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche email válidu</p>
                     </div>
                 </div>
                 
                 <div class="mb-4">
-                    <label class="form-label">Númeru BI / Cartão Eleitoral / Passaporte <span class="text-red-500">*</span></label>
+                    <label class="form-label">Númeru BI / Cartão Eleitoral / Passaporte <span class="required">*</span></label>
                     <input type="text" id="idNumber" required placeholder="Númeru dokumentu..." class="form-input">
+                    <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche númeru dokumentu</p>
                 </div>
                 
                 <!-- ======================================== -->
                 <!-- INFORMASAUN EDUKASAUN -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #00D4AA;">
+                <div class="form-section mt-8" style="border-left-color: #00D4AA;">
                     <div class="section-icon" style="background: linear-gradient(135deg, #00D4AA, #059669);">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
@@ -567,7 +735,7 @@
                 </div>
                 
                 <div class="mb-4">
-                    <label class="form-label">Nível Edukasaun Ikus <span class="text-red-500">*</span></label>
+                    <label class="form-label">Nível Edukasaun Ikus <span class="required">*</span></label>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                         <label class="flex items-center gap-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer">
                             <input type="radio" name="educationLevel" value="Ensino Básico" required class="w-4 h-4 accent-[#6C3CE1]">
@@ -594,6 +762,7 @@
                             <span class="text-sm">Seluk</span>
                         </label>
                     </div>
+                    <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor hili nível edukasaun</p>
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
@@ -603,81 +772,82 @@
                     </div>
                     <div>
                         <label class="form-label">Tinan Remata Estudu</label>
-                        <input type="number" id="graduationYear" placeholder="Ex: 2020" class="form-input">
+                        <input type="number" id="graduationYear" placeholder="Ex: 2020" class="form-input" min="1970" max="2026">
                     </div>
                 </div>
                 
                 <!-- ======================================== -->
                 <!-- KURSU NE'EBE HAKARAK TUIR -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #8B5CF6;">
+                <div class="form-section mt-8" style="border-left-color: #8B5CF6;">
                     <div class="section-icon" style="background: linear-gradient(135deg, #8B5CF6, #6C3CE1);">
                         <i class="fas fa-book"></i>
                     </div>
                     <h3 class="font-bold text-gray-800 text-lg">KURSU NE'EBÉ HAKARAK TUIR</h3>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-3 mb-4" id="courseSelection">
+                <div id="courseSelection" class="grid md:grid-cols-2 gap-3 mb-4">
+                    
                     <!-- Level 1 -->
                     <label class="course-select-card">
                         <input type="checkbox" name="courses" value="Level 1 – Computer & Digital Fundamental" class="form-checkbox mt-1 course-checkbox" data-price="5" data-regfee="2">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 1 – Computer & Digital Fundamental</p>
-                            <p class="text-xs text-blue-600 font-semibold">$5/fulan + $2 rejistu</p>
+                            <p class="course-title">Level 1 – Computer & Digital Fundamental</p>
+                            <p class="course-price text-blue-600">$5/fulan + $2 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 2 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 2 – Graphic Design Fundamental (Canva Professional)" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="2">
+                        <input type="checkbox" name="courses" value="Level 2 – Graphic Design Fundamental" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="2">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 2 – Graphic Design Fundamental</p>
-                            <p class="text-xs text-purple-600 font-semibold">$6/fulan + $2 rejistu</p>
+                            <p class="course-title">Level 2 – Graphic Design Fundamental</p>
+                            <p class="course-price text-purple-600">$6/fulan + $2 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 3 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 3 – Advanced Graphic Design (Adobe Photoshop, Illustrator & Video Editing)" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="2">
+                        <input type="checkbox" name="courses" value="Level 3 – Advanced Graphic Design" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="2">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 3 – Advanced Graphic Design</p>
-                            <p class="text-xs text-pink-600 font-semibold">$6/fulan + $2 rejistu</p>
+                            <p class="course-title">Level 3 – Advanced Graphic Design</p>
+                            <p class="course-price text-pink-600">$6/fulan + $2 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 4 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 4 – UI/UX Design (Figma, Wireframe & Prototype)" class="form-checkbox mt-1 course-checkbox" data-price="5" data-regfee="2">
+                        <input type="checkbox" name="courses" value="Level 4 – UI/UX Design" class="form-checkbox mt-1 course-checkbox" data-price="5" data-regfee="2">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 4 – UI/UX Design</p>
-                            <p class="text-xs text-indigo-600 font-semibold">$5/fulan + $2 rejistu</p>
+                            <p class="course-title">Level 4 – UI/UX Design</p>
+                            <p class="course-price text-indigo-600">$5/fulan + $2 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 5 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 5 – Web Fundamental (HTML5, CSS3, Tailwind CSS & JavaScript)" class="form-checkbox mt-1 course-checkbox" data-price="5" data-regfee="3">
+                        <input type="checkbox" name="courses" value="Level 5 – Web Fundamental" class="form-checkbox mt-1 course-checkbox" data-price="5" data-regfee="3">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 5 – Web Fundamental</p>
-                            <p class="text-xs text-green-600 font-semibold">$5/fulan + $3 rejistu</p>
+                            <p class="course-title">Level 5 – Web Fundamental</p>
+                            <p class="course-price text-green-600">$5/fulan + $3 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 6 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 6 – Frontend Development (ReactJS & Next.js)" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="3">
+                        <input type="checkbox" name="courses" value="Level 6 – Frontend Development" class="form-checkbox mt-1 course-checkbox" data-price="6" data-regfee="3">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 6 – Frontend Development</p>
-                            <p class="text-xs text-cyan-600 font-semibold">$6/fulan + $3 rejistu</p>
+                            <p class="course-title">Level 6 – Frontend Development</p>
+                            <p class="course-price text-cyan-600">$6/fulan + $3 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 7 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 7 – Database & Backend Development (MySQL, PostgreSQL, PHP & Laravel)" class="form-checkbox mt-1 course-checkbox" data-price="7" data-regfee="3">
+                        <input type="checkbox" name="courses" value="Level 7 – Database & Backend Development" class="form-checkbox mt-1 course-checkbox" data-price="7" data-regfee="3">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 7 – Database & Backend</p>
-                            <p class="text-xs text-orange-600 font-semibold">$7/fulan + $3 rejistu</p>
+                            <p class="course-title">Level 7 – Database & Backend</p>
+                            <p class="course-price text-orange-600">$7/fulan + $3 rejistu</p>
                         </div>
                     </label>
                     
@@ -685,35 +855,35 @@
                     <label class="course-select-card">
                         <input type="checkbox" name="courses" value="Level 8 – API & Fullstack Development" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 8 – API & Fullstack</p>
-                            <p class="text-xs text-red-600 font-semibold">$10/fulan + $5 rejistu</p>
+                            <p class="course-title">Level 8 – API & Fullstack</p>
+                            <p class="course-price text-red-600">$10/fulan + $5 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 9 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 9 – Mobile Development (Flutter)" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
+                        <input type="checkbox" name="courses" value="Level 9 – Mobile Development" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 9 – Mobile Development</p>
-                            <p class="text-xs text-teal-600 font-semibold">$10/fulan + $5 rejistu</p>
+                            <p class="course-title">Level 9 – Mobile Development</p>
+                            <p class="course-price text-teal-600">$10/fulan + $5 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 10 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 10 – Modern Backend Development (Node.js, Express.js, TypeScript & Golang)" class="form-checkbox mt-1 course-checkbox" data-price="8" data-regfee="5">
+                        <input type="checkbox" name="courses" value="Level 10 – Modern Backend Development" class="form-checkbox mt-1 course-checkbox" data-price="8" data-regfee="5">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 10 – Modern Backend</p>
-                            <p class="text-xs text-gray-600 font-semibold">$8/fulan + $5 rejistu</p>
+                            <p class="course-title">Level 10 – Modern Backend</p>
+                            <p class="course-price text-gray-600">$8/fulan + $5 rejistu</p>
                         </div>
                     </label>
                     
                     <!-- Level 11 -->
                     <label class="course-select-card">
-                        <input type="checkbox" name="courses" value="Level 11 – DevOps & Cloud Deployment (Linux, Docker, VPS & CI/CD)" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
+                        <input type="checkbox" name="courses" value="Level 11 – DevOps & Cloud Deployment" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 11 – DevOps & Cloud</p>
-                            <p class="text-xs text-indigo-600 font-semibold">$10/fulan + $5 rejistu</p>
+                            <p class="course-title">Level 11 – DevOps & Cloud</p>
+                            <p class="course-price text-indigo-600">$10/fulan + $5 rejistu</p>
                         </div>
                     </label>
                     
@@ -721,44 +891,57 @@
                     <label class="course-select-card">
                         <input type="checkbox" name="courses" value="Level 12 – AI & Emerging Technology" class="form-checkbox mt-1 course-checkbox" data-price="10" data-regfee="5">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">Level 12 – AI & Emerging Tech</p>
-                            <p class="text-xs text-pink-600 font-semibold">$10/fulan + $5 rejistu</p>
+                            <p class="course-title">Level 12 – AI & Emerging Tech</p>
+                            <p class="course-price text-pink-600">$10/fulan + $5 rejistu</p>
                         </div>
                     </label>
                     
-                    <!-- Entrepreneurship -->
+                    <!-- Bonus -->
                     <label class="course-select-card border-amber-300 bg-amber-50">
                         <input type="checkbox" name="courses" value="Entrepreneurship & Freelancing" class="form-checkbox mt-1 course-checkbox" data-price="0" data-regfee="0">
                         <div>
-                            <p class="text-sm font-medium text-gray-800">🎯 Entrepreneurship & Freelancing</p>
-                            <p class="text-xs text-amber-600 font-semibold">Inklui iha pakote</p>
+                            <p class="course-title">🎯 Entrepreneurship & Freelancing</p>
+                            <p class="course-price text-amber-600">Inklui iha pakote</p>
                         </div>
                     </label>
                     
                     <!-- Programa Kompletu -->
-                    <label class="course-select-card border-2 border-[#6C3CE1] bg-purple-50 col-span-2">
-                        <input type="checkbox" name="courses" value="Programa Kompletu – Digital Technology & Creative Industry Academy" class="form-checkbox mt-1 course-checkbox" data-price="0" data-regfee="0">
-                        <div>
-                            <p class="text-sm font-bold text-gray-800">🏆 Programa Kompletu – Digital Technology & Creative Industry Academy</p>
-                            <p class="text-xs text-[#6C3CE1] font-bold">Pakote Espesial (Ekonómia)</p>
+                    <label class="course-select-card border-2 border-[#6C3CE1] bg-purple-50 col-span-2" id="completeProgramCard">
+                        <input type="checkbox" name="courses" value="Programa Kompletu – Digital Technology & Creative Industry Academy" class="form-checkbox mt-1 course-checkbox" data-price="0" data-regfee="0" id="completeProgramCheck">
+                        <div class="flex-1">
+                            <p class="course-title font-bold text-[#6C3CE1]">🏆 Programa Kompletu – Digital Technology & Creative Industry Academy</p>
+                            <p class="course-price text-[#6C3CE1] font-bold">Pakote Espesial (Ekonómia)</p>
+                            <div class="mt-2 p-2 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800 hidden" id="completeAlert">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                <strong>Ekonómia!</strong> Programa ida ne'e inklui módulu hotu-hotu (Level 1-12) + Entrepreneurship & Freelancing ho preçu espesial. 
+                                <a href="payment.html" class="text-[#6C3CE1] font-semibold hover:underline">Haree informasaun</a>
+                            </div>
                         </div>
                     </label>
+                    
                 </div>
                 
-                <!-- Total Price Display -->
-                <div id="priceDisplay" class="hidden bg-amber-50 border-2 border-amber-400 rounded-xl p-4 mb-6 text-center">
-                    <p class="text-lg font-bold text-amber-800">
-                        TOTAL: <span id="totalPrice" class="text-2xl">$0</span>
-                    </p>
-                    <p class="text-sm text-gray-600">
+                <!-- Error for courses -->
+                <p class="error-text text-red-500 text-xs mt-1 hidden" id="courseError">
+                    <i class="fas fa-exclamation-circle mr-1"></i> Favor hili kursu ne'ebé ita hakarak
+                </p>
+                
+                <!-- Price Display -->
+                <div class="price-display" id="priceDisplay">
+                    <p class="detail">TOTAL</p>
+                    <p class="total" id="totalPrice">$0</p>
+                    <p class="detail">
                         <span id="totalMonthly">$0</span>/fulan + <span id="totalRegFee">$0</span> rejistu
+                    </p>
+                    <p class="text-xs text-amber-700 mt-1" id="completeNote" style="display:none;">
+                        🏆 Programa Kompletu - Pakote Espesial (Ekonómia)
                     </p>
                 </div>
                 
                 <!-- ======================================== -->
                 <!-- MODALIDADE APRENDIZAJEN -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #F59E0B;">
+                <div class="form-section mt-8" style="border-left-color: #F59E0B;">
                     <div class="section-icon" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
                         <i class="fas fa-clock"></i>
                     </div>
@@ -787,11 +970,12 @@
                         <span class="text-sm">Evening Class</span>
                     </label>
                 </div>
+                <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor hili modalidade aprendizajen</p>
                 
                 <!-- ======================================== -->
                 <!-- ESPERIÉNSIA ANTES -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #6B7280;">
+                <div class="form-section mt-8" style="border-left-color: #6B7280;">
                     <div class="section-icon" style="background: linear-gradient(135deg, #6B7280, #4B5563);">
                         <i class="fas fa-star"></i>
                     </div>
@@ -825,7 +1009,7 @@
                 <!-- ======================================== -->
                 <!-- OBJETIVU APRENDIZAJEN -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #3B82F6;">
+                <div class="form-section mt-8" style="border-left-color: #3B82F6;">
                     <div class="section-icon" style="background: linear-gradient(135deg, #3B82F6, #2563EB);">
                         <i class="fas fa-bullseye"></i>
                     </div>
@@ -833,14 +1017,15 @@
                 </div>
                 
                 <div class="mb-4">
-                    <label class="form-label">Tansá mak ita hakarak tuir programa ida ne'e? <span class="text-red-500">*</span></label>
+                    <label class="form-label">Tansá mak ita hakarak tuir programa ida ne'e? <span class="required">*</span></label>
                     <textarea id="objective" required rows="3" placeholder="Escreve ita nia objetivu..." class="form-input"></textarea>
+                    <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche objetivu</p>
                 </div>
                 
                 <!-- ======================================== -->
                 <!-- KONTAKTU EMERJÉNSIA -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #EF4444;">
+                <div class="form-section mt-8" style="border-left-color: #EF4444;">
                     <div class="section-icon" style="background: linear-gradient(135deg, #EF4444, #DC2626);">
                         <i class="fas fa-phone-alt"></i>
                     </div>
@@ -849,23 +1034,26 @@
                 
                 <div class="grid md:grid-cols-3 gap-4 mb-4">
                     <div>
-                        <label class="form-label">Naran <span class="text-red-500">*</span></label>
+                        <label class="form-label">Naran <span class="required">*</span></label>
                         <input type="text" id="emergencyName" required placeholder="Naran..." class="form-input">
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche naran</p>
                     </div>
                     <div>
-                        <label class="form-label">Relação <span class="text-red-500">*</span></label>
+                        <label class="form-label">Relação <span class="required">*</span></label>
                         <input type="text" id="emergencyRelation" required placeholder="Inan, Aman, etc" class="form-input">
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche relasaun</p>
                     </div>
                     <div>
-                        <label class="form-label">Telemóvel <span class="text-red-500">*</span></label>
+                        <label class="form-label">Telemóvel <span class="required">*</span></label>
                         <input type="tel" id="emergencyPhone" required placeholder="670 1234 5678" class="form-input">
+                        <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor preenche telemóvel</p>
                     </div>
                 </div>
                 
                 <!-- ======================================== -->
                 <!-- DOKUMENTU ANEXU -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #6B7280;">
+                <div class="form-section mt-8" style="border-left-color: #6B7280;">
                     <div class="section-icon" style="background: linear-gradient(135deg, #6B7280, #4B5563);">
                         <i class="fas fa-file"></i>
                     </div>
@@ -902,7 +1090,7 @@
                 <!-- ======================================== -->
                 <!-- DEKLARAÇÃO -->
                 <!-- ======================================== -->
-                <div class="form-section flex items-center gap-3 mt-8" style="border-left-color: #10B981;">
+                <div class="form-section mt-8" style="border-left-color: #10B981;">
                     <div class="section-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
                         <i class="fas fa-check-circle"></i>
                     </div>
@@ -917,6 +1105,7 @@
                             Ha'u konkorda atu tuir regra no regulamentu ne'ebé estabelese husi Digital Technology & Creative Industry Academy.
                         </span>
                     </label>
+                    <p class="error-text text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle mr-1"></i> Favor asina deklarasaun</p>
                 </div>
                 
                 <div class="grid md:grid-cols-3 gap-4 mb-6">
@@ -985,7 +1174,7 @@
                 <!-- ======================================== -->
                 <!-- SUBMIT BUTTON -->
                 <!-- ======================================== -->
-                <button type="submit" class="btn-submit">
+                <button type="submit" class="btn-submit" id="submitBtn">
                     <i class="fas fa-paper-plane mr-2"></i> SUBMETE REJISTU
                 </button>
                 
@@ -1004,6 +1193,27 @@
 </section>
 
 <!-- ============================================================ -->
+<!-- TOAST / NOTIFICATION CONTAINER -->
+<!-- ============================================================ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ============================================================ -->
+<!-- CONFIRMATION DIALOG -->
+<!-- ============================================================ -->
+<div class="dialog-overlay" id="dialogOverlay">
+    <div class="dialog-box">
+        <div class="dialog-icon" id="dialogIcon">📋</div>
+        <h3 id="dialogTitle">Konfirmasaun Rejistu</h3>
+        <p id="dialogSubtitle">Favor verifika informasaun antes submite</p>
+        <div class="dialog-body" id="dialogBody"></div>
+        <div class="dialog-footer">
+            <button class="btn-cancel" onclick="closeDialog()">Kansela</button>
+            <button class="btn-confirm" id="dialogConfirmBtn">Konfirma no Haruka</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
 <!-- FOOTER -->
 <!-- ============================================================ -->
 <footer class="bg-[#0A0A0F] text-white py-10">
@@ -1020,8 +1230,9 @@
                 <h5 class="font-semibold mb-3">Ligaun</h5>
                 <ul class="space-y-2 text-sm text-gray-500">
                     <li><a href="index.html" class="hover:text-white transition">Início</a></li>
-                    <li><a href="about.html" class="hover:text-white transition">Kona-ba</a></li>
+                    <li><a href="modules.html" class="hover:text-white transition">Módulu</a></li>
                     <li><a href="curriculum.html" class="hover:text-white transition">Kurikulum</a></li>
+                    <li><a href="payment.html" class="hover:text-white transition">Pagamentu</a></li>
                 </ul>
             </div>
             <div>
@@ -1036,6 +1247,7 @@
                 <ul class="space-y-2 text-sm text-gray-500">
                     <li><i class="fas fa-envelope w-5 text-[#6C3CE1]"></i> info@dtciacademy.com</li>
                     <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 1234 5678</li>
+                    <li><i class="fas fa-map-marker-alt w-5 text-[#6C3CE1]"></i> Dili, Timor-Leste</li>
                 </ul>
             </div>
         </div>
@@ -1048,250 +1260,491 @@
 <!-- ============================================================ -->
 <!-- WHATSAPP FLOAT -->
 <!-- ============================================================ -->
-<a href="https://wa.me/+670 7449 2303" target="_blank" class="whatsapp-float" title="WhatsApp">
+<a href="https://wa.me/67012345678" target="_blank" class="whatsapp-float" title="WhatsApp">
     <i class="fab fa-whatsapp"></i>
 </a>
 
 <!-- ============================================================ -->
-<!-- JAVASCRIPT -->
+<!-- JAVASCRIPT - COMPLETE -->
 <!-- ============================================================ -->
 <script>
+$(document).ready(function() {
+    console.log('🚀 Register page loaded successfully!');
+
     // ============================================
     // MOBILE MENU
     // ============================================
-    const toggleBtn = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    toggleBtn?.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-        const icon = this.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+    $('#menu-toggle').on('click', function() {
+        $('#mobile-menu').toggleClass('hidden');
+        $(this).find('i').toggleClass('fa-bars fa-times');
     });
 
-    mobileMenu?.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            const icon = toggleBtn?.querySelector('i');
-            if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+    $('#mobile-menu a').on('click', function() {
+        $('#mobile-menu').addClass('hidden');
+        $('#menu-toggle').find('i').removeClass('fa-times').addClass('fa-bars');
+    });
+
+    // ============================================
+    // TOAST NOTIFICATION SYSTEM
+    // ============================================
+    function showToast(title, message, type = 'info', duration = 4000) {
+        const container = $('#toastContainer');
+        const icons = {
+            success: 'fa-check-circle',
+            error: 'fa-times-circle',
+            warning: 'fa-exclamation-triangle',
+            info: 'fa-info-circle'
+        };
+        
+        const toast = $(`
+            <div class="toast toast-${type}">
+                <div class="toast-icon">
+                    <i class="fas ${icons[type] || icons.info}"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close"><i class="fas fa-times"></i></button>
+            </div>
+        `);
+        
+        container.append(toast);
+        
+        // Show with animation
+        setTimeout(function() {
+            toast.addClass('show');
+        }, 50);
+        
+        // Close button
+        toast.find('.toast-close').on('click', function() {
+            toast.removeClass('show');
+            setTimeout(function() {
+                toast.remove();
+            }, 400);
         });
+        
+        // Auto close
+        setTimeout(function() {
+            toast.removeClass('show');
+            setTimeout(function() {
+                toast.remove();
+            }, 400);
+        }, duration);
+    }
+
+    // ============================================
+    // DIALOG SYSTEM
+    // ============================================
+    let dialogCallback = null;
+
+    function showDialog(icon, title, subtitle, bodyHTML, confirmText = 'Konfirma', callback) {
+        $('#dialogIcon').text(icon);
+        $('#dialogTitle').text(title);
+        $('#dialogSubtitle').text(subtitle);
+        $('#dialogBody').html(bodyHTML);
+        $('#dialogConfirmBtn').text(confirmText);
+        $('#dialogOverlay').addClass('active');
+        dialogCallback = callback;
+    }
+
+    function closeDialog() {
+        $('#dialogOverlay').removeClass('active');
+        dialogCallback = null;
+    }
+
+    $('#dialogConfirmBtn').on('click', function() {
+        if (dialogCallback) {
+            dialogCallback();
+        }
+        closeDialog();
+    });
+
+    // Close dialog on overlay click
+    $('#dialogOverlay').on('click', function(e) {
+        if (e.target === this) {
+            closeDialog();
+        }
     });
 
     // ============================================
-    // SET DEFAULT DATES
+    // COMPLETE PROGRAM ALERT
     // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        const today = new Date();
-        const dateStr = today.toISOString().split('T')[0];
-        
-        const declarationDate = document.getElementById('declarationDate');
-        if (declarationDate) declarationDate.value = dateStr;
-        
-        const regDate = document.getElementById('regDate');
-        if (regDate) regDate.value = dateStr;
-        
-        // Generate registration number
-        const regNumber = document.getElementById('regNumber');
-        if (regNumber) {
-            const prefix = 'DTCI';
-            const year = today.getFullYear();
-            const random = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
-            regNumber.value = `${prefix}-${year}-${random}`;
+    $('#completeProgramCheck').on('change', function() {
+        if ($(this).is(':checked')) {
+            // Show alert
+            $('#completeAlert').removeClass('hidden').slideDown(300);
+            
+            // Show toast notification
+            showToast(
+                '🏆 Programa Kompletu',
+                'Ita hili pakote espesial! Inklui módulu hotu-hotu ho ekonómia.',
+                'info',
+                5000
+            );
+            
+        } else {
+            // Hide alert
+            $('#completeAlert').slideUp(300);
         }
     });
 
     // ============================================
     // PRICE CALCULATOR
     // ============================================
-    document.querySelectorAll('.course-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', calculateTotal);
+    $('.course-checkbox').on('change', function() {
+        calculateTotal();
     });
 
     function calculateTotal() {
-        const checked = document.querySelectorAll('.course-checkbox:checked');
-        const display = document.getElementById('priceDisplay');
-        const totalPrice = document.getElementById('totalPrice');
-        const totalMonthly = document.getElementById('totalMonthly');
-        const totalRegFee = document.getElementById('totalRegFee');
+        const checked = $('.course-checkbox:checked');
+        const display = $('#priceDisplay');
+        const totalPrice = $('#totalPrice');
+        const totalMonthly = $('#totalMonthly');
+        const totalRegFee = $('#totalRegFee');
+        const selectedCourses = $('#selectedCourses');
+        const completeNote = $('#completeNote');
+        const isComplete = $('#completeProgramCheck').is(':checked');
         
         if (checked.length === 0) {
-            display.classList.add('hidden');
+            display.removeClass('show');
+            if (selectedCourses.length) selectedCourses.val('');
+            completeNote.hide();
             return;
         }
         
-        display.classList.remove('hidden');
+        display.addClass('show');
         
         let monthly = 0;
         let regFee = 0;
+        const courseNames = [];
         
-        checked.forEach(cb => {
-            monthly += parseFloat(cb.dataset.price) || 0;
-            regFee += parseFloat(cb.dataset.regfee) || 0;
+        checked.each(function() {
+            monthly += parseFloat($(this).data('price')) || 0;
+            regFee += parseFloat($(this).data('regfee')) || 0;
+            courseNames.push($(this).val());
         });
         
-        const isComplete = Array.from(checked).some(cb => cb.value.includes('Programa Kompletu'));
-        
         if (isComplete) {
-            totalPrice.textContent = '$0 (Pakote Espesial)';
-            totalMonthly.textContent = '$0';
-            totalRegFee.textContent = '$0';
+            totalPrice.text('$0 (Pakote Espesial)');
+            totalMonthly.text('$0');
+            totalRegFee.text('$0');
+            completeNote.show();
         } else {
-            totalPrice.textContent = `$${monthly + regFee}`;
-            totalMonthly.textContent = `$${monthly}`;
-            totalRegFee.textContent = `$${regFee}`;
+            totalPrice.text('$' + (monthly + regFee));
+            totalMonthly.text('$' + monthly);
+            totalRegFee.text('$' + regFee);
+            completeNote.hide();
+        }
+        
+        if (selectedCourses.length) {
+            selectedCourses.val(courseNames.join('; '));
         }
     }
 
     // ============================================
-    // UPDATE SELECTED COURSES (admin section)
+    // SET DEFAULT DATES
     // ============================================
-    document.querySelectorAll('.course-checkbox').forEach(cb => {
-        cb.addEventListener('change', function() {
-            const checked = document.querySelectorAll('.course-checkbox:checked');
-            const names = Array.from(checked).map(c => c.value);
-            const selectedCourses = document.getElementById('selectedCourses');
-            if (selectedCourses) {
-                selectedCourses.value = names.length > 0 ? names.join('; ') : 'N/A';
+    function setDefaultDates() {
+        const today = new Date();
+        const dateStr = today.toISOString().split('T')[0];
+        
+        $('#declarationDate').val(dateStr);
+        $('#regDate').val(dateStr);
+        
+        // Generate registration number
+        const prefix = 'DTCI';
+        const year = today.getFullYear();
+        const random = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+        $('#regNumber').val(`${prefix}-${year}-${random}`);
+    }
+
+    setDefaultDates();
+
+    // ============================================
+    // REAL-TIME VALIDATION
+    // ============================================
+    // Input validation on blur
+    $('.form-input').on('blur', function() {
+        validateField($(this));
+    });
+
+    // Input validation on keyup (for text fields)
+    $('input[type="text"], input[type="tel"], input[type="email"], textarea').on('keyup', function() {
+        if ($(this).hasClass('error') || $(this).hasClass('success')) {
+            validateField($(this));
+        }
+    });
+
+    function validateField($field) {
+        const $error = $field.siblings('.error-text');
+        
+        if (!$field.val() || !$field.val().trim()) {
+            if ($field.prop('required')) {
+                $field.addClass('error').removeClass('success');
+                $error.removeClass('hidden');
+                return false;
+            }
+            return true;
+        }
+        
+        // Email validation
+        if ($field.attr('type') === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test($field.val().trim())) {
+                $field.addClass('error').removeClass('success');
+                $error.text('Favor preenche email válidu').removeClass('hidden');
+                return false;
+            }
+        }
+        
+        // Phone validation
+        if ($field.attr('type') === 'tel') {
+            const phoneRegex = /^[0-9+\-\s()]{7,15}$/;
+            if (!phoneRegex.test($field.val().trim())) {
+                $field.addClass('error').removeClass('success');
+                $error.text('Favor preenche telemóvel válidu').removeClass('hidden');
+                return false;
+            }
+        }
+        
+        $field.removeClass('error').addClass('success');
+        $error.addClass('hidden');
+        return true;
+    }
+
+    // ============================================
+    // VALIDATE ALL FIELDS
+    // ============================================
+    function validateAllFields() {
+        let isValid = true;
+        
+        // Text inputs
+        $('.form-input[required]').each(function() {
+            if (!validateField($(this))) {
+                isValid = false;
             }
         });
+        
+        // Radio buttons - Gender
+        if ($('input[name="gender"]:checked').length === 0) {
+            $('input[name="gender"]').closest('.grid').find('.error-text').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('input[name="gender"]').closest('.grid').find('.error-text').addClass('hidden');
+        }
+        
+        // Radio buttons - Education
+        if ($('input[name="educationLevel"]:checked').length === 0) {
+            $('input[name="educationLevel"]').closest('.grid').find('.error-text').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('input[name="educationLevel"]').closest('.grid').find('.error-text').addClass('hidden');
+        }
+        
+        // Radio buttons - Mode
+        if ($('input[name="mode"]:checked').length === 0) {
+            $('input[name="mode"]').closest('.grid').find('.error-text').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('input[name="mode"]').closest('.grid').find('.error-text').addClass('hidden');
+        }
+        
+        // Courses
+        if ($('.course-checkbox:checked').length === 0) {
+            $('#courseError').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#courseError').addClass('hidden');
+        }
+        
+        // Declaration
+        if (!$('#declaration').is(':checked')) {
+            $('#declaration').closest('.mb-4').find('.error-text').removeClass('hidden');
+            isValid = false;
+        } else {
+            $('#declaration').closest('.mb-4').find('.error-text').addClass('hidden');
+        }
+        
+        return isValid;
+    }
+
+    // ============================================
+    // FORM SUBMISSION
+    // ============================================
+    $('#registrationForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate all fields
+        if (!validateAllFields()) {
+            showToast(
+                '⚠️ Validasaun Falha',
+                'Favor preenche kampu hotu ne\'ebé presiza ho loos.',
+                'error'
+            );
+            
+            // Scroll to first error
+            const firstError = $('.form-input.error:first, .error-text:visible:first');
+            if (firstError.length) {
+                $('html, body').animate({
+                    scrollTop: firstError.closest('.mb-4, .grid, .form-section').offset().top - 150
+                }, 500);
+            }
+            return;
+        }
+        
+        // Check if Complete Program is selected
+        const isComplete = $('#completeProgramCheck').is(':checked');
+        
+        if (isComplete) {
+            // Show confirmation dialog for Complete Program
+            showDialog(
+                '🏆',
+                'Konfirmasaun Rejistu',
+                'Ita hili Programa Kompletu - Pakote Espesial',
+                `
+                    <div class="text-center mb-3">
+                        <span class="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-bold">PAKOTE ESPESIAL</span>
+                    </div>
+                    <div class="item"><i class="fas fa-check-circle"></i> Level 1-12 (12 módulu)</div>
+                    <div class="item"><i class="fas fa-check-circle"></i> Entrepreneurship & Freelancing</div>
+                    <div class="item"><i class="fas fa-check-circle"></i> Sertifikadu Kompletu</div>
+                    <div class="item"><i class="fas fa-check-circle"></i> Portfolio Profisional</div>
+                    <div class="item"><i class="fas fa-check-circle"></i> Capstone Project</div>
+                    <div class="item"><i class="fas fa-check-circle"></i> Mentoria Kontinua</div>
+                    <div class="mt-3 p-2 bg-amber-50 rounded-lg text-center text-sm">
+                        💰 <strong>Preçu:</strong> Pakote Espesial (Ekonómia)
+                    </div>
+                `,
+                'Konfirma no Haruka',
+                function() {
+                    submitRegistration();
+                }
+            );
+        } else {
+            // Show regular confirmation
+            const courseCount = $('.course-checkbox:checked').length;
+            const total = $('#totalPrice').text();
+            
+            showDialog(
+                '📋',
+                'Konfirmasaun Rejistu',
+                `Ita hili ${courseCount} kursu`,
+                `
+                    <div class="text-center text-sm text-gray-600 mb-2">
+                        Total: <strong class="text-lg">${total}</strong>
+                    </div>
+                    <div class="text-xs text-gray-500 text-center">
+                        Ita nia dadus sei haruka ba WhatsApp atu prosesa rejistu.
+                    </div>
+                `,
+                'Konfirma no Haruka',
+                function() {
+                    submitRegistration();
+                }
+            );
+        }
     });
 
     // ============================================
-    // HANDLE REGISTRATION - WHATSAPP INTEGRATION
+    // SUBMIT REGISTRATION
     // ============================================
-    function handleRegistration(event) {
-        event.preventDefault();
+    function submitRegistration() {
+        // Disable button
+        const $btn = $('#submitBtn');
+        $btn.prop('disabled', true).html('<span class="spinner-small"></span> Prosesu...');
         
-        // ========================================
-        // 1. COLLECT FORM DATA
-        // ========================================
-        
-        const genderEl = document.querySelector('input[name="gender"]:checked');
-        const gender = genderEl ? genderEl.value : '';
-        
-        const eduEl = document.querySelector('input[name="educationLevel"]:checked');
-        const educationLevel = eduEl ? eduEl.value : '';
-        
-        const modeEl = document.querySelector('input[name="mode"]:checked');
-        const mode = modeEl ? modeEl.value : '';
-        
-        const expEl = document.querySelector('input[name="experience"]:checked');
-        const experience = expEl ? expEl.value : '';
-        
-        const statusEl = document.querySelector('input[name="adminStatus"]:checked');
-        const adminStatus = statusEl ? statusEl.value : 'Pendente';
-        
-        const courses = Array.from(document.querySelectorAll('input[name="courses"]:checked')).map(cb => cb.value);
-        const documents = Array.from(document.querySelectorAll('input[name="documents"]:checked')).map(cb => cb.value);
-        
+        // Collect form data
         const formData = {
-            fullName: document.getElementById('fullName')?.value || '',
-            birthDate: document.getElementById('birthDate')?.value || '',
-            gender: gender,
-            municipality: document.getElementById('municipality')?.value || '',
-            address: document.getElementById('address')?.value || '',
-            phone: document.getElementById('phone')?.value || '',
-            email: document.getElementById('email')?.value || '',
-            idNumber: document.getElementById('idNumber')?.value || '',
-            educationLevel: educationLevel,
-            schoolName: document.getElementById('schoolName')?.value || '',
-            graduationYear: document.getElementById('graduationYear')?.value || '',
-            courses: courses,
-            mode: mode,
-            experience: experience,
-            experienceDetail: document.getElementById('experienceDetail')?.value || '',
-            objective: document.getElementById('objective')?.value || '',
-            emergencyName: document.getElementById('emergencyName')?.value || '',
-            emergencyRelation: document.getElementById('emergencyRelation')?.value || '',
-            emergencyPhone: document.getElementById('emergencyPhone')?.value || '',
-            documents: documents,
-            declaration: document.getElementById('declaration')?.checked || false,
-            place: document.getElementById('place')?.value || 'Dili',
-            declarationDate: document.getElementById('declarationDate')?.value || '',
-            signature: document.getElementById('signature')?.value || '',
-            regNumber: document.getElementById('regNumber')?.value || '',
-            regDate: document.getElementById('regDate')?.value || '',
-            selectedCourses: document.getElementById('selectedCourses')?.value || '',
-            adminStatus: adminStatus,
-            adminObservations: document.getElementById('adminObservations')?.value || ''
+            fullName: $('#fullName').val().trim(),
+            birthDate: $('#birthDate').val(),
+            gender: $('input[name="gender"]:checked').val() || '',
+            municipality: $('#municipality').val().trim(),
+            address: $('#address').val().trim(),
+            phone: $('#phone').val().trim(),
+            email: $('#email').val().trim(),
+            idNumber: $('#idNumber').val().trim(),
+            educationLevel: $('input[name="educationLevel"]:checked').val() || '',
+            schoolName: $('#schoolName').val().trim(),
+            graduationYear: $('#graduationYear').val(),
+            courses: $('.course-checkbox:checked').map(function() { return $(this).val(); }).get(),
+            mode: $('input[name="mode"]:checked').val() || '',
+            experience: $('input[name="experience"]:checked').val() || '',
+            experienceDetail: $('#experienceDetail').val().trim(),
+            objective: $('#objective').val().trim(),
+            emergencyName: $('#emergencyName').val().trim(),
+            emergencyRelation: $('#emergencyRelation').val().trim(),
+            emergencyPhone: $('#emergencyPhone').val().trim(),
+            documents: $('input[name="documents"]:checked').map(function() { return $(this).val(); }).get(),
+            place: $('#place').val().trim() || 'Dili',
+            declarationDate: $('#declarationDate').val(),
+            signature: $('#signature').val().trim(),
+            regNumber: $('#regNumber').val(),
+            regDate: $('#regDate').val(),
+            selectedCourses: $('#selectedCourses').val(),
+            adminStatus: $('input[name="adminStatus"]:checked').val() || 'Pendente',
+            adminObservations: $('#adminObservations').val().trim()
         };
         
-        // ========================================
-        // 2. VALIDATE REQUIRED FIELDS
-        // ========================================
-        if (!formData.fullName) {
-            alert('⚠️ Favor preenche Naran Kompletu!');
-            document.getElementById('fullName').focus();
-            return;
-        }
-        if (!formData.phone) {
-            alert('⚠️ Favor preenche Númeru Telemóvel!');
-            document.getElementById('phone').focus();
-            return;
-        }
-        if (!formData.email) {
-            alert('⚠️ Favor preenche Email!');
-            document.getElementById('email').focus();
-            return;
-        }
-        if (!formData.idNumber) {
-            alert('⚠️ Favor preenche Númeru BI / Cartão Eleitoral!');
-            document.getElementById('idNumber').focus();
-            return;
-        }
-        if (formData.courses.length === 0) {
-            alert('⚠️ Favor hili kursu ne\'ebé ita hakarak tuir!');
-            return;
-        }
-        if (!formData.mode) {
-            alert('⚠️ Favor hili modalidade aprendizajen!');
-            return;
-        }
-        if (!formData.objective) {
-            alert('⚠️ Favor preenche objetivu aprendizajen!');
-            document.getElementById('objective').focus();
-            return;
-        }
-        if (!formData.emergencyName) {
-            alert('⚠️ Favor preenche kontaktu emerjénsia naran!');
-            document.getElementById('emergencyName').focus();
-            return;
-        }
-        if (!formData.declaration) {
-            alert('⚠️ Favor asina deklarasaun!');
-            document.getElementById('declaration').focus();
-            return;
-        }
-        
-        // ========================================
-        // 3. BUILD WHATSAPP MESSAGE
-        // ========================================
+        // Build WhatsApp message
         const message = buildWhatsAppMessage(formData);
         
-        // ========================================
-        // 4. SEND TO WHATSAPP
-        // ========================================
-        // MUDA BA NUMERU REAL HUSI DTCI ACADEMY
-        const phoneNumber = '+67074492303';
+        // WhatsApp number - MUDA BA NUMERU REAL
+        const phoneNumber = '67012345678';
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         
-        window.open(whatsappUrl, '_blank');
+        // Show success toast
+        showToast(
+            '✅ Rejistu Susezu!',
+            'Ita nia rejistu hetan ona. Redireksiona ba WhatsApp atu konfirma.',
+            'success',
+            4000
+        );
         
-        // ========================================
-        // 5. SHOW SUCCESS MESSAGE
-        // ========================================
-        alert('✅ REJISTU SUSEZU!\n\n' +
-              'Ita nia rejistu hetan ona.\n' +
-              'Favor verifika WhatsApp atu konfirma.\n\n' +
-              'Obrigadu!');
+        // Open WhatsApp after delay
+        setTimeout(function() {
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset button
+            $btn.prop('disabled', false).html('<i class="fas fa-paper-plane mr-2"></i> SUBMETE REJISTU');
+            
+            // Show additional notification for Complete Program
+            if (formData.courses.some(c => c.includes('Programa Kompletu'))) {
+                setTimeout(function() {
+                    showToast(
+                        '🏆 Programa Kompletu',
+                        'Ita hili pakote espesial! Kontaktu administrasaun ba informasaun preçu.',
+                        'info',
+                        5000
+                    );
+                }, 2000);
+            }
+            
+            // Reset form after 5 seconds
+            setTimeout(function() {
+                $('#registrationForm')[0].reset();
+                $('#priceDisplay').removeClass('show');
+                $('.form-input').removeClass('success error');
+                $('.error-text').addClass('hidden');
+                $('#selectedCourses').val('');
+                $('#completeAlert').slideUp(300);
+                setDefaultDates();
+                $('.course-select-card').removeClass('checked');
+                
+                showToast(
+                    '🔄 Formuláriu Reset',
+                    'Formuláriu reset ona atu rejistu foun.',
+                    'info',
+                    3000
+                );
+            }, 6000);
+            
+        }, 1500);
     }
 
     // ============================================
-    // BUILD WHATSAPP MESSAGE - FORMATED
+    // BUILD WHATSAPP MESSAGE
     // ============================================
     function buildWhatsAppMessage(data) {
         const courseList = data.courses.map((c, i) => `${i+1}. ${c}`).join('\n');
@@ -1299,13 +1752,13 @@
         
         let monthly = 0;
         let regFee = 0;
-        document.querySelectorAll('.course-checkbox:checked').forEach(cb => {
-            monthly += parseFloat(cb.dataset.price) || 0;
-            regFee += parseFloat(cb.dataset.regfee) || 0;
+        $('.course-checkbox:checked').each(function() {
+            monthly += parseFloat($(this).data('price')) || 0;
+            regFee += parseFloat($(this).data('regfee')) || 0;
         });
         
         const isComplete = data.courses.some(c => c.includes('Programa Kompletu'));
-        const totalPrice = isComplete ? '$0 (Pakote Espesial)' : `$${monthly + regFee}`;
+        const totalPrice = isComplete ? '$0 (Pakote Espesial - Ekonómia)' : `$${monthly + regFee}`;
         const monthlyTotal = isComplete ? '$0' : `$${monthly}`;
         const regTotal = isComplete ? '$0' : `$${regFee}`;
         
@@ -1338,6 +1791,7 @@ ${courseList}
 Fulan: ${monthlyTotal}
 Rejistu: ${regTotal}
 Total: ${totalPrice}
+${isComplete ? '🏆 Pakote Espesial (Ekonómia)' : ''}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 *⏰ MODALIDADE*
@@ -1375,6 +1829,26 @@ Data Rejistu: ${data.regDate}
 Status: ${data.adminStatus}
 `.trim();
     }
+
+    // ============================================
+    // COURSE CARD HOVER EFFECT
+    // ============================================
+    $('.course-select-card').on('click', function(e) {
+        // Toggle checked class
+        $(this).toggleClass('checked');
+    });
+
+    // ============================================
+    // KEYBOARD SHORTCUT: ESC to close dialog
+    // ============================================
+    $(document).on('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeDialog();
+        }
+    });
+
+    console.log('✅ All systems ready!');
+});
 </script>
 </body>
 </html>

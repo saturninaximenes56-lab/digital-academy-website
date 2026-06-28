@@ -6,11 +6,25 @@
     <title>DTCI Academy - Digital Technology & Creative Industry Academy</title>
     <meta name="description" content="Formasaun kompletu husi zero to profissional iha área teknolojia digital no indústria kreativa.">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
     <style>
+        /* ============================================================ */
+        /* VARIABLES & BASE */
+        /* ============================================================ */
         :root {
             --primary: #6C3CE1;
             --primary-dark: #5531b5;
@@ -23,6 +37,7 @@
             --white: #FFFFFF;
             --gradient-main: linear-gradient(135deg, #6C3CE1 0%, #00D4AA 100%);
             --shadow-card: 0 20px 60px rgba(108, 60, 225, 0.15);
+            --shadow-hover: 0 30px 80px rgba(108, 60, 225, 0.25);
             --radius: 20px;
             --radius-sm: 12px;
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -31,7 +46,9 @@
         * { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         body { background: var(--white); color: var(--dark); overflow-x: hidden; }
 
-        /* ===== NAVIGATION ===== */
+        /* ============================================================ */
+        /* NAVIGATION - GLASSMORPHISM */
+        /* ============================================================ */
         .navbar-glass {
             background: rgba(10, 10, 15, 0.85);
             backdrop-filter: blur(20px);
@@ -71,6 +88,9 @@
             font-weight: 600;
             transition: var(--transition);
             border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary-gradient:hover {
@@ -78,7 +98,27 @@
             box-shadow: 0 10px 30px rgba(108, 60, 225, 0.4);
         }
 
-        /* ===== HERO ===== */
+        .btn-outline-light {
+            background: transparent;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ============================================================ */
+        /* HERO SECTION */
+        /* ============================================================ */
         .hero-section {
             background: var(--dark);
             position: relative;
@@ -179,33 +219,9 @@
         .hero-stat .number { font-size: 28px; font-weight: 800; color: white; }
         .hero-stat .label { font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-top: 2px; }
 
-        /* ===== SECTION HEADERS ===== */
-        .section-tag {
-            display: inline-block;
-            background: rgba(108, 60, 225, 0.1);
-            color: var(--primary);
-            padding: 4px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            color: var(--dark);
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .section-subtitle {
-            color: var(--gray);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        /* ===== PROGRAM CARDS ===== */
+        /* ============================================================ */
+        /* PROGRAM CARDS */
+        /* ============================================================ */
         .program-card {
             background: white;
             border-radius: var(--radius);
@@ -232,8 +248,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background-size: cover;
-            background-position: center;
         }
 
         .program-card .card-header .overlay {
@@ -242,10 +256,7 @@
             background: linear-gradient(135deg, rgba(10, 10, 15, 0.7), rgba(10, 10, 15, 0.3));
         }
 
-        .program-card .card-header .content {
-            position: relative;
-            z-index: 2;
-        }
+        .program-card .card-header .content { position: relative; z-index: 2; }
 
         .program-card .card-header .level-badge {
             display: inline-block;
@@ -281,17 +292,8 @@
             z-index: 3;
         }
 
-        .program-card .card-body {
-            padding: 16px 20px 12px;
-            flex: 1;
-        }
-
-        .program-card .card-body .topics {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
+        .program-card .card-body { padding: 16px 20px 12px; flex: 1; }
+        .program-card .card-body .topics { display: flex; flex-wrap: wrap; gap: 4px; }
         .program-card .card-body .topics span {
             background: var(--light-gray);
             color: var(--gray);
@@ -345,7 +347,9 @@
             box-shadow: 0 8px 24px rgba(108, 60, 225, 0.3);
         }
 
-        /* ===== POPOVER / MODAL ===== */
+        /* ============================================================ */
+        /* POPOVER / MODAL */
+        /* ============================================================ */
         .popover-overlay {
             position: fixed;
             inset: 0;
@@ -359,9 +363,7 @@
             animation: fadeIn 0.3s ease;
         }
 
-        .popover-overlay.active {
-            display: flex;
-        }
+        .popover-overlay.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
@@ -375,7 +377,6 @@
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 0;
             box-shadow: 0 40px 80px rgba(0,0,0,0.3);
             animation: slideUp 0.3s ease;
         }
@@ -426,9 +427,7 @@
             color: rgba(255,255,255,0.7);
         }
 
-        .popover-content .popover-body {
-            padding: 24px 28px 28px;
-        }
+        .popover-content .popover-body { padding: 24px 28px 28px; }
 
         .popover-content .popover-body .info-grid {
             display: grid;
@@ -495,9 +494,7 @@
             margin: 0;
         }
 
-        .popover-content .popover-body .popover-projects strong {
-            color: var(--dark);
-        }
+        .popover-content .popover-body .popover-projects strong { color: var(--dark); }
 
         .popover-content .popover-footer {
             padding: 16px 28px 24px;
@@ -537,11 +534,11 @@
             cursor: pointer;
         }
 
-        .popover-content .popover-footer .btn-popover-close:hover {
-            background: #e5e7eb;
-        }
+        .popover-content .popover-footer .btn-popover-close:hover { background: #e5e7eb; }
 
-        /* ===== WHATSAPP FLOAT ===== */
+        /* ============================================================ */
+        /* WHATSAPP FLOAT */
+        /* ============================================================ */
         .whatsapp-float {
             position: fixed;
             bottom: 24px;
@@ -573,7 +570,37 @@
 
         .whatsapp-float { animation: pulse-wa 2s infinite; }
 
-        /* ===== RESPONSIVE ===== */
+        /* ============================================================ */
+        /* SECTION HEADERS */
+        /* ============================================================ */
+        .section-tag {
+            display: inline-block;
+            background: rgba(108, 60, 225, 0.1);
+            color: var(--primary);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
         @media (max-width: 768px) {
             .hero-section { min-height: auto; padding: 100px 0 60px; }
             .hero-title { font-size: 2.2rem; }
@@ -608,17 +635,15 @@
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg shadow-lg">D</div>
                 <div><span class="text-white font-bold text-lg tracking-tight">DTCI</span><span class="text-gray-400 font-medium text-sm hidden md:inline">Academy</span></div>
             </a>
-            <!-- Desktop Menu -->
-<div class="hidden lg:flex items-center gap-8">
-    <a href="index.html" class="nav-link">Início</a>
-    <a href="modules.html" class="nav-link">Módulu</a>
-    <a href="curriculum.html" class="nav-link">Kurikulum</a>
-    <a href="projects.html" class="nav-link">Projetu</a>
-    <a href="about.html" class="nav-link">Kona-ba</a>
-    <a href="contact.html" class="nav-link">Kontaktu</a>
-    <a href="payment.html" class="nav-link">Pagamentu</a>
-</div>
-
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="nav-link active">Início</a>
+                <a href="modules.html" class="nav-link">Módulu</a>
+                <a href="curriculum.html" class="nav-link">Kurikulum</a>
+                <a href="projects.html" class="nav-link">Projetu</a>
+                <a href="about.html" class="nav-link">Kona-ba</a>
+                <a href="contact.html" class="nav-link">Kontaktu</a>
+                <a href="payment.html" class="nav-link">Pagamentu</a>
+            </div>
             <div class="flex items-center gap-3">
                 <a href="register.html" class="btn-primary-gradient text-sm px-5 py-2 hidden sm:inline-block">
                     <i class="fas fa-user-plus mr-2"></i>Rejistu
@@ -629,7 +654,20 @@
             </div>
         </div>
     </div>
-    
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#14141C] border-t border-white/5">
+        <div class="px-4 py-4 space-y-1">
+            <a href="index.html" class="block px-4 py-3 text-white bg-white/5 rounded-lg font-medium">Início</a>
+            <a href="modules.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Módulu</a>
+            <a href="curriculum.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kurikulum</a>
+            <a href="projects.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Projetu</a>
+            <a href="about.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kona-ba</a>
+            <a href="contact.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Kontaktu</a>
+            <a href="payment.html" class="block px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition">Pagamentu</a>
+            <a href="register.html" class="block px-4 py-3 mt-2 bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] text-white text-center font-bold rounded-xl">
+                <i class="fas fa-user-plus mr-2"></i>Rejistu Agora
+            </a>
+        </div>
+    </div>
 </nav>
 
 <!-- ============================================================ -->
@@ -661,580 +699,23 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- PROGRAMS SECTION - HO POPOVER -->
+<!-- PROGRAMS SECTION -->
 <!-- ============================================================ -->
 <section class="py-16 bg-gray-50" id="programs-section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <span class="section-tag">Programa</span>
             <h2 class="section-title mt-2">Kursu ne'ebé Ita Hakarak</h2>
-            <p class="section-subtitle max-w-2xl mx-auto mt-2">Klik iha naran programa atu haree informasaun detalladu</p>
+            <p class="section-subtitle max-w-2xl mx-auto mt-2">Klik iha "Detallu" atu haree informasaun kompletu</p>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="programs-grid">
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 1: Level 1 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 1,
-                "level": "Level 1",
-                "title": "Computer & Digital Fundamental",
-                "color": "#1E3A8A",
-                "price": "$5/fulan + $2 rejistu",
-                "description": "Fundamentu komputador no alfabetizasaun digital ba ema hotu. Aprende uza komputador, internet, no ferramenta digital báziku.",
-                "topics": ["Computer Basic", "OS", "Internet & Email", "Microsoft Office", "Google Workspace", "Cyber Security"],
-                "projects": ["CV Professional", "Presentation Design", "Digital Documentation"],
-                "duration": "1-2 months",
-                "level_desc": "Inisiante"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #1E3A8A, #3B82F6);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 1</span>
-                        <h3 class="program-title">Computer & Digital Fundamental</h3>
-                    </div>
-                    <span class="price-tag">$5/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>Computer Basic</span>
-                        <span>Microsoft Office</span>
-                        <span>Cyber Security</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
+        <div id="programs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Programs will be loaded by jQuery AJAX -->
+            <div class="col-span-full text-center py-12">
+                <div class="loading-spinner mx-auto"></div>
+                <p class="mt-4 text-gray-600">Karregando programa sira...</p>
             </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 2: Level 2 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 2,
-                "level": "Level 2",
-                "title": "Graphic Design Fundamental",
-                "color": "#6D28D9",
-                "price": "$6/fulan + $2 rejistu",
-                "description": "Prinsipiu básiku design gráfiku ho Canva Professional. Aprende kria materiál marketing, social media design, no brand identity.",
-                "topics": ["Design Principle", "Color Theory", "Typography", "Social Media Design", "Flyer & Poster", "Brand Identity"],
-                "projects": ["Company Profile", "Marketing Kit", "Social Campaign"],
-                "duration": "2-3 months",
-                "level_desc": "Inisiante"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #6D28D9, #A855F7);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 2</span>
-                        <h3 class="program-title">Graphic Design Fundamental</h3>
-                    </div>
-                    <span class="price-tag">$6/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>Design Principle</span>
-                        <span>Color Theory</span>
-                        <span>Typography</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 3: Level 3 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 3,
-                "level": "Level 3",
-                "title": "Advanced Graphic Design",
-                "color": "#BE185D",
-                "price": "$6/fulan + $2 rejistu",
-                "description": "Aprende Adobe Photoshop, Illustrator no Video Editing. Kria logo, branding, no materiál promosionál profesional.",
-                "topics": ["Adobe Photoshop", "Adobe Illustrator", "Banner & Poster", "Logo & Branding", "Video Editing", "Motion Graphic"],
-                "projects": ["Logo Brand", "Branding Guideline", "Promotional Video"],
-                "duration": "2-3 months",
-                "level_desc": "Intermediáriu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #BE185D, #EC4899);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 3</span>
-                        <h3 class="program-title">Advanced Graphic Design</h3>
-                    </div>
-                    <span class="price-tag">$6/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>Photoshop</span>
-                        <span>Illustrator</span>
-                        <span>Video Editing</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 4: Level 4 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 4,
-                "level": "Level 4",
-                "title": "UI/UX Design",
-                "color": "#4338CA",
-                "price": "$5/fulan + $2 rejistu",
-                "description": "Desenha interfase no esperiénsia uzuáriu ho Figma. Aprende UX research, wireframe, protótipu, no usability testing.",
-                "topics": ["UI Design", "Design System", "UX Research", "Wireframe", "Prototype", "Usability Testing"],
-                "projects": ["E-Commerce UI", "Mobile App UI", "Dashboard Design"],
-                "duration": "1-2 months",
-                "level_desc": "Intermediáriu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #4338CA, #818CF8);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 4</span>
-                        <h3 class="program-title">UI/UX Design</h3>
-                    </div>
-                    <span class="price-tag">$5/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>UI Design</span>
-                        <span>Wireframe</span>
-                        <span>Prototype</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 5: Level 5 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 5,
-                "level": "Level 5",
-                "title": "Web Fundamental",
-                "color": "#065F46",
-                "price": "$5/fulan + $3 rejistu",
-                "description": "Fundamentu web development ho HTML5, CSS3, Tailwind CSS no JavaScript. Kria website responsivu no interativu.",
-                "topics": ["HTML5", "CSS3", "Bootstrap", "Tailwind CSS", "JavaScript Basic", "Git & GitHub"],
-                "projects": ["Portfolio Website", "Company Profile", "Landing Page"],
-                "duration": "2-3 months",
-                "level_desc": "Inisiante"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #065F46, #10B981);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 5</span>
-                        <h3 class="program-title">Web Fundamental</h3>
-                    </div>
-                    <span class="price-tag">$5/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>HTML5</span>
-                        <span>CSS3</span>
-                        <span>JavaScript</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 6: Level 6 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 6,
-                "level": "Level 6",
-                "title": "Frontend Development",
-                "color": "#0E7490",
-                "price": "$6/fulan + $3 rejistu",
-                "description": "Desenvolve aplikasaun web modernu ho ReactJS no Next.js. Aprende state management, routing, no integrasaun ho API.",
-                "topics": ["JavaScript Advanced", "ES6+", "ReactJS", "Next.js", "State Management", "Fetch API & JSON"],
-                "projects": ["Dashboard", "Blog Platform", "Product Catalog"],
-                "duration": "2-3 months",
-                "level_desc": "Intermediáriu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #0E7490, #22D3EE);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 6</span>
-                        <h3 class="program-title">Frontend Development</h3>
-                    </div>
-                    <span class="price-tag">$6/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>React</span>
-                        <span>Next.js</span>
-                        <span>API Integration</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 7: Level 7 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 7,
-                "level": "Level 7",
-                "title": "Database & Backend",
-                "color": "#C2410C",
-                "price": "$7/fulan + $3 rejistu",
-                "description": "Aprende backend development ho PHP, Laravel no database MySQL/PostgreSQL. Kria sistema CRUD, autentikasaun, no API.",
-                "topics": ["Database Design", "MySQL", "PostgreSQL", "PHP Fundamental", "OOP PHP", "Laravel"],
-                "projects": ["Inventory System", "Employee System", "School System"],
-                "duration": "2-3 months",
-                "level_desc": "Intermediáriu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #C2410C, #FB923C);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 7</span>
-                        <h3 class="program-title">Database & Backend</h3>
-                    </div>
-                    <span class="price-tag">$7/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>MySQL</span>
-                        <span>PHP</span>
-                        <span>Laravel</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 8: Level 8 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 8,
-                "level": "Level 8",
-                "title": "API & Fullstack",
-                "color": "#B91C1C",
-                "price": "$10/fulan + $5 rejistu",
-                "description": "Integra frontend no backend ho REST API. Aprende JWT authentication, Laravel Sanctum, no deploy aplikasaun.",
-                "topics": ["REST API", "JSON Handling", "JWT Authentication", "Laravel Sanctum", "React + Laravel", "Next.js + Laravel"],
-                "projects": ["E-Commerce Platform", "Online Booking System"],
-                "duration": "1-2 months",
-                "level_desc": "Avansadu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #B91C1C, #EF4444);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 8</span>
-                        <h3 class="program-title">API & Fullstack</h3>
-                    </div>
-                    <span class="price-tag">$10/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>REST API</span>
-                        <span>JWT</span>
-                        <span>Fullstack</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 9: Level 9 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 9,
-                "level": "Level 9",
-                "title": "Mobile Development",
-                "color": "#0D9488",
-                "price": "$10/fulan + $5 rejistu",
-                "description": "Desenvolve aplikasaun mobile cross-platform ho Flutter. Aprende Dart, widget system, state management, no API integration.",
-                "topics": ["Dart Programming", "Widget System", "State Management", "API Integration", "Local Storage", "Push Notification"],
-                "projects": ["E-Commerce App", "Delivery App", "Attendance App"],
-                "duration": "2-3 months",
-                "level_desc": "Avansadu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #0D9488, #2DD4BF);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 9</span>
-                        <h3 class="program-title">Mobile Development</h3>
-                    </div>
-                    <span class="price-tag">$10/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>Flutter</span>
-                        <span>Dart</span>
-                        <span>API Integration</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 10: Level 10 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 10,
-                "level": "Level 10",
-                "title": "Modern Backend",
-                "color": "#4B5563",
-                "price": "$8/fulan + $5 rejistu",
-                "description": "Aprende backend modernu ho Node.js, Express, TypeScript no Golang. Kria API real-time no microservice.",
-                "topics": ["Node.js", "Express.js", "TypeScript", "Golang Basic", "API Development", "Real-Time System"],
-                "projects": ["Microservice API", "Real-Time Application"],
-                "duration": "2-3 months",
-                "level_desc": "Avansadu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #4B5563, #9CA3AF);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 10</span>
-                        <h3 class="program-title">Modern Backend</h3>
-                    </div>
-                    <span class="price-tag">$8/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>Node.js</span>
-                        <span>TypeScript</span>
-                        <span>Golang</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 11: Level 11 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 11,
-                "level": "Level 11",
-                "title": "DevOps & Cloud",
-                "color": "#4F46E5",
-                "price": "$10/fulan + $5 rejistu",
-                "description": "Aprende deployment no manutensaun aplikasaun iha nuvem. Linux, Docker, VPS, CI/CD, no SSL.",
-                "topics": ["Linux Basic", "VPS Management", "Nginx", "Docker Basic", "CI/CD Basic", "Domain & SSL"],
-                "projects": ["Deploy Fullstack App", "Production Server Setup"],
-                "duration": "1-2 months",
-                "level_desc": "Avansadu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #4F46E5, #818CF8);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 11</span>
-                        <h3 class="program-title">DevOps & Cloud</h3>
-                    </div>
-                    <span class="price-tag">$10/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>Docker</span>
-                        <span>VPS</span>
-                        <span>CI/CD</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- PROGRAM 12: Level 12 -->
-            <!-- ========================================================== -->
-            <div class="program-card" data-program='{
-                "id": 12,
-                "level": "Level 12",
-                "title": "AI & Emerging Tech",
-                "color": "#7C3AED",
-                "price": "$10/fulan + $5 rejistu",
-                "description": "Esplora inteligência artificial no teknolojia emergente. ChatGPT, Midjourney, prompt engineering, no AI automation.",
-                "topics": ["ChatGPT & Copilot", "Canva AI", "Midjourney", "AI Video", "Prompt Engineering", "AI Automation"],
-                "projects": ["AI Powered App", "AI Marketing Campaign"],
-                "duration": "1 month",
-                "level_desc": "Avansadu"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #7C3AED, #A855F7);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge">Level 12</span>
-                        <h3 class="program-title">AI & Emerging Tech</h3>
-                    </div>
-                    <span class="price-tag">$10/fulan</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>ChatGPT</span>
-                        <span>Midjourney</span>
-                        <span>AI Automation</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- BONUS: Entrepreneurship -->
-            <!-- ========================================================== -->
-            <div class="program-card border-2 border-amber-400" data-program='{
-                "id": 13,
-                "level": "Bonus",
-                "title": "Entrepreneurship & Freelancing",
-                "color": "#D97706",
-                "price": "FREE",
-                "description": "Preparasaun ba karreira no negósiu. Aprende startup, digital marketing, client management, no freelancing iha plataforma global.",
-                "topics": ["Startup Fundamental", "Business Model Canvas", "Digital Marketing", "Client Management", "Upwork & Fiverr", "Personal Branding"],
-                "projects": ["Startup Pitch Deck", "Business Plan"],
-                "duration": "1-2 months",
-                "level_desc": "Bonus"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #D97706, #F59E0B);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge" style="background: #FBBF24; color: #78350F;">🎯 Bonus</span>
-                        <h3 class="program-title">Entrepreneurship & Freelancing</h3>
-                    </div>
-                    <span class="price-tag" style="background: #10B981; color: white;">FREE</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span>Startup</span>
-                        <span>Digital Marketing</span>
-                        <span>Freelancing</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm" style="background: #F59E0B;">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- ========================================================== -->
-            <!-- COMPLETE PROGRAM -->
-            <!-- ========================================================== -->
-            <div class="program-card col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 border-2 border-[#6C3CE1]" data-program='{
-                "id": 14,
-                "level": "Complete",
-                "title": "Programa Kompletu",
-                "color": "#6C3CE1",
-                "price": "Pakote Espesial",
-                "description": "Pakote kompletu ne\'ebé inklui módulu hotu-hotu Level 1-12 ho Entrepreneurship & Freelancing. Hetan sertifikadu kompletu no portfolio profisional.",
-                "topics": ["Level 1-12 Hotu", "Entrepreneurship", "Freelancing", "Sertifikadu Kompletu", "Portfolio Profisional", "Capstone Project"],
-                "projects": ["Capstone Project - Sistema Kompletu"],
-                "duration": "12-18 months",
-                "level_desc": "Complete"
-            }'>
-                <div class="card-header" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA);">
-                    <div class="overlay"></div>
-                    <div class="content">
-                        <span class="level-badge" style="background: #FBBF24; color: #78350F;">🏆 Mellor Opsaun</span>
-                        <h3 class="program-title">Programa Kompletu</h3>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 13px;">Level 1 - 12 + Entrepreneurship</p>
-                    </div>
-                    <span class="price-tag" style="background: white; color: #6C3CE1;">Pakote</span>
-                </div>
-                <div class="card-body">
-                    <div class="topics">
-                        <span style="background: #10B981; color: white;">✅ All Levels</span>
-                        <span style="background: #10B981; color: white;">✅ Bonus</span>
-                        <span style="background: #10B981; color: white;">✅ Capstone</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-detail" onclick="openPopover(this)">
-                        <i class="fas fa-info-circle mr-1"></i> Detallu
-                    </button>
-                    <a href="register.html" class="btn-register-sm" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA);">
-                        Rejistu <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-        </div><!-- end grid -->
+        </div>
     </div>
 </section>
 
@@ -1243,14 +724,11 @@
 <!-- ============================================================ -->
 <div class="popover-overlay" id="popoverOverlay" onclick="closePopoverOutside(event)">
     <div class="popover-content" id="popoverContent">
-        <!-- Header dinamic -->
         <div class="popover-header" id="popoverHeader" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA);">
             <button class="popover-close" onclick="closePopover()"><i class="fas fa-times"></i></button>
             <span class="popover-subtitle" id="popoverLevel">Level 1</span>
             <h2 class="popover-title" id="popoverTitle">Programa Naran</h2>
         </div>
-        
-        <!-- Body -->
         <div class="popover-body">
             <div class="info-grid">
                 <div class="info-item">
@@ -1270,27 +748,62 @@
                     <div class="value" id="popoverProjectCount">3 projetu</div>
                 </div>
             </div>
-            
             <p class="popover-description" id="popoverDescription">Deskrisaun programa.</p>
-            
-            <div class="popover-topics" id="popoverTopics">
-                <!-- Topics rendered by JS -->
-            </div>
-            
+            <div class="popover-topics" id="popoverTopics"></div>
             <div class="popover-projects">
                 <p><strong><i class="fas fa-project-diagram mr-2" style="color: #6C3CE1;"></i> Projetu sira:</strong> <span id="popoverProjects">-</span></p>
             </div>
         </div>
-        
-        <!-- Footer -->
         <div class="popover-footer">
-            <a href="register.html" class="btn-popover-register">
-                <i class="fas fa-user-plus mr-2"></i> Rejistu Agora
-            </a>
+            <a href="register.html" class="btn-popover-register"><i class="fas fa-user-plus mr-2"></i> Rejistu Agora</a>
             <button class="btn-popover-close" onclick="closePopover()">Taka</button>
         </div>
     </div>
 </div>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-[#0A0A0F] text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-extrabold text-lg">D</div>
+                    <span class="text-white font-bold text-lg">DTCI Academy</span>
+                </div>
+                <p class="text-gray-500 text-sm">Digital Technology & Creative Industry Academy</p>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Ligaun</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="index.html" class="hover:text-white transition">Início</a></li>
+                    <li><a href="modules.html" class="hover:text-white transition">Módulu</a></li>
+                    <li><a href="curriculum.html" class="hover:text-white transition">Kurikulum</a></li>
+                    <li><a href="payment.html" class="hover:text-white transition">Pagamentu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Suporte</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><a href="contact.html" class="hover:text-white transition">Kontaktu</a></li>
+                    <li><a href="register.html" class="hover:text-white transition">Rejistu</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-3">Kontaktu</h5>
+                <ul class="space-y-2 text-sm text-gray-500">
+                    <li><i class="fas fa-envelope w-5 text-[#6C3CE1]"></i> info@dtciacademy.com</li>
+                    <li><i class="fas fa-phone w-5 text-[#6C3CE1]"></i> +670 1234 5678</li>
+                    <li><i class="fas fa-map-marker-alt w-5 text-[#6C3CE1]"></i> Dili, Timor-Leste</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-8 pt-6 text-center text-gray-600 text-sm">
+            &copy; 2026 DTCI Academy. Hotu-hotu direitu reservadu.
+        </div>
+    </div>
+</footer>
 
 <!-- ============================================================ -->
 <!-- WHATSAPP FLOAT -->
@@ -1300,107 +813,309 @@
 </a>
 
 <!-- ============================================================ -->
-<!-- JAVASCRIPT -->
+<!-- JAVASCRIPT - jQuery + AJAX -->
 <!-- ============================================================ -->
 <script>
     // ============================================
-    // MOBILE MENU
+    // MOBILE MENU - jQuery
     // ============================================
-    const toggleBtn = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    toggleBtn?.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-        const icon = this.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
-    });
-
-    mobileMenu?.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            const icon = toggleBtn?.querySelector('i');
-            if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+    $(document).ready(function() {
+        // Mobile Menu Toggle
+        $('#menu-toggle').on('click', function() {
+            $('#mobile-menu').toggleClass('hidden');
+            $(this).find('i').toggleClass('fa-bars fa-times');
         });
-    });
 
-    // ============================================
-    // POPOVER FUNCTIONS
-    // ============================================
-    function openPopover(button) {
-        const card = button.closest('.program-card');
-        const programData = JSON.parse(card.dataset.program);
-        
-        // Populate popover
-        const header = document.getElementById('popoverHeader');
-        header.style.background = `linear-gradient(135deg, ${programData.color}, ${adjustColor(programData.color, 30)})`;
-        
-        document.getElementById('popoverLevel').textContent = programData.level;
-        document.getElementById('popoverTitle').textContent = programData.title;
-        document.getElementById('popoverDuration').textContent = programData.duration;
-        document.getElementById('popoverPrice').textContent = programData.price;
-        document.getElementById('popoverLevelDesc').textContent = programData.level_desc;
-        document.getElementById('popoverProjectCount').textContent = programData.projects.length + ' projetu';
-        document.getElementById('popoverDescription').textContent = programData.description;
-        
-        // Topics
-        const topicsContainer = document.getElementById('popoverTopics');
-        topicsContainer.innerHTML = programData.topics.map(t => `<span>${t}</span>`).join('');
-        
-        // Projects
-        document.getElementById('popoverProjects').textContent = programData.projects.join(', ');
-        
-        // Show popover
-        document.getElementById('popoverOverlay').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+        // Close mobile menu on link click
+        $('#mobile-menu a').on('click', function() {
+            $('#mobile-menu').addClass('hidden');
+            $('#menu-toggle').find('i').removeClass('fa-times').addClass('fa-bars');
+        });
 
-    function closePopover() {
-        document.getElementById('popoverOverlay').classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    function closePopoverOutside(event) {
-        if (event.target === event.currentTarget) {
-            closePopover();
+        // ============================================
+        // LOAD PROGRAMS - AJAX
+        // ============================================
+        function loadPrograms() {
+            $.ajax({
+                url: 'data/modules.json',
+                method: 'GET',
+                dataType: 'json',
+                timeout: 5000,
+                success: function(data) {
+                    if (data && data.modules) {
+                        renderPrograms(data.modules);
+                    } else {
+                        // Fallback - use hardcoded data
+                        renderProgramsFallback();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.warn('⚠️ AJAX error, using fallback data:', error);
+                    renderProgramsFallback();
+                }
+            });
         }
-    }
 
-    // ============================================
-    // HELPER: Adjust Color
-    // ============================================
-    function adjustColor(hex, percent) {
-        const num = parseInt(hex.replace('#', ''), 16);
-        const amt = Math.round(2.55 * percent);
-        const R = Math.min(255, Math.max(0, (num >> 16) + amt));
-        const G = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amt));
-        const B = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
-        return `#${(1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1)}`;
-    }
+        function renderPrograms(modules) {
+            const grid = $('#programs-grid');
+            grid.empty();
 
-    // ============================================
-    // CLOSE POPOVER WITH ESC KEY
-    // ============================================
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closePopover();
+            // Color mapping for levels
+            const colors = {
+                1: '#1E3A8A',
+                2: '#6D28D9',
+                3: '#BE185D',
+                4: '#4338CA',
+                5: '#065F46',
+                6: '#0E7490',
+                7: '#C2410C',
+                8: '#B91C1C',
+                9: '#0D9488',
+                10: '#4B5563',
+                11: '#4F46E5',
+                12: '#7C3AED'
+            };
+
+            modules.forEach(function(module, index) {
+                const color = colors[module.id] || '#6C3CE1';
+                const price = module.price || '$5/fulan';
+                const level = module.level || 'Level ' + module.id;
+                const topics = module.topics.slice(0, 3).map(t => `<span>${t}</span>`).join('');
+
+                const card = `
+                    <div class="program-card" data-program='${JSON.stringify({
+                        id: module.id,
+                        level: level,
+                        title: module.title,
+                        color: color,
+                        price: price,
+                        description: module.description || 'Aprende teknolojia digital modernu.',
+                        topics: module.topics || [],
+                        projects: module.projects || [],
+                        duration: module.duration || '2-3 months',
+                        level_desc: module.level_desc || 'Inisiante'
+                    })}'>
+                        <div class="card-header" style="background: linear-gradient(135deg, ${color}, ${adjustColor(color, 30)});">
+                            <div class="overlay"></div>
+                            <div class="content">
+                                <span class="level-badge">${level}</span>
+                                <h3 class="program-title">${module.title}</h3>
+                            </div>
+                            <span class="price-tag">${price}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="topics">${topics}</div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-detail" onclick="openPopover(this)"><i class="fas fa-info-circle mr-1"></i> Detallu</button>
+                            <a href="register.html" class="btn-register-sm">Rejistu <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                `;
+                grid.append(card);
+            });
+
+            // Add Bonus Program
+            addBonusProgram(grid);
+            // Add Complete Program
+            addCompleteProgram(grid);
         }
-    });
 
-    // ============================================
-    // SMOOTH SCROLL
-    // ============================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
+        function renderProgramsFallback() {
+            const grid = $('#programs-grid');
+            grid.empty();
+
+            const fallbackModules = [
+                { id: 1, title: 'Computer & Digital Fundamental', level: 'Level 1', price: '$5/fulan', topics: ['Computer Basic', 'Microsoft Office', 'Cyber Security'], description: 'Fundamentu komputador no alfabetizasaun digital.', projects: ['CV', 'Presentation', 'Digital Documentation'], duration: '1-2 months', level_desc: 'Inisiante' },
+                { id: 2, title: 'Graphic Design Fundamental', level: 'Level 2', price: '$6/fulan', topics: ['Design Principle', 'Color Theory', 'Typography'], description: 'Prinsipiu básiku design gráfiku.', projects: ['Company Profile', 'Marketing Kit', 'Social Campaign'], duration: '2-3 months', level_desc: 'Inisiante' },
+                { id: 3, title: 'Advanced Graphic Design', level: 'Level 3', price: '$6/fulan', topics: ['Photoshop', 'Illustrator', 'Video Editing'], description: 'Adobe Photoshop, Illustrator no Video Editing.', projects: ['Logo Brand', 'Branding Guideline', 'Promotional Video'], duration: '2-3 months', level_desc: 'Intermediáriu' },
+                { id: 4, title: 'UI/UX Design', level: 'Level 4', price: '$5/fulan', topics: ['UI Design', 'Wireframe', 'Prototype'], description: 'Figma, Wireframe & Prototype.', projects: ['E-Commerce UI', 'Mobile App UI', 'Dashboard Design'], duration: '1-2 months', level_desc: 'Intermediáriu' },
+                { id: 5, title: 'Web Fundamental', level: 'Level 5', price: '$5/fulan', topics: ['HTML5', 'CSS3', 'JavaScript'], description: 'HTML5, CSS3, Tailwind CSS & JavaScript.', projects: ['Portfolio Website', 'Company Profile', 'Landing Page'], duration: '2-3 months', level_desc: 'Inisiante' },
+                { id: 6, title: 'Frontend Development', level: 'Level 6', price: '$6/fulan', topics: ['React', 'Next.js', 'API Integration'], description: 'ReactJS & Next.js.', projects: ['Dashboard', 'Blog Platform', 'Product Catalog'], duration: '2-3 months', level_desc: 'Intermediáriu' },
+                { id: 7, title: 'Database & Backend', level: 'Level 7', price: '$7/fulan', topics: ['MySQL', 'PHP', 'Laravel'], description: 'MySQL, PostgreSQL, PHP & Laravel.', projects: ['Inventory System', 'Employee System', 'School System'], duration: '2-3 months', level_desc: 'Intermediáriu' },
+                { id: 8, title: 'API & Fullstack', level: 'Level 8', price: '$10/fulan', topics: ['REST API', 'JWT', 'Fullstack'], description: 'REST API, JWT Authentication.', projects: ['E-Commerce Platform', 'Online Booking System'], duration: '1-2 months', level_desc: 'Avansadu' },
+                { id: 9, title: 'Mobile Development', level: 'Level 9', price: '$10/fulan', topics: ['Flutter', 'Dart', 'API Integration'], description: 'Flutter - Android & iOS.', projects: ['E-Commerce App', 'Delivery App', 'Attendance App'], duration: '2-3 months', level_desc: 'Avansadu' },
+                { id: 10, title: 'Modern Backend', level: 'Level 10', price: '$8/fulan', topics: ['Node.js', 'TypeScript', 'Golang'], description: 'Node.js, Express, TypeScript & Golang.', projects: ['Microservice API', 'Real-Time Application'], duration: '2-3 months', level_desc: 'Avansadu' },
+                { id: 11, title: 'DevOps & Cloud', level: 'Level 11', price: '$10/fulan', topics: ['Docker', 'VPS', 'CI/CD'], description: 'Linux, Docker, VPS & CI/CD.', projects: ['Deploy Fullstack App', 'Production Server Setup'], duration: '1-2 months', level_desc: 'Avansadu' },
+                { id: 12, title: 'AI & Emerging Tech', level: 'Level 12', price: '$10/fulan', topics: ['ChatGPT', 'Midjourney', 'AI Automation'], description: 'ChatGPT, Midjourney, Prompt Engineering.', projects: ['AI Powered App', 'AI Marketing Campaign'], duration: '1 month', level_desc: 'Avansadu' }
+            ];
+
+            fallbackModules.forEach(function(module) {
+                const color = ['#1E3A8A', '#6D28D9', '#BE185D', '#4338CA', '#065F46', '#0E7490', '#C2410C', '#B91C1C', '#0D9488', '#4B5563', '#4F46E5', '#7C3AED'][module.id - 1] || '#6C3CE1';
+                const topics = module.topics.slice(0, 3).map(t => `<span>${t}</span>`).join('');
+
+                const card = `
+                    <div class="program-card" data-program='${JSON.stringify({
+                        id: module.id,
+                        level: module.level,
+                        title: module.title,
+                        color: color,
+                        price: module.price,
+                        description: module.description,
+                        topics: module.topics,
+                        projects: module.projects,
+                        duration: module.duration,
+                        level_desc: module.level_desc
+                    })}'>
+                        <div class="card-header" style="background: linear-gradient(135deg, ${color}, ${adjustColor(color, 30)});">
+                            <div class="overlay"></div>
+                            <div class="content">
+                                <span class="level-badge">${module.level}</span>
+                                <h3 class="program-title">${module.title}</h3>
+                            </div>
+                            <span class="price-tag">${module.price}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="topics">${topics}</div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-detail" onclick="openPopover(this)"><i class="fas fa-info-circle mr-1"></i> Detallu</button>
+                            <a href="register.html" class="btn-register-sm">Rejistu <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                `;
+                grid.append(card);
+            });
+
+            addBonusProgram(grid);
+            addCompleteProgram(grid);
+        }
+
+        function addBonusProgram(grid) {
+            const bonus = `
+                <div class="program-card border-2 border-amber-400" data-program='{"id":13,"level":"Bonus","title":"Entrepreneurship & Freelancing","color":"#D97706","price":"FREE","description":"Preparasaun ba karreira no negósiu. Aprende startup, digital marketing, client management, no freelancing iha plataforma global.","topics":["Startup Fundamental","Business Model Canvas","Digital Marketing","Client Management","Upwork & Fiverr","Personal Branding"],"projects":["Startup Pitch Deck","Business Plan"],"duration":"1-2 months","level_desc":"Bonus"}'>
+                    <div class="card-header" style="background: linear-gradient(135deg, #D97706, #F59E0B);">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <span class="level-badge" style="background: #FBBF24; color: #78350F;">🎯 Bonus</span>
+                            <h3 class="program-title">Entrepreneurship & Freelancing</h3>
+                        </div>
+                        <span class="price-tag" style="background: #10B981; color: white;">FREE</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="topics"><span>Startup</span><span>Digital Marketing</span><span>Freelancing</span></div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-detail" onclick="openPopover(this)"><i class="fas fa-info-circle mr-1"></i> Detallu</button>
+                        <a href="register.html" class="btn-register-sm" style="background: #F59E0B;">Rejistu <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            `;
+            grid.append(bonus);
+        }
+
+        function addCompleteProgram(grid) {
+            const complete = `
+                <div class="program-card col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 border-2 border-[#6C3CE1]" data-program='{"id":14,"level":"Complete","title":"Programa Kompletu","color":"#6C3CE1","price":"Pakote Espesial","description":"Pakote kompletu ne\'e inklui módulu hotu-hotu Level 1-12 ho Entrepreneurship & Freelancing. Hetan sertifikadu kompletu no portfolio profisional.","topics":["Level 1-12 Hotu","Entrepreneurship","Freelancing","Sertifikadu Kompletu","Portfolio Profisional","Capstone Project"],"projects":["Capstone Project - Sistema Kompletu"],"duration":"12-18 months","level_desc":"Complete"}'>
+                    <div class="card-header" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA);">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <span class="level-badge" style="background: #FBBF24; color: #78350F;">🏆 Mellor Opsaun</span>
+                            <h3 class="program-title">Programa Kompletu</h3>
+                            <p style="color: rgba(255,255,255,0.7); font-size: 13px;">Level 1 - 12 + Entrepreneurship</p>
+                        </div>
+                        <span class="price-tag" style="background: white; color: #6C3CE1;">Pakote</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="topics">
+                            <span style="background: #10B981; color: white;">✅ All Levels</span>
+                            <span style="background: #10B981; color: white;">✅ Bonus</span>
+                            <span style="background: #10B981; color: white;">✅ Capstone</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-detail" onclick="openPopover(this)"><i class="fas fa-info-circle mr-1"></i> Detallu</button>
+                        <a href="register.html" class="btn-register-sm" style="background: linear-gradient(135deg, #6C3CE1, #00D4AA);">Rejistu <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            `;
+            grid.append(complete);
+        }
+
+        // ============================================
+        // HELPER: Adjust Color
+        // ============================================
+        function adjustColor(hex, percent) {
+            const num = parseInt(hex.replace('#', ''), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = Math.min(255, Math.max(0, (num >> 16) + amt));
+            const G = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amt));
+            const B = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
+            return `#${(1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1)}`;
+        }
+
+        // ============================================
+        // LOAD PROGRAMS
+        // ============================================
+        loadPrograms();
+
+        // ============================================
+        // SMOOTH SCROLL - jQuery
+        // ============================================
+        $('a[href^="#"]').on('click', function(e) {
+            const target = $(this.attr('href'));
+            if (target.length) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 80
+                }, 600);
             }
         });
+
+        // ============================================
+        // POPOVER FUNCTIONS (Global)
+        // ============================================
+        window.openPopover = function(button) {
+            const card = $(button).closest('.program-card');
+            const programData = card.data('program');
+            
+            const header = $('#popoverHeader');
+            header.css('background', `linear-gradient(135deg, ${programData.color}, ${adjustColor(programData.color, 30)})`);
+            
+            $('#popoverLevel').text(programData.level);
+            $('#popoverTitle').text(programData.title);
+            $('#popoverDuration').text(programData.duration);
+            $('#popoverPrice').text(programData.price);
+            $('#popoverLevelDesc').text(programData.level_desc);
+            $('#popoverProjectCount').text(programData.projects.length + ' projetu');
+            $('#popoverDescription').text(programData.description);
+            
+            const topicsContainer = $('#popoverTopics');
+            topicsContainer.empty();
+            programData.topics.forEach(function(topic) {
+                topicsContainer.append(`<span>${topic}</span>`);
+            });
+            
+            $('#popoverProjects').text(programData.projects.join(', '));
+            
+            $('#popoverOverlay').addClass('active');
+            $('body').css('overflow', 'hidden');
+        };
+
+        window.closePopover = function() {
+            $('#popoverOverlay').removeClass('active');
+            $('body').css('overflow', '');
+        };
+
+        window.closePopoverOutside = function(event) {
+            if (event.target === event.currentTarget) {
+                closePopover();
+            }
+        };
+
+        // ============================================
+        // CLOSE POPOVER WITH ESC KEY
+        // ============================================
+        $(document).on('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopover();
+            }
+        });
+
+        // ============================================
+        // CONSOLE LOG
+        // ============================================
+        console.log('🚀 DTCI Academy Website loaded successfully with jQuery + AJAX!');
     });
 </script>
 </body>

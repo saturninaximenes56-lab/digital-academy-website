@@ -1,428 +1,332 @@
-// main.js - JavaScript prinsipál ba website hotu
+// ============================================================
+// DTCI ACADEMY - MAIN JAVASCRIPT (jQuery Version)
+// ============================================================
 
-// ============================================
-// 1. WAITING FOR DOM TO LOAD
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 DTCI Academy Website loaded successfully!');
-    
-    // Initialize all components
-    initMobileMenu();
-    initSmoothScroll();
-    initAnimations();
-    initScrollSpy();
-    initBackToTop();
-    initFormValidation();
-    
-    // Load data dynamically
-    if (typeof loadModules === 'function') {
+$(document).ready(function() {
+    console.log('🚀 DTCI Academy Website loaded successfully with jQuery!');
+
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    $('#menu-toggle').on('click', function() {
+        $('#mobile-menu').toggleClass('hidden');
+        $(this).find('i').toggleClass('fa-bars fa-times');
+    });
+
+    $('#mobile-menu a').on('click', function() {
+        $('#mobile-menu').addClass('hidden');
+        $('#menu-toggle').find('i').removeClass('fa-times').addClass('fa-bars');
+    });
+
+    // ============================================
+    // LOAD MODULES - AJAX
+    // ============================================
+    function loadModules() {
+        $('#modules-container').html(`
+            <div class="col-span-full text-center py-12">
+                <div class="loading-spinner mx-auto"></div>
+                <p class="mt-4 text-gray-600">Karregando módulu sira...</p>
+            </div>
+        `);
+
+        $.ajax({
+            url: 'data/modules.json',
+            method: 'GET',
+            dataType: 'json',
+            timeout: 5000,
+            success: function(data) {
+                if (data && data.modules) {
+                    renderModules(data.modules);
+                } else {
+                    renderModulesFallback();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.warn('⚠️ AJAX error, using fallback:', error);
+                renderModulesFallback();
+            }
+        });
+    }
+
+    function renderModules(modules) {
+        const container = $('#modules-container');
+        container.empty();
+
+        const colorMap = {
+            blue: 'bg-blue-100 border-blue-300 text-blue-700',
+            purple: 'bg-purple-100 border-purple-300 text-purple-700',
+            pink: 'bg-pink-100 border-pink-300 text-pink-700',
+            indigo: 'bg-indigo-100 border-indigo-300 text-indigo-700',
+            green: 'bg-green-100 border-green-300 text-green-700',
+            cyan: 'bg-cyan-100 border-cyan-300 text-cyan-700',
+            orange: 'bg-orange-100 border-orange-300 text-orange-700',
+            red: 'bg-red-100 border-red-300 text-red-700',
+            teal: 'bg-teal-100 border-teal-300 text-teal-700',
+            gray: 'bg-gray-100 border-gray-300 text-gray-700'
+        };
+
+        modules.forEach(function(module) {
+            const colorClasses = colorMap[module.color] || colorMap.blue;
+            const topicsList = module.topics.map(function(topic) {
+                return `<li class="text-sm text-gray-600"><i class="fas fa-check text-blue-500 mr-2"></i>${topic}</li>`;
+            }).join('');
+
+            const card = `
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 rounded-full ${colorClasses} flex items-center justify-center text-2xl border-2">
+                                <i class="fas ${module.icon}"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                                ${module.duration}
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">${module.id}. ${module.title}</h3>
+                        <ul class="space-y-1 mb-4">${topicsList}</ul>
+                        <div class="pt-4 border-t border-gray-200">
+                            <p class="text-sm font-medium text-gray-700">
+                                <i class="fas fa-project-diagram text-blue-500 mr-2"></i>
+                                Projetu: ${module.projects.join(', ')}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.append(card);
+        });
+    }
+
+    function renderModulesFallback() {
+        const container = $('#modules-container');
+        container.empty();
+
+        const fallbackData = [
+            { id: 1, title: 'Computer & Digital Fundamental', icon: 'fa-laptop', color: 'blue', duration: '1-2 months', topics: ['Computer Basic', 'OS', 'Internet & Email', 'Microsoft Office'], projects: ['CV', 'Presentation'] },
+            { id: 2, title: 'Graphic Design Fundamental', icon: 'fa-paint-brush', color: 'purple', duration: '2-3 months', topics: ['Design Principle', 'Color Theory', 'Typography'], projects: ['Company Profile', 'Marketing Kit'] },
+            { id: 3, title: 'Advanced Graphic Design', icon: 'fa-edit', color: 'pink', duration: '2-3 months', topics: ['Adobe Photoshop', 'Adobe Illustrator', 'Video Editing'], projects: ['Logo Brand', 'Branding Guideline'] },
+            { id: 4, title: 'UI/UX Design', icon: 'fa-pencil-ruler', color: 'indigo', duration: '1-2 months', topics: ['UI Design', 'Design System', 'UX Research'], projects: ['E-Commerce UI', 'Mobile App UI'] },
+            { id: 5, title: 'Web Fundamental', icon: 'fa-code', color: 'green', duration: '2-3 months', topics: ['HTML5', 'CSS3', 'Bootstrap', 'JavaScript Basic'], projects: ['Portfolio Website', 'Landing Page'] },
+            { id: 6, title: 'Frontend Development', icon: 'fa-react', color: 'cyan', duration: '2-3 months', topics: ['JavaScript Advanced', 'ReactJS', 'Next.js'], projects: ['Dashboard', 'Blog Platform'] },
+            { id: 7, title: 'Database & Backend', icon: 'fa-database', color: 'orange', duration: '2-3 months', topics: ['MySQL', 'PHP', 'Laravel'], projects: ['Inventory System', 'Employee System'] },
+            { id: 8, title: 'API & Fullstack', icon: 'fa-plug', color: 'red', duration: '1-2 months', topics: ['REST API', 'JWT', 'Laravel Sanctum'], projects: ['E-Commerce Platform'] },
+            { id: 9, title: 'Mobile Development', icon: 'fa-mobile-alt', color: 'teal', duration: '2-3 months', topics: ['Dart', 'Flutter', 'API Integration'], projects: ['E-Commerce App', 'Delivery App'] },
+            { id: 10, title: 'Modern Backend', icon: 'fa-server', color: 'gray', duration: '2-3 months', topics: ['Node.js', 'Express.js', 'Golang'], projects: ['Microservice API'] },
+            { id: 11, title: 'DevOps & Cloud', icon: 'fa-cloud-upload-alt', color: 'indigo', duration: '1-2 months', topics: ['Linux', 'Docker', 'VPS'], projects: ['Deploy Fullstack App'] },
+            { id: 12, title: 'AI & Emerging Technology', icon: 'fa-robot', color: 'purple', duration: '1 month', topics: ['ChatGPT', 'Midjourney', 'AI Automation'], projects: ['AI Powered App'] }
+        ];
+
+        fallbackData.forEach(function(module) {
+            const colorClasses = {
+                blue: 'bg-blue-100 border-blue-300 text-blue-700',
+                purple: 'bg-purple-100 border-purple-300 text-purple-700',
+                pink: 'bg-pink-100 border-pink-300 text-pink-700',
+                indigo: 'bg-indigo-100 border-indigo-300 text-indigo-700',
+                green: 'bg-green-100 border-green-300 text-green-700',
+                cyan: 'bg-cyan-100 border-cyan-300 text-cyan-700',
+                orange: 'bg-orange-100 border-orange-300 text-orange-700',
+                red: 'bg-red-100 border-red-300 text-red-700',
+                teal: 'bg-teal-100 border-teal-300 text-teal-700',
+                gray: 'bg-gray-100 border-gray-300 text-gray-700'
+            }[module.color] || colorMap.blue;
+
+            const topicsList = module.topics.map(function(topic) {
+                return `<li class="text-sm text-gray-600"><i class="fas fa-check text-blue-500 mr-2"></i>${topic}</li>`;
+            }).join('');
+
+            const card = `
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 rounded-full ${colorClasses} flex items-center justify-center text-2xl border-2">
+                                <i class="fas ${module.icon}"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                                ${module.duration}
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">${module.id}. ${module.title}</h3>
+                        <ul class="space-y-1 mb-4">${topicsList}</ul>
+                        <div class="pt-4 border-t border-gray-200">
+                            <p class="text-sm font-medium text-gray-700">
+                                <i class="fas fa-project-diagram text-blue-500 mr-2"></i>
+                                Projetu: ${module.projects.join(', ')}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.append(card);
+        });
+    }
+
+    // ============================================
+    // LOAD TESTIMONIALS - AJAX
+    // ============================================
+    function loadTestimonials() {
+        $('#testimonials-container').html(`
+            <div class="col-span-full text-center py-12">
+                <div class="loading-spinner mx-auto"></div>
+                <p class="mt-4 text-gray-600">Karregando testemunhu...</p>
+            </div>
+        `);
+
+        $.ajax({
+            url: 'data/testimonials.json',
+            method: 'GET',
+            dataType: 'json',
+            timeout: 5000,
+            success: function(data) {
+                if (data && data.testimonials) {
+                    renderTestimonials(data.testimonials);
+                } else {
+                    renderTestimonialsFallback();
+                }
+            },
+            error: function() {
+                renderTestimonialsFallback();
+            }
+        });
+    }
+
+    function renderTestimonials(testimonials) {
+        const container = $('#testimonials-container');
+        container.empty();
+
+        testimonials.forEach(function(item) {
+            const stars = '★'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+            const card = `
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                            ${item.name.charAt(0)}
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-900">${item.name}</h4>
+                            <p class="text-sm text-gray-600">${item.role} - ${item.company}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"${item.testimonial}"</p>
+                    <div class="mt-3 text-yellow-400">${stars}</div>
+                </div>
+            `;
+            container.append(card);
+        });
+    }
+
+    function renderTestimonialsFallback() {
+        const container = $('#testimonials-container');
+        container.empty();
+
+        const fallback = [
+            { name: 'João da Silva', role: 'Frontend Developer', company: 'Tech Solutions TL', testimonial: 'DTCI Academy transforma hau husi zero to profissional.', rating: 5 },
+            { name: 'Maria Fernandes', role: 'UI/UX Designer', company: 'Creative Studio Dili', testimonial: 'Instrutor sira profisional no suporte individual mak ajuda hau.', rating: 5 },
+            { name: 'Carlos Amaral', role: 'Fullstack Developer', company: 'Freelancer', testimonial: 'Kursu kompletu tebes! Projetu real prepara hau ba merkadu.', rating: 5 }
+        ];
+
+        fallback.forEach(function(item) {
+            const stars = '★'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+            const card = `
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-[#6C3CE1] to-[#00D4AA] flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                            ${item.name.charAt(0)}
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-900">${item.name}</h4>
+                            <p class="text-sm text-gray-600">${item.role} - ${item.company}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"${item.testimonial}"</p>
+                    <div class="mt-3 text-yellow-400">${stars}</div>
+                </div>
+            `;
+            container.append(card);
+        });
+    }
+
+    // ============================================
+    // FILTER MODULES - jQuery
+    // ============================================
+    window.filterModules = function(query) {
+        const searchTerm = query.toLowerCase().trim();
+        const cards = $('#modules-container .bg-white');
+
+        let visibleCount = 0;
+
+        cards.each(function() {
+            const $card = $(this);
+            const text = $card.text().toLowerCase();
+
+            if (text.includes(searchTerm) || searchTerm === '') {
+                $card.show();
+                visibleCount++;
+            } else {
+                $card.hide();
+            }
+        });
+
+        if (visibleCount === 0 && searchTerm.length > 0) {
+            $('#no-results').removeClass('hidden');
+        } else {
+            $('#no-results').addClass('hidden');
+        }
+    };
+
+    // ============================================
+    // SMOOTH SCROLL
+    // ============================================
+    $('a[href^="#"]').on('click', function(e) {
+        const target = $(this.attr('href'));
+        if (target.length) {
+            e.preventDefault();
+            $('html, body').animate({
+                scrollTop: target.offset().top - 80
+            }, 600);
+        }
+    });
+
+    // ============================================
+    // ANIMATE COUNTERS
+    // ============================================
+    function animateCounters() {
+        $('[id$="-count"]').each(function() {
+            const $this = $(this);
+            const target = parseInt($this.text());
+
+            if (!isNaN(target) && target > 0) {
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(function() {
+                    current += increment;
+                    if (current >= target) {
+                        $this.text(target);
+                        clearInterval(timer);
+                    } else {
+                        $this.text(Math.floor(current));
+                    }
+                }, 40);
+            }
+        });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    if ($('#modules-container').length) {
         loadModules();
     }
-    if (typeof loadTestimonials === 'function') {
+
+    if ($('#testimonials-container').length) {
         loadTestimonials();
     }
-    if (typeof loadProjects === 'function') {
-        loadProjects();
-    }
-    if (typeof loadTeam === 'function') {
-        loadTeam();
-    }
-    if (typeof loadFAQ === 'function') {
-        loadFAQ();
-    }
-    
-    // Animate counters if they exist
+
     animateCounters();
+
+    // ============================================
+    // EXPOSE FUNCTIONS
+    // ============================================
+    window.loadModules = loadModules;
+    window.loadTestimonials = loadTestimonials;
+    window.filterModules = filterModules;
 });
-
-// ============================================
-// 2. MOBILE MENU
-// ============================================
-function initMobileMenu() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const closeMenu = document.getElementById('close-menu');
-    
-    if (menuToggle && mobileMenu) {
-        // Toggle menu on button click
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            mobileMenu.classList.toggle('hidden');
-            document.body.classList.toggle('overflow-hidden');
-            
-            // Change icon
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-            }
-        });
-        
-        // Close menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-                const icon = menuToggle.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-        });
-        
-        // Close menu on outside click
-        document.addEventListener('click', function(e) {
-            if (!mobileMenu.classList.contains('hidden') && 
-                !mobileMenu.contains(e.target) && 
-                !menuToggle.contains(e.target)) {
-                mobileMenu.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-                const icon = menuToggle.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            }
-        });
-    }
-}
-
-// ============================================
-// 3. SMOOTH SCROLL
-// ============================================
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// ============================================
-// 4. INTERSECTION OBSERVER FOR ANIMATIONS
-// ============================================
-function initAnimations() {
-    // Fade-in elements
-    const fadeElements = document.querySelectorAll('.fade-in, .animate-on-scroll');
-    
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        fadeElements.forEach(el => {
-            el.classList.add('opacity-0', 'translate-y-10');
-            observer.observe(el);
-        });
-    } else {
-        // Fallback for older browsers
-        fadeElements.forEach(el => {
-            el.classList.remove('opacity-0', 'translate-y-10');
-            el.classList.add('opacity-100');
-        });
-    }
-    
-    // Counter animation
-    const counterElements = document.querySelectorAll('.counter');
-    if ('IntersectionObserver' in window) {
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = parseInt(entry.target.textContent);
-                    if (!isNaN(target)) {
-                        animateCounter(entry.target, target);
-                    }
-                    counterObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        counterElements.forEach(el => counterObserver.observe(el));
-    }
-}
-
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 60;
-    const duration = 2000; // 2 seconds
-    const stepTime = duration / 60;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target + '+';
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current) + '+';
-        }
-    }, stepTime);
-}
-
-// ============================================
-// 5. SCROLL SPY (Active nav links)
-// ============================================
-function initScrollSpy() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    
-    if (sections.length === 0 || navLinks.length === 0) return;
-    
-    window.addEventListener('scroll', function() {
-        let current = '';
-        const scrollPosition = window.scrollY + 120;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('text-blue-600', 'border-blue-600');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('text-blue-600', 'border-blue-600');
-            }
-        });
-    });
-}
-
-// ============================================
-// 6. BACK TO TOP BUTTON
-// ============================================
-function initBackToTop() {
-    const button = document.getElementById('back-to-top');
-    if (!button) return;
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 400) {
-            button.classList.remove('opacity-0', 'invisible');
-            button.classList.add('opacity-100', 'visible');
-        } else {
-            button.classList.add('opacity-0', 'invisible');
-            button.classList.remove('opacity-100', 'visible');
-        }
-    });
-    
-    button.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
-
-// ============================================
-// 7. FORM VALIDATION
-// ============================================
-function initFormValidation() {
-    const forms = document.querySelectorAll('form[data-validate]');
-    
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            let isValid = true;
-            const inputs = this.querySelectorAll('input, textarea, select');
-            
-            inputs.forEach(input => {
-                // Remove previous error states
-                input.classList.remove('border-red-500');
-                const errorMsg = input.parentElement.querySelector('.error-message');
-                if (errorMsg) errorMsg.remove();
-                
-                // Validate required fields
-                if (input.hasAttribute('required') && !input.value.trim()) {
-                    isValid = false;
-                    input.classList.add('border-red-500');
-                    showError(input, 'Field ida ne\'e presize');
-                }
-                
-                // Validate email
-                if (input.type === 'email' && input.value.trim()) {
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(input.value.trim())) {
-                        isValid = false;
-                        input.classList.add('border-red-500');
-                        showError(input, 'Email válidu de\'it');
-                    }
-                }
-                
-                // Validate phone
-                if (input.type === 'tel' && input.value.trim()) {
-                    const phoneRegex = /^[0-9+\-\s()]{7,15}$/;
-                    if (!phoneRegex.test(input.value.trim())) {
-                        isValid = false;
-                        input.classList.add('border-red-500');
-                        showError(input, 'Número telefone válidu de\'it');
-                    }
-                }
-            });
-            
-            if (isValid) {
-                // Show success message
-                const successMsg = document.createElement('div');
-                successMsg.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mt-4';
-                successMsg.innerHTML = '✅ Mensajem haruka ho susesu! Obrigadu.';
-                this.appendChild(successMsg);
-                
-                // Reset form after 3 seconds
-                setTimeout(() => {
-                    this.reset();
-                    successMsg.remove();
-                }, 3000);
-            }
-        });
-    });
-}
-
-function showError(input, message) {
-    const error = document.createElement('p');
-    error.className = 'error-message text-red-500 text-sm mt-1';
-    error.textContent = '⚠️ ' + message;
-    input.parentElement.appendChild(error);
-}
-
-// ============================================
-// 8. ANIMATE COUNTERS (Global)
-// ============================================
-function animateCounters() {
-    const counters = document.querySelectorAll('[id$="-count"]');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.textContent);
-        if (isNaN(target)) return;
-        
-        let current = 0;
-        const increment = target / 50;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                counter.textContent = target;
-                clearInterval(timer);
-            } else {
-                counter.textContent = Math.floor(current);
-            }
-        }, 40);
-    });
-}
-
-// ============================================
-// 9. SEARCH/FILTER FUNCTION
-// ============================================
-function filterModules(query) {
-    const modules = document.querySelectorAll('#modules-container > div');
-    const searchTerm = query.toLowerCase().trim();
-    
-    if (modules.length === 0) return;
-    
-    let visibleCount = 0;
-    
-    modules.forEach(module => {
-        const title = module.querySelector('h3')?.textContent?.toLowerCase() || '';
-        const topics = module.querySelector('ul')?.textContent?.toLowerCase() || '';
-        
-        if (title.includes(searchTerm) || topics.includes(searchTerm)) {
-            module.style.display = 'block';
-            visibleCount++;
-        } else {
-            module.style.display = 'none';
-        }
-    });
-    
-    // Show/hide no results message
-    const noResults = document.getElementById('no-results');
-    if (noResults) {
-        if (visibleCount === 0 && searchTerm.length > 0) {
-            noResults.classList.remove('hidden');
-        } else {
-            noResults.classList.add('hidden');
-        }
-    }
-}
-
-// ============================================
-// 10. LOADING SPINNER
-// ============================================
-function showLoading(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    
-    container.innerHTML = `
-        <div class="flex justify-center items-center py-12">
-            <div class="loading-spinner"></div>
-            <span class="ml-3 text-gray-600">Karregando dadus...</span>
-        </div>
-    `;
-}
-
-function hideLoading(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    
-    // Remove loading spinner if exists
-    const spinner = container.querySelector('.loading-spinner');
-    if (spinner) {
-        spinner.remove();
-    }
-}
-
-// ============================================
-// 11. TOAST NOTIFICATIONS
-// ============================================
-function showToast(message, type = 'success') {
-    const colors = {
-        success: 'bg-green-500',
-        error: 'bg-red-500',
-        warning: 'bg-yellow-500',
-        info: 'bg-blue-500'
-    };
-    
-    const toast = document.createElement('div');
-    toast.className = `fixed bottom-4 right-4 ${colors[type] || colors.success} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-transform duration-300 translate-y-0`;
-    toast.textContent = message;
-    
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('translate-y-20');
-        toast.classList.remove('translate-y-0');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-// ============================================
-// 12. EXPOSE GLOBAL FUNCTIONS
-// ============================================
-window.filterModules = filterModules;
-window.showToast = showToast;
-window.showLoading = showLoading;
-window.hideLoading = hideLoading;
-window.animateCounters = animateCounters;
-
-console.log('✅ main.js loaded successfully!');

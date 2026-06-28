@@ -1,4 +1,6 @@
-// modules-data.js - Fallback data if JSON fails to load
+// ============================================================
+// DTCI ACADEMY - MODULES DATA (Fallback)
+// ============================================================
 
 const modulesData = [
     {
@@ -19,7 +21,7 @@ const modulesData = [
         color: "purple",
         topics: ["Design Principle", "Color Theory", "Typography", "Social Media Design", "Flyer, Poster, Brochure", "Presentation Design", "Brand Identity"],
         projects: ["Company Profile", "Marketing Kit", "Social Campaign"],
-        level: "Level 1"
+        level: "Level 2"
     },
     {
         id: 3,
@@ -29,7 +31,7 @@ const modulesData = [
         color: "pink",
         topics: ["Adobe Photoshop", "Adobe Illustrator", "Banner & Poster", "Logo & Branding", "Video Editing (CapCut)", "Motion Graphic Basic"],
         projects: ["Logo Brand", "Branding Guideline", "Promotional Video"],
-        level: "Level 1"
+        level: "Level 3"
     },
     {
         id: 4,
@@ -39,7 +41,7 @@ const modulesData = [
         color: "indigo",
         topics: ["UI Design", "Design System", "Responsive Design", "UX Research", "Wireframe", "Prototype", "Usability Testing"],
         projects: ["E-Commerce UI", "Mobile App UI", "Dashboard Design"],
-        level: "Level 1-2"
+        level: "Level 4"
     },
     {
         id: 5,
@@ -49,7 +51,7 @@ const modulesData = [
         color: "green",
         topics: ["HTML5", "CSS3", "Bootstrap", "Tailwind CSS", "JavaScript Basic", "Git & GitHub"],
         projects: ["Portfolio Website", "Company Profile", "Landing Page"],
-        level: "Level 2"
+        level: "Level 5"
     },
     {
         id: 6,
@@ -59,7 +61,7 @@ const modulesData = [
         color: "cyan",
         topics: ["JavaScript Advanced", "ES6+ (DOM, Async)", "Fetch API & JSON", "ReactJS", "Next.js", "State Management"],
         projects: ["Dashboard", "Blog Platform", "Product Catalog"],
-        level: "Level 2"
+        level: "Level 6"
     },
     {
         id: 7,
@@ -69,7 +71,7 @@ const modulesData = [
         color: "orange",
         topics: ["ERP & Database Design", "MySQL", "PostgreSQL", "PHP Fundamental", "OOP PHP", "Laravel"],
         projects: ["Inventory System", "Employee System", "School System"],
-        level: "Level 3"
+        level: "Level 7"
     },
     {
         id: 8,
@@ -79,7 +81,7 @@ const modulesData = [
         color: "red",
         topics: ["REST API", "JSON Handling", "JWT Authentication", "Laravel Sanctum", "React + Laravel", "Next.js + Laravel"],
         projects: ["E-Commerce Platform", "Online Booking System"],
-        level: "Level 4"
+        level: "Level 8"
     },
     {
         id: 9,
@@ -89,7 +91,7 @@ const modulesData = [
         color: "teal",
         topics: ["Dart Programming", "Widget System", "State Management", "API Integration", "Local Storage", "Push Notification"],
         projects: ["E-Commerce App", "Delivery App", "Attendance App"],
-        level: "Level 5"
+        level: "Level 9"
     },
     {
         id: 10,
@@ -99,7 +101,7 @@ const modulesData = [
         color: "gray",
         topics: ["Node.js", "Express.js", "TypeScript", "Golang Basic", "API Development", "Real-Time System"],
         projects: ["Microservice API", "Real-Time Application"],
-        level: "Level 5"
+        level: "Level 10"
     },
     {
         id: 11,
@@ -109,7 +111,7 @@ const modulesData = [
         color: "indigo",
         topics: ["Linux Basic", "VPS Management", "Nginx", "Docker Basic", "CI/CD Basic", "Domain & SSL"],
         projects: ["Deploy Fullstack App", "Production Server Setup"],
-        level: "Level 5"
+        level: "Level 11"
     },
     {
         id: 12,
@@ -119,18 +121,18 @@ const modulesData = [
         color: "purple",
         topics: ["ChatGPT & Copilot", "Canva AI, Firefly", "Midjourney", "AI Video (Runway)", "Prompt Engineering", "AI Automation"],
         projects: ["AI Powered App", "AI Marketing Campaign"],
-        level: "Level 5"
+        level: "Level 12"
     }
 ];
+
+// Export for browser
+if (typeof window !== 'undefined') {
+    window.modulesData = modulesData;
+}
 
 // Export for Node.js
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = modulesData;
-}
-
-// Make available globally
-if (typeof window !== 'undefined') {
-    window.modulesData = modulesData;
 }
 
 console.log('✅ modules-data.js fallback loaded!');
